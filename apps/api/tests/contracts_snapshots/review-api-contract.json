@@ -1,0 +1,1375 @@
+{
+  "models": {
+    "ApprovalDetailView": {
+      "$defs": {
+        "Actor": {
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "title": "Id",
+              "type": "string"
+            },
+            "name": {
+              "title": "Name",
+              "type": "string"
+            },
+            "role": {
+              "title": "Role",
+              "type": "string"
+            }
+          },
+          "required": ["id", "name", "role"],
+          "title": "Actor",
+          "type": "object"
+        },
+        "ApprovalStatus": {
+          "enum": ["pending", "approved", "rejected", "expired", "cancelled"],
+          "title": "ApprovalStatus",
+          "type": "string"
+        },
+        "Correlation": {
+          "additionalProperties": false,
+          "properties": {
+            "attemptId": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Attemptid"
+            },
+            "projectId": {
+              "title": "Projectid",
+              "type": "string"
+            },
+            "runId": {
+              "title": "Runid",
+              "type": "string"
+            },
+            "taskId": {
+              "title": "Taskid",
+              "type": "string"
+            }
+          },
+          "required": ["projectId", "runId", "taskId"],
+          "title": "Correlation",
+          "type": "object"
+        },
+        "RiskLevel": {
+          "enum": ["low", "medium", "high", "critical"],
+          "title": "RiskLevel",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "properties": {
+        "correlation": {
+          "$ref": "#/$defs/Correlation"
+        },
+        "expiresAt": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Expiresat"
+        },
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "reason": {
+          "title": "Reason",
+          "type": "string"
+        },
+        "relatedArtifacts": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Relatedartifacts",
+          "type": "array"
+        },
+        "requestedAt": {
+          "title": "Requestedat",
+          "type": "string"
+        },
+        "requestedBy": {
+          "$ref": "#/$defs/Actor"
+        },
+        "resolutionNote": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Resolutionnote"
+        },
+        "riskLevel": {
+          "$ref": "#/$defs/RiskLevel"
+        },
+        "schemaVersion": {
+          "default": "2026-04-19.execution.v1",
+          "title": "Schemaversion",
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/$defs/ApprovalStatus"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "type": {
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "type",
+        "status",
+        "requestedBy",
+        "requestedAt",
+        "riskLevel",
+        "title",
+        "reason",
+        "correlation"
+      ],
+      "title": "ApprovalDetailView",
+      "type": "object"
+    },
+    "ApprovalListResponse": {
+      "$defs": {
+        "Actor": {
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "title": "Id",
+              "type": "string"
+            },
+            "name": {
+              "title": "Name",
+              "type": "string"
+            },
+            "role": {
+              "title": "Role",
+              "type": "string"
+            }
+          },
+          "required": ["id", "name", "role"],
+          "title": "Actor",
+          "type": "object"
+        },
+        "ApprovalStatus": {
+          "enum": ["pending", "approved", "rejected", "expired", "cancelled"],
+          "title": "ApprovalStatus",
+          "type": "string"
+        },
+        "ApprovalSummaryView": {
+          "additionalProperties": false,
+          "properties": {
+            "correlation": {
+              "$ref": "#/$defs/Correlation"
+            },
+            "id": {
+              "title": "Id",
+              "type": "string"
+            },
+            "reason": {
+              "title": "Reason",
+              "type": "string"
+            },
+            "requestedAt": {
+              "title": "Requestedat",
+              "type": "string"
+            },
+            "requestedBy": {
+              "$ref": "#/$defs/Actor"
+            },
+            "riskLevel": {
+              "$ref": "#/$defs/RiskLevel"
+            },
+            "schemaVersion": {
+              "default": "2026-04-19.execution.v1",
+              "title": "Schemaversion",
+              "type": "string"
+            },
+            "status": {
+              "$ref": "#/$defs/ApprovalStatus"
+            },
+            "title": {
+              "title": "Title",
+              "type": "string"
+            },
+            "type": {
+              "title": "Type",
+              "type": "string"
+            }
+          },
+          "required": [
+            "id",
+            "type",
+            "status",
+            "requestedBy",
+            "requestedAt",
+            "riskLevel",
+            "title",
+            "reason",
+            "correlation"
+          ],
+          "title": "ApprovalSummaryView",
+          "type": "object"
+        },
+        "Correlation": {
+          "additionalProperties": false,
+          "properties": {
+            "attemptId": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Attemptid"
+            },
+            "projectId": {
+              "title": "Projectid",
+              "type": "string"
+            },
+            "runId": {
+              "title": "Runid",
+              "type": "string"
+            },
+            "taskId": {
+              "title": "Taskid",
+              "type": "string"
+            }
+          },
+          "required": ["projectId", "runId", "taskId"],
+          "title": "Correlation",
+          "type": "object"
+        },
+        "RiskLevel": {
+          "enum": ["low", "medium", "high", "critical"],
+          "title": "RiskLevel",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "properties": {
+        "items": {
+          "items": {
+            "$ref": "#/$defs/ApprovalSummaryView"
+          },
+          "title": "Items",
+          "type": "array"
+        }
+      },
+      "required": ["items"],
+      "title": "ApprovalListResponse",
+      "type": "object"
+    },
+    "ApprovalSummaryView": {
+      "$defs": {
+        "Actor": {
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "title": "Id",
+              "type": "string"
+            },
+            "name": {
+              "title": "Name",
+              "type": "string"
+            },
+            "role": {
+              "title": "Role",
+              "type": "string"
+            }
+          },
+          "required": ["id", "name", "role"],
+          "title": "Actor",
+          "type": "object"
+        },
+        "ApprovalStatus": {
+          "enum": ["pending", "approved", "rejected", "expired", "cancelled"],
+          "title": "ApprovalStatus",
+          "type": "string"
+        },
+        "Correlation": {
+          "additionalProperties": false,
+          "properties": {
+            "attemptId": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Attemptid"
+            },
+            "projectId": {
+              "title": "Projectid",
+              "type": "string"
+            },
+            "runId": {
+              "title": "Runid",
+              "type": "string"
+            },
+            "taskId": {
+              "title": "Taskid",
+              "type": "string"
+            }
+          },
+          "required": ["projectId", "runId", "taskId"],
+          "title": "Correlation",
+          "type": "object"
+        },
+        "RiskLevel": {
+          "enum": ["low", "medium", "high", "critical"],
+          "title": "RiskLevel",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "properties": {
+        "correlation": {
+          "$ref": "#/$defs/Correlation"
+        },
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "reason": {
+          "title": "Reason",
+          "type": "string"
+        },
+        "requestedAt": {
+          "title": "Requestedat",
+          "type": "string"
+        },
+        "requestedBy": {
+          "$ref": "#/$defs/Actor"
+        },
+        "riskLevel": {
+          "$ref": "#/$defs/RiskLevel"
+        },
+        "schemaVersion": {
+          "default": "2026-04-19.execution.v1",
+          "title": "Schemaversion",
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/$defs/ApprovalStatus"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "type": {
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "type",
+        "status",
+        "requestedBy",
+        "requestedAt",
+        "riskLevel",
+        "title",
+        "reason",
+        "correlation"
+      ],
+      "title": "ApprovalSummaryView",
+      "type": "object"
+    },
+    "ArtifactListResponse": {
+      "$defs": {
+        "ArtifactView": {
+          "additionalProperties": false,
+          "properties": {
+            "content": {
+              "title": "Content",
+              "type": "string"
+            },
+            "id": {
+              "title": "Id",
+              "type": "string"
+            },
+            "mimeType": {
+              "title": "Mimetype",
+              "type": "string"
+            },
+            "preview": {
+              "title": "Preview",
+              "type": "string"
+            },
+            "provenance": {
+              "$ref": "#/$defs/ProvenanceRecord"
+            },
+            "schemaVersion": {
+              "default": "2026-04-19.execution.v1",
+              "title": "Schemaversion",
+              "type": "string"
+            },
+            "title": {
+              "title": "Title",
+              "type": "string"
+            },
+            "type": {
+              "title": "Type",
+              "type": "string"
+            }
+          },
+          "required": ["id", "type", "title", "preview", "mimeType", "content", "provenance"],
+          "title": "ArtifactView",
+          "type": "object"
+        },
+        "Correlation": {
+          "additionalProperties": false,
+          "properties": {
+            "attemptId": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Attemptid"
+            },
+            "projectId": {
+              "title": "Projectid",
+              "type": "string"
+            },
+            "runId": {
+              "title": "Runid",
+              "type": "string"
+            },
+            "taskId": {
+              "title": "Taskid",
+              "type": "string"
+            }
+          },
+          "required": ["projectId", "runId", "taskId"],
+          "title": "Correlation",
+          "type": "object"
+        },
+        "ProvenanceRecord": {
+          "additionalProperties": false,
+          "properties": {
+            "contentHash": {
+              "title": "Contenthash",
+              "type": "string"
+            },
+            "correlation": {
+              "$ref": "#/$defs/Correlation"
+            },
+            "createdAt": {
+              "title": "Createdat",
+              "type": "string"
+            },
+            "producer": {
+              "title": "Producer",
+              "type": "string"
+            },
+            "source": {
+              "title": "Source",
+              "type": "string"
+            }
+          },
+          "required": ["source", "producer", "createdAt", "contentHash", "correlation"],
+          "title": "ProvenanceRecord",
+          "type": "object"
+        }
+      },
+      "additionalProperties": false,
+      "properties": {
+        "items": {
+          "items": {
+            "$ref": "#/$defs/ArtifactView"
+          },
+          "title": "Items",
+          "type": "array"
+        }
+      },
+      "required": ["items"],
+      "title": "ArtifactListResponse",
+      "type": "object"
+    },
+    "ArtifactView": {
+      "$defs": {
+        "Correlation": {
+          "additionalProperties": false,
+          "properties": {
+            "attemptId": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Attemptid"
+            },
+            "projectId": {
+              "title": "Projectid",
+              "type": "string"
+            },
+            "runId": {
+              "title": "Runid",
+              "type": "string"
+            },
+            "taskId": {
+              "title": "Taskid",
+              "type": "string"
+            }
+          },
+          "required": ["projectId", "runId", "taskId"],
+          "title": "Correlation",
+          "type": "object"
+        },
+        "ProvenanceRecord": {
+          "additionalProperties": false,
+          "properties": {
+            "contentHash": {
+              "title": "Contenthash",
+              "type": "string"
+            },
+            "correlation": {
+              "$ref": "#/$defs/Correlation"
+            },
+            "createdAt": {
+              "title": "Createdat",
+              "type": "string"
+            },
+            "producer": {
+              "title": "Producer",
+              "type": "string"
+            },
+            "source": {
+              "title": "Source",
+              "type": "string"
+            }
+          },
+          "required": ["source", "producer", "createdAt", "contentHash", "correlation"],
+          "title": "ProvenanceRecord",
+          "type": "object"
+        }
+      },
+      "additionalProperties": false,
+      "properties": {
+        "content": {
+          "title": "Content",
+          "type": "string"
+        },
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "mimeType": {
+          "title": "Mimetype",
+          "type": "string"
+        },
+        "preview": {
+          "title": "Preview",
+          "type": "string"
+        },
+        "provenance": {
+          "$ref": "#/$defs/ProvenanceRecord"
+        },
+        "schemaVersion": {
+          "default": "2026-04-19.execution.v1",
+          "title": "Schemaversion",
+          "type": "string"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "type": {
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": ["id", "type", "title", "preview", "mimeType", "content", "provenance"],
+      "title": "ArtifactView",
+      "type": "object"
+    },
+    "AttemptListResponse": {
+      "$defs": {
+        "Correlation": {
+          "additionalProperties": false,
+          "properties": {
+            "attemptId": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Attemptid"
+            },
+            "projectId": {
+              "title": "Projectid",
+              "type": "string"
+            },
+            "runId": {
+              "title": "Runid",
+              "type": "string"
+            },
+            "taskId": {
+              "title": "Taskid",
+              "type": "string"
+            }
+          },
+          "required": ["projectId", "runId", "taskId"],
+          "title": "Correlation",
+          "type": "object"
+        },
+        "EvidenceKind": {
+          "enum": ["artifact", "memory", "verification", "approval", "provenance"],
+          "title": "EvidenceKind",
+          "type": "string"
+        },
+        "EvidenceRefView": {
+          "additionalProperties": false,
+          "properties": {
+            "href": {
+              "title": "Href",
+              "type": "string"
+            },
+            "id": {
+              "title": "Id",
+              "type": "string"
+            },
+            "label": {
+              "title": "Label",
+              "type": "string"
+            },
+            "type": {
+              "$ref": "#/$defs/EvidenceKind"
+            }
+          },
+          "required": ["id", "label", "type", "href"],
+          "title": "EvidenceRefView",
+          "type": "object"
+        },
+        "ExecutorAttemptView": {
+          "additionalProperties": false,
+          "properties": {
+            "correlation": {
+              "$ref": "#/$defs/Correlation"
+            },
+            "evidenceRefs": {
+              "items": {
+                "$ref": "#/$defs/EvidenceRefView"
+              },
+              "title": "Evidencerefs",
+              "type": "array"
+            },
+            "executor": {
+              "title": "Executor",
+              "type": "string"
+            },
+            "finishedAt": {
+              "title": "Finishedat",
+              "type": "string"
+            },
+            "id": {
+              "title": "Id",
+              "type": "string"
+            },
+            "memoryHits": {
+              "items": {
+                "$ref": "#/$defs/MemoryHitView"
+              },
+              "title": "Memoryhits",
+              "type": "array"
+            },
+            "schemaVersion": {
+              "default": "2026-04-19.execution.v1",
+              "title": "Schemaversion",
+              "type": "string"
+            },
+            "security": {
+              "$ref": "#/$defs/SecuritySummaryView"
+            },
+            "startedAt": {
+              "title": "Startedat",
+              "type": "string"
+            },
+            "summary": {
+              "title": "Summary",
+              "type": "string"
+            },
+            "verification": {
+              "$ref": "#/$defs/VerificationView"
+            }
+          },
+          "required": [
+            "id",
+            "executor",
+            "startedAt",
+            "finishedAt",
+            "summary",
+            "verification",
+            "security",
+            "correlation"
+          ],
+          "title": "ExecutorAttemptView",
+          "type": "object"
+        },
+        "MemoryHitView": {
+          "additionalProperties": false,
+          "properties": {
+            "externalRef": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Externalref"
+            },
+            "id": {
+              "title": "Id",
+              "type": "string"
+            },
+            "namespace": {
+              "title": "Namespace",
+              "type": "string"
+            },
+            "recallCount": {
+              "default": 0,
+              "title": "Recallcount",
+              "type": "integer"
+            },
+            "retentionPolicy": {
+              "default": "retain_for_project",
+              "title": "Retentionpolicy",
+              "type": "string"
+            },
+            "score": {
+              "title": "Score",
+              "type": "number"
+            },
+            "staleAt": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Staleat"
+            },
+            "summary": {
+              "title": "Summary",
+              "type": "string"
+            },
+            "supersedesRecordId": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Supersedesrecordid"
+            },
+            "version": {
+              "default": 1,
+              "title": "Version",
+              "type": "integer"
+            }
+          },
+          "required": ["id", "namespace", "score", "summary"],
+          "title": "MemoryHitView",
+          "type": "object"
+        },
+        "SecuritySummaryView": {
+          "additionalProperties": false,
+          "properties": {
+            "approvalRequired": {
+              "title": "Approvalrequired",
+              "type": "boolean"
+            },
+            "scope": {
+              "title": "Scope",
+              "type": "string"
+            },
+            "usedSecret": {
+              "title": "Usedsecret",
+              "type": "boolean"
+            },
+            "writeAllowed": {
+              "title": "Writeallowed",
+              "type": "boolean"
+            }
+          },
+          "required": ["writeAllowed", "approvalRequired", "usedSecret", "scope"],
+          "title": "SecuritySummaryView",
+          "type": "object"
+        },
+        "VerificationCheckView": {
+          "additionalProperties": false,
+          "properties": {
+            "detail": {
+              "title": "Detail",
+              "type": "string"
+            },
+            "label": {
+              "title": "Label",
+              "type": "string"
+            },
+            "status": {
+              "title": "Status",
+              "type": "string"
+            }
+          },
+          "required": ["label", "status", "detail"],
+          "title": "VerificationCheckView",
+          "type": "object"
+        },
+        "VerificationView": {
+          "additionalProperties": false,
+          "properties": {
+            "checks": {
+              "items": {
+                "$ref": "#/$defs/VerificationCheckView"
+              },
+              "title": "Checks",
+              "type": "array"
+            },
+            "summary": {
+              "title": "Summary",
+              "type": "string"
+            },
+            "verdict": {
+              "title": "Verdict",
+              "type": "string"
+            }
+          },
+          "required": ["verdict", "summary"],
+          "title": "VerificationView",
+          "type": "object"
+        }
+      },
+      "additionalProperties": false,
+      "properties": {
+        "items": {
+          "items": {
+            "$ref": "#/$defs/ExecutorAttemptView"
+          },
+          "title": "Items",
+          "type": "array"
+        }
+      },
+      "required": ["items"],
+      "title": "AttemptListResponse",
+      "type": "object"
+    },
+    "EvidenceSummaryView": {
+      "$defs": {
+        "EvidenceKind": {
+          "enum": ["artifact", "memory", "verification", "approval", "provenance"],
+          "title": "EvidenceKind",
+          "type": "string"
+        },
+        "EvidenceRefView": {
+          "additionalProperties": false,
+          "properties": {
+            "href": {
+              "title": "Href",
+              "type": "string"
+            },
+            "id": {
+              "title": "Id",
+              "type": "string"
+            },
+            "label": {
+              "title": "Label",
+              "type": "string"
+            },
+            "type": {
+              "$ref": "#/$defs/EvidenceKind"
+            }
+          },
+          "required": ["id", "label", "type", "href"],
+          "title": "EvidenceRefView",
+          "type": "object"
+        },
+        "MemoryHitView": {
+          "additionalProperties": false,
+          "properties": {
+            "externalRef": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Externalref"
+            },
+            "id": {
+              "title": "Id",
+              "type": "string"
+            },
+            "namespace": {
+              "title": "Namespace",
+              "type": "string"
+            },
+            "recallCount": {
+              "default": 0,
+              "title": "Recallcount",
+              "type": "integer"
+            },
+            "retentionPolicy": {
+              "default": "retain_for_project",
+              "title": "Retentionpolicy",
+              "type": "string"
+            },
+            "score": {
+              "title": "Score",
+              "type": "number"
+            },
+            "staleAt": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Staleat"
+            },
+            "summary": {
+              "title": "Summary",
+              "type": "string"
+            },
+            "supersedesRecordId": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Supersedesrecordid"
+            },
+            "version": {
+              "default": 1,
+              "title": "Version",
+              "type": "integer"
+            }
+          },
+          "required": ["id", "namespace", "score", "summary"],
+          "title": "MemoryHitView",
+          "type": "object"
+        },
+        "VerificationCheckView": {
+          "additionalProperties": false,
+          "properties": {
+            "detail": {
+              "title": "Detail",
+              "type": "string"
+            },
+            "label": {
+              "title": "Label",
+              "type": "string"
+            },
+            "status": {
+              "title": "Status",
+              "type": "string"
+            }
+          },
+          "required": ["label", "status", "detail"],
+          "title": "VerificationCheckView",
+          "type": "object"
+        },
+        "VerificationView": {
+          "additionalProperties": false,
+          "properties": {
+            "checks": {
+              "items": {
+                "$ref": "#/$defs/VerificationCheckView"
+              },
+              "title": "Checks",
+              "type": "array"
+            },
+            "summary": {
+              "title": "Summary",
+              "type": "string"
+            },
+            "verdict": {
+              "title": "Verdict",
+              "type": "string"
+            }
+          },
+          "required": ["verdict", "summary"],
+          "title": "VerificationView",
+          "type": "object"
+        }
+      },
+      "additionalProperties": false,
+      "properties": {
+        "artifactIds": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Artifactids",
+          "type": "array"
+        },
+        "attemptId": {
+          "title": "Attemptid",
+          "type": "string"
+        },
+        "evidenceRefs": {
+          "items": {
+            "$ref": "#/$defs/EvidenceRefView"
+          },
+          "title": "Evidencerefs",
+          "type": "array"
+        },
+        "memoryHits": {
+          "items": {
+            "$ref": "#/$defs/MemoryHitView"
+          },
+          "title": "Memoryhits",
+          "type": "array"
+        },
+        "schemaVersion": {
+          "default": "2026-04-19.execution.v1",
+          "title": "Schemaversion",
+          "type": "string"
+        },
+        "verification": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/VerificationView"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": ["attemptId"],
+      "title": "EvidenceSummaryView",
+      "type": "object"
+    },
+    "ExecutorAttemptView": {
+      "$defs": {
+        "Correlation": {
+          "additionalProperties": false,
+          "properties": {
+            "attemptId": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Attemptid"
+            },
+            "projectId": {
+              "title": "Projectid",
+              "type": "string"
+            },
+            "runId": {
+              "title": "Runid",
+              "type": "string"
+            },
+            "taskId": {
+              "title": "Taskid",
+              "type": "string"
+            }
+          },
+          "required": ["projectId", "runId", "taskId"],
+          "title": "Correlation",
+          "type": "object"
+        },
+        "EvidenceKind": {
+          "enum": ["artifact", "memory", "verification", "approval", "provenance"],
+          "title": "EvidenceKind",
+          "type": "string"
+        },
+        "EvidenceRefView": {
+          "additionalProperties": false,
+          "properties": {
+            "href": {
+              "title": "Href",
+              "type": "string"
+            },
+            "id": {
+              "title": "Id",
+              "type": "string"
+            },
+            "label": {
+              "title": "Label",
+              "type": "string"
+            },
+            "type": {
+              "$ref": "#/$defs/EvidenceKind"
+            }
+          },
+          "required": ["id", "label", "type", "href"],
+          "title": "EvidenceRefView",
+          "type": "object"
+        },
+        "MemoryHitView": {
+          "additionalProperties": false,
+          "properties": {
+            "externalRef": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Externalref"
+            },
+            "id": {
+              "title": "Id",
+              "type": "string"
+            },
+            "namespace": {
+              "title": "Namespace",
+              "type": "string"
+            },
+            "recallCount": {
+              "default": 0,
+              "title": "Recallcount",
+              "type": "integer"
+            },
+            "retentionPolicy": {
+              "default": "retain_for_project",
+              "title": "Retentionpolicy",
+              "type": "string"
+            },
+            "score": {
+              "title": "Score",
+              "type": "number"
+            },
+            "staleAt": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Staleat"
+            },
+            "summary": {
+              "title": "Summary",
+              "type": "string"
+            },
+            "supersedesRecordId": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Supersedesrecordid"
+            },
+            "version": {
+              "default": 1,
+              "title": "Version",
+              "type": "integer"
+            }
+          },
+          "required": ["id", "namespace", "score", "summary"],
+          "title": "MemoryHitView",
+          "type": "object"
+        },
+        "SecuritySummaryView": {
+          "additionalProperties": false,
+          "properties": {
+            "approvalRequired": {
+              "title": "Approvalrequired",
+              "type": "boolean"
+            },
+            "scope": {
+              "title": "Scope",
+              "type": "string"
+            },
+            "usedSecret": {
+              "title": "Usedsecret",
+              "type": "boolean"
+            },
+            "writeAllowed": {
+              "title": "Writeallowed",
+              "type": "boolean"
+            }
+          },
+          "required": ["writeAllowed", "approvalRequired", "usedSecret", "scope"],
+          "title": "SecuritySummaryView",
+          "type": "object"
+        },
+        "VerificationCheckView": {
+          "additionalProperties": false,
+          "properties": {
+            "detail": {
+              "title": "Detail",
+              "type": "string"
+            },
+            "label": {
+              "title": "Label",
+              "type": "string"
+            },
+            "status": {
+              "title": "Status",
+              "type": "string"
+            }
+          },
+          "required": ["label", "status", "detail"],
+          "title": "VerificationCheckView",
+          "type": "object"
+        },
+        "VerificationView": {
+          "additionalProperties": false,
+          "properties": {
+            "checks": {
+              "items": {
+                "$ref": "#/$defs/VerificationCheckView"
+              },
+              "title": "Checks",
+              "type": "array"
+            },
+            "summary": {
+              "title": "Summary",
+              "type": "string"
+            },
+            "verdict": {
+              "title": "Verdict",
+              "type": "string"
+            }
+          },
+          "required": ["verdict", "summary"],
+          "title": "VerificationView",
+          "type": "object"
+        }
+      },
+      "additionalProperties": false,
+      "properties": {
+        "correlation": {
+          "$ref": "#/$defs/Correlation"
+        },
+        "evidenceRefs": {
+          "items": {
+            "$ref": "#/$defs/EvidenceRefView"
+          },
+          "title": "Evidencerefs",
+          "type": "array"
+        },
+        "executor": {
+          "title": "Executor",
+          "type": "string"
+        },
+        "finishedAt": {
+          "title": "Finishedat",
+          "type": "string"
+        },
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "memoryHits": {
+          "items": {
+            "$ref": "#/$defs/MemoryHitView"
+          },
+          "title": "Memoryhits",
+          "type": "array"
+        },
+        "schemaVersion": {
+          "default": "2026-04-19.execution.v1",
+          "title": "Schemaversion",
+          "type": "string"
+        },
+        "security": {
+          "$ref": "#/$defs/SecuritySummaryView"
+        },
+        "startedAt": {
+          "title": "Startedat",
+          "type": "string"
+        },
+        "summary": {
+          "title": "Summary",
+          "type": "string"
+        },
+        "verification": {
+          "$ref": "#/$defs/VerificationView"
+        }
+      },
+      "required": [
+        "id",
+        "executor",
+        "startedAt",
+        "finishedAt",
+        "summary",
+        "verification",
+        "security",
+        "correlation"
+      ],
+      "title": "ExecutorAttemptView",
+      "type": "object"
+    }
+  },
+  "schema_version": "2026-04-19.execution.v1"
+}

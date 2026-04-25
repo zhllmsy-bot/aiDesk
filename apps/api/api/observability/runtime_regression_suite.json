@@ -1,0 +1,70 @@
+{
+  "suite_id": "runtime_regression",
+  "title": "AI Desk runtime regression harness",
+  "cases": [
+    {
+      "case_id": "runtime_graph_interrupt_resume",
+      "kind": "runtime_graph",
+      "params": {
+        "graph_kind": "planner",
+        "objective": "Plan the rollout"
+      },
+      "expected": {
+        "status": "completed",
+        "output_key": "plan_steps"
+      }
+    },
+    {
+      "case_id": "security_write_requires_approval",
+      "kind": "security_gate",
+      "params": {
+        "workspace_root": "/repo/project",
+        "writable_path": "/repo/project",
+        "proposed_command": "pytest -q"
+      },
+      "expected": {
+        "needs_approval": true,
+        "reason_contains": "write execution requires approval"
+      }
+    },
+    {
+      "case_id": "openhands_remote_required_by_default",
+      "kind": "openhands_runtime",
+      "params": {
+        "host": null,
+        "allow_local_workspace": false
+      },
+      "expected": {
+        "status": "not_configured"
+      }
+    },
+    {
+      "case_id": "workflow_approval_wait_resume",
+      "kind": "workflow_approval_resume",
+      "params": {
+        "signal_delay_seconds": 0.01,
+        "signal_timeout_seconds": 1
+      },
+      "expected": {
+        "approval_id": "approval-eval",
+        "actor": "eval-approver",
+        "approved_write_path": "/repo/project/apps/api"
+      }
+    },
+    {
+      "case_id": "restart_durability_review_memory_runtime",
+      "kind": "restart_durability",
+      "expected": {
+        "approval_status": "approved",
+        "event_types": [
+          "task.claimed",
+          "task.completed",
+          "task.graph.updated",
+          "task.running",
+          "workflow.completed",
+          "workflow.started"
+        ]
+      }
+    }
+  ]
+}

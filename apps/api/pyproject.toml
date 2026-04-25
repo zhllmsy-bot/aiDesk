@@ -1,0 +1,92 @@
+[project]
+name = "ai-desk-api"
+version = "0.1.0"
+description = "FastAPI control plane for AI Desk"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+  "alembic>=1.16.5,<1.17",
+  "email-validator>=2.3.0,<3",
+  "fastapi>=0.136.0,<0.137",
+  "httpx>=0.28.1,<0.29",
+  "langgraph>=0.6.8,<0.7",
+  "langgraph-checkpoint-postgres>=3.0.5",
+  "lark-oapi>=1.5.3,<2",
+  "mem0ai>=0.1.116,<0.2",
+  "openhands-sdk>=1.18.0",
+  "psycopg[binary]>=3.2.10,<4",
+  "pydantic-settings>=2.11.0,<3",
+  "sqlalchemy>=2.0.49,<2.1",
+  "temporalio>=1.18.2,<2",
+  "uvicorn[standard]>=0.38.0,<0.39",
+]
+
+[dependency-groups]
+dev = [
+  "pyright>=1.1.406,<2",
+  "pytest>=8.4.2,<9",
+  "pytest-asyncio>=1.2.0,<2",
+  "pytest-cov>=7.0.0,<8",
+  "ruff>=0.14.0,<0.15",
+]
+
+[tool.pytest.ini_options]
+testpaths = [
+  "tests",
+]
+addopts = "-q"
+markers = [
+  "unit: unit-level tests (no IO, no DB)",
+  "integration: integration tests (DB, in-process services)",
+  "e2e: end-to-end cross-module tests",
+  "contract: contract snapshot regression tests",
+  "live_smoke: live external dependency smoke tests (requires env vars)",
+]
+
+[tool.pyright]
+include = [
+  "api/app.py",
+  "api/config.py",
+  "api/contracts.py",
+  "api/database.py",
+  "api/errors.py",
+  "api/models.py",
+  "api/health",
+  "api/auth",
+  "api/control_plane",
+  "api/context",
+  "api/executors",
+  "api/memory",
+  "api/review",
+  "api/security",
+  "tests/conftest.py",
+  "tests/helpers.py",
+  "tests/test_auth_api.py",
+  "tests/test_be3.py",
+  "tests/test_migrations.py",
+  "tests/test_openapi_snapshot.py",
+  "tests/test_projects_api.py",
+  "tests/test_security_hardening.py",
+]
+typeCheckingMode = "strict"
+venvPath = "."
+venv = ".venv"
+reportMissingTypeStubs = false
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+extend-exclude = ["src"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "N", "A", "C4", "SIM"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["api"]
+
+[tool.hatch.build.targets.sdist]
+include = ["api", "alembic", "tests", "README.md", "alembic.ini"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

@@ -1,0 +1,17 @@
+{
+  "name": "@ai-desk/api",
+  "private": true,
+  "scripts": {
+    "dev": "uv run --project . uvicorn api.app:create_app --factory --reload --host 0.0.0.0 --port 8000",
+    "build": "uv run --project . python -m compileall api",
+    "lint": "uv run --project . ruff check .",
+    "typecheck": "uv run --project . pyright",
+    "test": "uv run --project . python -m pytest",
+    "test:temporal": "uv run --project . pytest tests/test_temporal_runtime_approval.py",
+    "eval:runtime": "uv run --project . python -m api.scripts.eval_harness",
+    "migrate": "uv run --project . alembic upgrade head",
+    "openapi:export": "uv run --project . python -m api.scripts.export_openapi",
+    "smoke": "uv run --project . python -m api.scripts.smoke",
+    "worker:runtime": "uv run --project . python -m api.workflows.workers.runtime_worker"
+  }
+}
