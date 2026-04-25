@@ -1,6 +1,6 @@
 import type { TimelineReadModel } from "@ai-desk/contracts-runtime";
 
-import { getTimelineFixture } from "../fixtures/runtime-data";
+import { getTimelineFixture } from "@/lib/demo-data/runtime-data";
 import { fetchTimelineLive } from "./runtime-live";
 
 export async function getRunTimeline(runId: string): Promise<TimelineReadModel> {

@@ -510,6 +510,13 @@
             "title": "Secret Broker Enabled",
             "type": "boolean"
           },
+          "skills": {
+            "items": {
+              "$ref": "#/components/schemas/ContextSkill"
+            },
+            "title": "Skills",
+            "type": "array"
+          },
           "task_id": {
             "title": "Task Id",
             "type": "string"
@@ -659,6 +666,51 @@
         "title": "AuthenticatedUserModel",
         "type": "object"
       },
+      "BreakGlassKind": {
+        "enum": ["incident_response", "maintenance", "operator_override"],
+        "title": "BreakGlassKind",
+        "type": "string"
+      },
+      "BreakGlassReason": {
+        "properties": {
+          "approved_by": {
+            "title": "Approved By",
+            "type": "string"
+          },
+          "expires_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Expires At"
+          },
+          "kind": {
+            "$ref": "#/components/schemas/BreakGlassKind"
+          },
+          "reason": {
+            "title": "Reason",
+            "type": "string"
+          },
+          "ticket_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Ticket Id"
+          }
+        },
+        "required": ["kind", "reason", "approved_by"],
+        "title": "BreakGlassReason",
+        "type": "object"
+      },
       "ContextBlock": {
         "additionalProperties": false,
         "properties": {
@@ -791,6 +843,43 @@
         "title": "ContextLevel",
         "type": "string"
       },
+      "ContextSkill": {
+        "additionalProperties": false,
+        "properties": {
+          "body": {
+            "title": "Body",
+            "type": "string"
+          },
+          "evidence_refs": {
+            "items": {
+              "$ref": "#/components/schemas/EvidenceRef"
+            },
+            "title": "Evidence Refs",
+            "type": "array"
+          },
+          "metadata": {
+            "additionalProperties": true,
+            "title": "Metadata",
+            "type": "object"
+          },
+          "skill_id": {
+            "title": "Skill Id",
+            "type": "string"
+          },
+          "source": {
+            "default": "context.skill",
+            "title": "Source",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          }
+        },
+        "required": ["skill_id", "title", "body"],
+        "title": "ContextSkill",
+        "type": "object"
+      },
       "Correlation": {
         "additionalProperties": false,
         "properties": {
@@ -868,8 +957,8 @@
             "type": "string"
           },
           "password": {
-            "maxLength": 128,
-            "minLength": 12,
+            "maxLength": 256,
+            "minLength": 1,
             "title": "Password",
             "type": "string"
           }
@@ -966,6 +1055,7 @@
           "task.heartbeat",
           "task.reclaimed",
           "task.graph.updated",
+          "task.todo.updated",
           "approval.requested",
           "approval.resolved",
           "notification.sent",
@@ -2297,7 +2387,7 @@
         "properties": {
           "display_name": {
             "maxLength": 120,
-            "minLength": 2,
+            "minLength": 1,
             "title": "Display Name",
             "type": "string"
           },
@@ -2307,14 +2397,30 @@
             "type": "string"
           },
           "password": {
-            "maxLength": 128,
-            "minLength": 12,
+            "maxLength": 256,
+            "minLength": 8,
             "title": "Password",
             "type": "string"
           }
         },
         "required": ["email", "password", "display_name"],
         "title": "RegisterUserRequest",
+        "type": "object"
+      },
+      "RequestOptions": {
+        "properties": {
+          "full_access": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/BreakGlassReason"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "title": "RequestOptions",
         "type": "object"
       },
       "RetentionPolicy": {
@@ -2521,6 +2627,13 @@
           "title": {
             "title": "Title",
             "type": "string"
+          },
+          "todo_items": {
+            "items": {
+              "$ref": "#/components/schemas/TaskTodoItem"
+            },
+            "title": "Todo Items",
+            "type": "array"
           }
         },
         "required": ["task_id", "title"],
@@ -2613,6 +2726,38 @@
         ],
         "title": "TaskStatus",
         "type": "string"
+      },
+      "TaskTodoItem": {
+        "additionalProperties": false,
+        "properties": {
+          "detail": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Detail"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "status": {
+            "default": "queued",
+            "title": "Status",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          }
+        },
+        "required": ["id", "title"],
+        "title": "TaskTodoItem",
+        "type": "object"
       },
       "TimelineEntry": {
         "additionalProperties": false,
@@ -3000,6 +3145,9 @@
             "title": "Project Id",
             "type": "string"
           },
+          "request_options": {
+            "$ref": "#/components/schemas/RequestOptions"
+          },
           "require_manual_approval": {
             "default": false,
             "title": "Require Manual Approval",
@@ -3185,12 +3333,6 @@
         "title": "WorkspaceMode",
         "type": "string"
       }
-    },
-    "securitySchemes": {
-      "HTTPBearer": {
-        "scheme": "bearer",
-        "type": "http"
-      }
     }
   },
   "info": {
@@ -3225,6 +3367,24 @@
     "/auth/me": {
       "get": {
         "operationId": "get_me_auth_me_get",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "content": {
@@ -3235,13 +3395,18 @@
               }
             },
             "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
           }
         },
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
         "summary": "Get Me",
         "tags": ["auth"]
       }
@@ -3327,6 +3492,24 @@
     "/context/assemble": {
       "post": {
         "operationId": "assemble_context_context_assemble_post",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -3359,11 +3542,6 @@
             "description": "Validation Error"
           }
         },
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
         "summary": "Assemble Context",
         "tags": ["context"]
       }
@@ -3371,6 +3549,24 @@
     "/context/build": {
       "post": {
         "operationId": "build_context_context_build_post",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -3403,11 +3599,6 @@
             "description": "Validation Error"
           }
         },
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
         "summary": "Build Context",
         "tags": ["context"]
       }
@@ -3436,6 +3627,24 @@
     "/executors/capabilities": {
       "get": {
         "operationId": "list_capabilities_executors_capabilities_get",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "content": {
@@ -3446,13 +3655,18 @@
               }
             },
             "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
           }
         },
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
         "summary": "List Capabilities",
         "tags": ["executors"]
       }
@@ -3460,6 +3674,24 @@
     "/executors/dispatch": {
       "post": {
         "operationId": "dispatch_execution_executors_dispatch_post",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -3492,11 +3724,6 @@
             "description": "Validation Error"
           }
         },
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
         "summary": "Dispatch Execution",
         "tags": ["executors"]
       }
@@ -3586,6 +3813,22 @@
               "title": "Limit",
               "type": "integer"
             }
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
           }
         ],
         "responses": {
@@ -3610,11 +3853,6 @@
             "description": "Validation Error"
           }
         },
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
         "summary": "List Memory Hits",
         "tags": ["memory"]
       }
@@ -3622,6 +3860,24 @@
     "/memory/maintenance": {
       "post": {
         "operationId": "run_maintenance_memory_maintenance_post",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "content": {
@@ -3634,13 +3890,18 @@
               }
             },
             "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
           }
         },
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
         "summary": "Run Maintenance",
         "tags": ["memory"]
       }
@@ -3648,6 +3909,24 @@
     "/memory/writes": {
       "post": {
         "operationId": "write_memory_memory_writes_post",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -3680,11 +3959,6 @@
             "description": "Validation Error"
           }
         },
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
         "summary": "Write Memory",
         "tags": ["memory"]
       }
@@ -3784,6 +4058,22 @@
               "title": "Limit",
               "type": "integer"
             }
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
           }
         ],
         "responses": {
@@ -3808,11 +4098,6 @@
             "description": "Validation Error"
           }
         },
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
         "summary": "List Notification Deliveries",
         "tags": ["notifications"]
       }
@@ -3828,6 +4113,22 @@
             "schema": {
               "title": "Receipt Id",
               "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
             }
           }
         ],
@@ -3863,11 +4164,6 @@
             "description": "Validation Error"
           }
         },
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
         "summary": "Update Notification Delivery Status",
         "tags": ["notifications"]
       }
@@ -4067,6 +4363,22 @@
               ],
               "title": "Status"
             }
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
           }
         ],
         "responses": {
@@ -4091,16 +4403,29 @@
             "description": "Validation Error"
           }
         },
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
         "summary": "List Projects",
         "tags": ["projects"]
       },
       "post": {
         "operationId": "create_project_projects_post",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -4133,11 +4458,6 @@
             "description": "Validation Error"
           }
         },
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
         "summary": "Create Project",
         "tags": ["projects"]
       }
@@ -4153,6 +4473,22 @@
             "schema": {
               "title": "Project Id",
               "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
             }
           }
         ],
@@ -4178,11 +4514,6 @@
             "description": "Validation Error"
           }
         },
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
         "summary": "Get Project",
         "tags": ["projects"]
       },
@@ -4196,6 +4527,22 @@
             "schema": {
               "title": "Project Id",
               "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
             }
           }
         ],
@@ -4231,11 +4578,6 @@
             "description": "Validation Error"
           }
         },
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
         "summary": "Update Project",
         "tags": ["projects"]
       }
@@ -4251,6 +4593,22 @@
             "schema": {
               "title": "Project Id",
               "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
             }
           }
         ],
@@ -4276,11 +4634,6 @@
             "description": "Validation Error"
           }
         },
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
         "summary": "Archive Project",
         "tags": ["projects"]
       }
@@ -4296,6 +4649,22 @@
             "schema": {
               "title": "Project Id",
               "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
             }
           }
         ],
@@ -4321,11 +4690,6 @@
             "description": "Validation Error"
           }
         },
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
         "summary": "List Iterations",
         "tags": ["projects"]
       }
@@ -4341,6 +4705,22 @@
             "schema": {
               "title": "Project Id",
               "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
             }
           }
         ],
@@ -4366,11 +4746,6 @@
             "description": "Validation Error"
           }
         },
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
         "summary": "Get Plan Summary",
         "tags": ["projects"]
       }
@@ -4378,6 +4753,24 @@
     "/review/approvals": {
       "get": {
         "operationId": "list_approvals_review_approvals_get",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "content": {
@@ -4388,13 +4781,18 @@
               }
             },
             "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
           }
         },
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
         "summary": "List Approvals",
         "tags": ["review"]
       }
@@ -4410,6 +4808,22 @@
             "schema": {
               "title": "Approval Id",
               "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
             }
           }
         ],
@@ -4435,11 +4849,6 @@
             "description": "Validation Error"
           }
         },
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
         "summary": "Get Approval Detail",
         "tags": ["review"]
       }
@@ -4455,6 +4864,22 @@
             "schema": {
               "title": "Approval Id",
               "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
             }
           }
         ],
@@ -4490,11 +4915,6 @@
             "description": "Validation Error"
           }
         },
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
         "summary": "Resolve Approval",
         "tags": ["review"]
       }
@@ -4550,6 +4970,22 @@
               ],
               "title": "Task Id"
             }
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
           }
         ],
         "responses": {
@@ -4574,11 +5010,6 @@
             "description": "Validation Error"
           }
         },
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
         "summary": "List Artifacts",
         "tags": ["review"]
       }
@@ -4594,6 +5025,22 @@
             "schema": {
               "title": "Artifact Id",
               "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
             }
           }
         ],
@@ -4619,11 +5066,6 @@
             "description": "Validation Error"
           }
         },
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
         "summary": "Get Artifact Detail",
         "tags": ["review"]
       }
@@ -4679,6 +5121,22 @@
               ],
               "title": "Task Id"
             }
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
           }
         ],
         "responses": {
@@ -4703,11 +5161,6 @@
             "description": "Validation Error"
           }
         },
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
         "summary": "List Attempts",
         "tags": ["review"]
       }
@@ -4723,6 +5176,22 @@
             "schema": {
               "title": "Attempt Id",
               "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
             }
           }
         ],
@@ -4748,11 +5217,6 @@
             "description": "Validation Error"
           }
         },
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
         "summary": "Get Attempt Detail",
         "tags": ["review"]
       }
@@ -4768,6 +5232,22 @@
             "schema": {
               "title": "Attempt Id",
               "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
             }
           }
         ],
@@ -4793,11 +5273,6 @@
             "description": "Validation Error"
           }
         },
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
         "summary": "Get Evidence Summary",
         "tags": ["review"]
       }

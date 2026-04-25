@@ -1,7 +1,7 @@
 import type { MemoryHit } from "@ai-desk/contracts-execution";
 
 import { getApiErrorMessage, getApiHeaders, webApiClient } from "@/lib/api-client";
-import { getMemoryHitsFixture } from "../fixtures/ops-data";
+import { getMemoryHitsFixture } from "@/lib/demo-data/ops-data";
 
 export async function getMemoryHits(attemptId: string): Promise<MemoryHit[]> {
   try {

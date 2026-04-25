@@ -51,6 +51,17 @@ class Settings(BaseSettings):
     openhands_api_key: str | None = Field(default=None)
     openhands_local_workspace_enabled: bool = Field(default=False)
     openhands_remote_working_dir: str | None = Field(default=None)
+    llm_provider: str = Field(default="litellm")
+    llm_default_model: str = Field(default="openai/gpt-5.4")
+    llm_request_timeout_seconds: float = Field(default=60.0, gt=0)
+    llm_agent_provider: str = Field(default="claude_agent_sdk")
+    claude_code_command: str = Field(default="claude")
+    claude_code_model: str = Field(default="claude-sonnet-4-5")
+    claude_agent_model: str = Field(default="claude-sonnet-4-5")
+    openai_agents_model: str = Field(default="gpt-5.4")
+    aider_model: str = Field(default="openai/gpt-5.4")
+    opa_enabled: bool = Field(default=True)
+    opa_policy_dir: str = Field(default=str(ROOT_DIR / "infra" / "policies"))
     mem0_api_key: str | None = Field(
         default=None,
         validation_alias=AliasChoices("mem0_api_key", "AI_DESK_MEM0_API_KEY", "MEM0_API_KEY"),

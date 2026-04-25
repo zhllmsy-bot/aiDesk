@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+# pyright: reportUnknownVariableType=false
 import asyncio
 import json
 from contextlib import suppress
@@ -168,6 +169,8 @@ def _run_runtime_graph_case(case: EvalCase) -> EvalCaseResult:
             }
         )
     )
+    if interrupted.checkpoint is None:
+        raise RuntimeError("interrupted graph did not return a checkpoint")
     resumed = service.execute(
         GraphExecutionRequest.model_validate(
             {

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+# pyright: reportUnknownVariableType=false, reportUnknownMemberType=false, reportUnknownArgumentType=false, reportAttributeAccessIssue=false
 import asyncio
 from dataclasses import asdict
 from typing import Any

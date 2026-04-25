@@ -5,11 +5,13 @@ import json
 from dataclasses import dataclass
 from datetime import datetime
 from enum import StrEnum
+from typing import Any
 
 from sqlalchemy import select
 from sqlalchemy.orm import Session, sessionmaker
 
 from api.config import Settings
+from api.domain.security.hooks import ToolHookContext, ToolHookPhase, ToolHookPipeline
 from api.executors.contracts import (
     ArtifactDescriptor,
     ExecutionProvenance,
@@ -24,6 +26,7 @@ from api.security.models import (
     SecretRecord,
     SecretScopeDB,
 )
+from api.security.opa import OpaPolicyEngine
 
 
 @dataclass(slots=True)
@@ -454,11 +457,18 @@ class SecurityPolicyService:
         session_factory: sessionmaker[Session] | None = None,
         audit: AuditLogService | None = None,
         settings: Settings | None = None,
+        hook_pipeline: ToolHookPipeline | None = None,
+        opa: OpaPolicyEngine | None = None,
     ) -> None:
         self._secret_broker = SecretBroker(session_factory=session_factory, audit=audit)
         self._audit = audit or AuditLogService()
         self._session_factory = session_factory
         self._settings = settings
+        self._hook_pipeline = hook_pipeline or ToolHookPipeline()
+        self._opa = opa or OpaPolicyEngine(
+            policy_dir=settings.opa_policy_dir if settings else "infra/policies",
+            enabled=settings.opa_enabled if settings else False,
+        )
 
     @property
     def secret_broker(self) -> SecretBroker:
@@ -469,6 +479,31 @@ class SecurityPolicyService:
         return self._audit
 
     def evaluate(self, bundle: ExecutorInputBundle) -> SecurityGateDecision:
+        hook_decision = self._hook_pipeline.run(
+            ToolHookContext(
+                phase=ToolHookPhase.BEFORE_TOOL,
+                tool_name="command",
+                run_id=bundle.task.run_id,
+                task_id=bundle.task.task_id,
+                attempt_id=bundle.dispatch.attempt_id,
+                payload={"commands": list(bundle.proposed_commands)},
+            )
+        )
+        if not hook_decision.allowed:
+            return SecurityGateDecision(
+                True,
+                hook_decision.reason or f"tool hook {hook_decision.hook_id} rejected call",
+                [hook_decision.hook_id],
+            )
+
+        opa_decision = self._opa.evaluate("execution", _opa_input(bundle))
+        if not opa_decision.allowed:
+            return SecurityGateDecision(
+                True,
+                opa_decision.reason,
+                opa_decision.required_scope,
+            )
+
         if not any(
             bundle.workspace.root_path.startswith(root)
             for root in bundle.permission_policy.workspace_allowlist
@@ -592,3 +627,20 @@ class SecurityPolicyService:
         if any(command.startswith(prefix) for prefix in denylist):
             return True
         return bool(allowlist and not any(command.startswith(prefix) for prefix in allowlist))
+
+
+def _opa_input(bundle: ExecutorInputBundle) -> dict[str, Any]:
+    return {
+        "task": {
+            "task_id": bundle.task.task_id,
+            "run_id": bundle.task.run_id,
+            "executor": bundle.task.executor,
+        },
+        "workspace": {
+            "root_path": bundle.workspace.root_path,
+            "writable_paths": list(bundle.workspace.writable_paths),
+            "mode": bundle.workspace.mode,
+        },
+        "permission": bundle.permission_policy.model_dump(mode="json"),
+        "commands": list(bundle.proposed_commands),
+    }

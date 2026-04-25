@@ -19,7 +19,7 @@ from api.events.models import (
     TimelineReadModel,
     WorkerHealthReadModel,
 )
-from api.runtime_contracts import EventType, TaskStatus
+from api.runtime_contracts import ClaimStatus, EventType, TaskStatus
 from api.runtime_persistence.models import (
     ClaimStatusDB,
     RuntimeGraphCheckpoint,
@@ -117,7 +117,7 @@ def _duration_stats(values: list[float]) -> dict[str, float | int | None]:
 @dataclass(slots=True)
 class RuntimePersistenceService:
     session_factory: Callable[[], Session]
-    projector: RuntimeProjectorService = field(default=None)
+    projector: RuntimeProjectorService | None = field(default=None)
 
     def __post_init__(self) -> None:
         if self.projector is None:
@@ -134,6 +134,11 @@ class RuntimePersistenceService:
                 attempt_history=AttemptHistoryProjector(session_factory=self.session_factory),
                 worker_health=WorkerHealthProjector(session_factory=self.session_factory),
             )
+
+    def require_projector(self) -> RuntimeProjectorService:
+        if self.projector is None:
+            raise RuntimeError("runtime projector was not configured")
+        return self.projector
 
     def ensure_workflow_run(
         self,
@@ -543,16 +548,16 @@ class RuntimePersistenceService:
             return session.query(RuntimeRunEvent).filter_by(workflow_run_id=workflow_run_id).count()
 
     def get_timeline(self, workflow_run_id: str) -> TimelineReadModel:
-        return self.projector.get_timeline(workflow_run_id)
+        return self.require_projector().get_timeline(workflow_run_id)
 
     def get_graph(self, workflow_run_id: str) -> TaskGraphReadModel:
-        return self.projector.get_graph(workflow_run_id)
+        return self.require_projector().get_graph(workflow_run_id)
 
     def get_attempts(self, task_id: str) -> AttemptHistoryReadModel:
-        return self.projector.get_attempts(task_id)
+        return self.require_projector().get_attempts(task_id)
 
     def get_workers_health(self) -> list[WorkerHealthReadModel]:
-        return self.projector.get_workers_health()
+        return self.require_projector().get_workers_health()
 
     def claim_task(
         self,
@@ -922,24 +927,26 @@ class RuntimePersistenceService:
         elif event.event_type == EventType.WORKFLOW_COMPLETED:
             workflow_run = session.get(RuntimeWorkflowRun, event.correlation.workflow_run_id)
             if workflow_run is not None:
+                occurred_at = datetime.fromisoformat(event.occurred_at)
                 workflow_run.status = WorkflowRunStatusDB.completed
-                workflow_run.completed_at = datetime.fromisoformat(event.occurred_at)
+                workflow_run.completed_at = occurred_at
                 self._finalize_inflight_records_on_workflow_terminal(
                     session=session,
                     workflow_run_id=workflow_run.id,
                     workflow_status=WorkflowRunStatusDB.completed,
-                    occurred_at=workflow_run.completed_at,
+                    occurred_at=occurred_at,
                 )
         elif event.event_type == EventType.WORKFLOW_FAILED:
             workflow_run = session.get(RuntimeWorkflowRun, event.correlation.workflow_run_id)
             if workflow_run is not None:
+                occurred_at = datetime.fromisoformat(event.occurred_at)
                 workflow_run.status = WorkflowRunStatusDB.failed
-                workflow_run.completed_at = datetime.fromisoformat(event.occurred_at)
+                workflow_run.completed_at = occurred_at
                 self._finalize_inflight_records_on_workflow_terminal(
                     session=session,
                     workflow_run_id=workflow_run.id,
                     workflow_status=WorkflowRunStatusDB.failed,
-                    occurred_at=workflow_run.completed_at,
+                    occurred_at=occurred_at,
                 )
         elif event.event_type == EventType.WORKFLOW_RETRYING:
             workflow_run = session.get(RuntimeWorkflowRun, event.correlation.workflow_run_id)
@@ -1061,7 +1068,7 @@ class RuntimePersistenceService:
             attempt_id=row.attempt_id,
             worker_id=row.worker_id,
             lease_timeout_seconds=row.lease_timeout_seconds,
-            status=row.status,
+            status=ClaimStatus(row.status.value),
             claimed_at=row.claimed_at.isoformat(),
             heartbeat_at=row.heartbeat_at.isoformat(),
             expired_at=row.expired_at.isoformat() if row.expired_at else None,

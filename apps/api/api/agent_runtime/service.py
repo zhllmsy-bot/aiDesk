@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+# pyright: reportUnknownVariableType=false, reportUnknownMemberType=false, reportUnknownArgumentType=false, reportUnknownParameterType=false, reportMissingTypeArgument=false
 from typing import Any, TypedDict
 from uuid import uuid4
 

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+# pyright: reportUnknownVariableType=false, reportUnknownMemberType=false, reportUnknownArgumentType=false
 from collections.abc import Callable
 from dataclasses import dataclass
 
@@ -247,6 +248,8 @@ class WorkerHealthProjector:
                 worker_id = str(row.payload_json["worker_id"])
                 if worker_id in latest_by_worker:
                     continue
+                raw_active_names = row.payload_json.get("active_workflow_names")
+                active_names = raw_active_names if isinstance(raw_active_names, list) else []
                 latest_by_worker[worker_id] = WorkerHealthReadModel(
                     worker_id=worker_id,
                     task_queue=str(row.payload_json["task_queue"]),
@@ -254,7 +257,7 @@ class WorkerHealthProjector:
                     last_seen_at=row.occurred_at.isoformat(),
                     active_workflow_names=[
                         WorkflowName(name)
-                        for name in row.payload_json.get("active_workflow_names", [])
+                        for name in active_names
                     ],
                     detail=str(row.payload_json["detail"])
                     if row.payload_json.get("detail") is not None

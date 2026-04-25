@@ -1,7 +1,7 @@
 import type { ApprovalDetail } from "@ai-desk/contracts-execution";
 
 import { getApiErrorMessage, getApiHeaders, webApiClient } from "@/lib/api-client";
-import { getApprovalFixture } from "../fixtures/review-data";
+import { getApprovalFixture } from "@/lib/demo-data/review-data";
 
 export async function getApproval(approvalId: string): Promise<ApprovalDetail> {
   try {

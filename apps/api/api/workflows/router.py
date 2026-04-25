@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+# pyright: reportUnknownVariableType=false, reportUnknownArgumentType=false
 from datetime import UTC, datetime, timedelta
 from pathlib import Path
 from typing import Annotated, Any
@@ -24,8 +25,9 @@ from api.workflows.definitions.project_improvement import resolve_project_improv
 from api.workflows.definitions.project_planning import resolve_project_planning_tasks
 from api.workflows.definitions.task_execution import resolve_task_execution_tasks
 from api.workflows.dependencies import RuntimeContainer
+from api.workflows.execution_policy import resolve_runtime_full_access
 from api.workflows.recovery import recover_stale_claims
-from api.workflows.types import WorkflowRequest
+from api.workflows.types import BreakGlassKind, BreakGlassReason, WorkflowRequest
 
 router = APIRouter(prefix="/runtime", tags=["runtime"])
 
@@ -99,6 +101,46 @@ def _normalize_runtime_workspace_metadata(payload: WorkflowRequest, request: Req
         if resolved_root not in normalized_allowlist:
             normalized_allowlist.append(resolved_root)
         metadata["workspace_allowlist"] = normalized_allowlist
+
+
+def _validate_break_glass_options(payload: WorkflowRequest) -> None:
+    legacy_full_access = resolve_runtime_full_access(payload.metadata)
+    if payload.request_options.full_access is None and legacy_full_access:
+        payload.request_options.full_access = BreakGlassReason(
+            kind=BreakGlassKind.OPERATOR_OVERRIDE,
+            reason=str(
+                payload.metadata.get("runtime_full_access_reason")
+                or "legacy runtime_full_access metadata"
+            ),
+            approved_by=payload.initiated_by,
+            ticket_id=(
+                str(payload.metadata.get("runtime_full_access_ticket"))
+                if payload.metadata.get("runtime_full_access_ticket") is not None
+                else None
+            ),
+        )
+
+    reason = payload.request_options.full_access
+    if reason is None:
+        return
+    if not str(reason.reason).strip():
+        raise HTTPException(
+            status_code=422,
+            detail="request_options.full_access.reason is required",
+        )
+    if not str(reason.approved_by).strip():
+        raise HTTPException(
+            status_code=422,
+            detail="request_options.full_access.approved_by is required",
+        )
+    payload.metadata["runtime_full_access"] = True
+    payload.metadata["break_glass"] = {
+        "kind": reason.kind.value,
+        "reason": reason.reason,
+        "approved_by": reason.approved_by,
+        "ticket_id": reason.ticket_id,
+        "expires_at": reason.expires_at,
+    }
 
 
 @router.post(
@@ -234,6 +276,7 @@ async def start_runtime_workflow(
     workflow_name = WorkflowName(workflow_name_raw)
     _resolve_workflow_tasks(workflow_name, payload)
     _normalize_runtime_workspace_metadata(payload, request)
+    _validate_break_glass_options(payload)
 
     client = await _temporal_client(request)
     workflow_id = f"{workflow_name.value}:{payload.workflow_run_id}"

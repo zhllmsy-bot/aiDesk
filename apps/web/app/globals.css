@@ -218,6 +218,22 @@ body[data-theme="dawn"] {
   gap: var(--space-3);
 }
 
+.list-card-title {
+  margin: 0;
+}
+
+.trace-span-depth-1 {
+  margin-left: var(--space-5);
+}
+
+.trace-span-depth-2 {
+  margin-left: var(--space-6);
+}
+
+.trace-span-depth-3 {
+  margin-left: var(--space-7);
+}
+
 .meta-row {
   display: flex;
   flex-wrap: wrap;

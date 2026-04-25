@@ -1,7 +1,7 @@
 import type { ExecutorAttempt } from "@ai-desk/contracts-execution";
 
 import { getApiErrorMessage, getApiHeaders, webApiClient } from "@/lib/api-client";
-import { getExecutorAttemptFixture } from "../fixtures/ops-data";
+import { getExecutorAttemptFixture } from "@/lib/demo-data/ops-data";
 
 export async function getExecutorAttempt(attemptId: string): Promise<ExecutorAttempt> {
   try {

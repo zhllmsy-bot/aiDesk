@@ -7,9 +7,9 @@ import { startTransition, useEffect, useState } from "react";
 import { eventTypes } from "@ai-desk/contracts-runtime";
 import { Button, CodeBlock, Panel, StatusBadge } from "@ai-desk/ui";
 
+import { timelineItemViewModel } from "@/lib/view-models/runtime-view-models";
 import { useRunEvents } from "../hooks/use-run-events";
 import { timelineFilterSchema } from "../schemas/runtime-schemas";
-import { timelineItemViewModel } from "../view-models/runtime-view-models";
 import { RunFilterBar } from "./run-filter-bar";
 
 export function RunTimelinePanel({

@@ -1,12 +1,12 @@
 import { describe, expect, it } from "vitest";
 
-import { getTaskDetailFixture, listRunEvents } from "@/features/runs/fixtures/runtime-data";
+import { getTaskDetailFixture, listRunEvents } from "@/lib/demo-data/runtime-data";
 import {
   graphNodeViewModel,
   taskDetailViewModel,
   timelineItemViewModel,
   workflowStatusTone,
-} from "@/features/runs/view-models/runtime-view-models";
+} from "@/lib/view-models/runtime-view-models";
 
 describe("runtime view models", () => {
   it("maps raw events to timeline items with readable labels", () => {

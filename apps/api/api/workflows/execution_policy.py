@@ -1,9 +1,17 @@
 from __future__ import annotations
 
+# pyright: reportUnknownVariableType=false, reportUnknownMemberType=false, reportUnknownArgumentType=false
+from dataclasses import asdict
 from typing import Any
 
 from api.executors.contracts import ArtifactType, WorkspaceMode
-from api.workflows.types import ApprovalResolution, WorkflowRequest, WorkflowTaskSpec
+from api.workflows.types import (
+    ApprovalResolution,
+    BreakGlassKind,
+    BreakGlassReason,
+    WorkflowRequest,
+    WorkflowTaskSpec,
+)
 
 
 def normalize_context_blocks(metadata: dict[str, Any]) -> list[dict[str, Any]]:
@@ -125,6 +133,26 @@ def resolve_runtime_full_access(metadata: dict[str, Any]) -> bool:
     return False
 
 
+def resolve_request_full_access(request: WorkflowRequest) -> BreakGlassReason | None:
+    if request.request_options.full_access is not None:
+        return request.request_options.full_access
+    if resolve_runtime_full_access(request.metadata):
+        return BreakGlassReason(
+            kind=BreakGlassKind.OPERATOR_OVERRIDE,
+            reason=str(
+                request.metadata.get("runtime_full_access_reason")
+                or "legacy runtime_full_access metadata"
+            ),
+            approved_by=request.initiated_by,
+            ticket_id=(
+                str(request.metadata.get("runtime_full_access_ticket"))
+                if request.metadata.get("runtime_full_access_ticket") is not None
+                else None
+            ),
+        )
+    return None
+
+
 def workspace_root_path(metadata: dict[str, Any]) -> str:
     return str(metadata.get("workspace_root_path", "/tmp/ai-desk-workspace"))
 
@@ -158,7 +186,8 @@ def build_executor_dispatch_payload(
 ) -> dict[str, Any]:
     resolved_workspace_root_path = workspace_root_path(request.metadata)
     writable_paths = workspace_writable_paths(request.metadata, approval_resolution)
-    full_access = resolve_runtime_full_access(request.metadata)
+    break_glass_reason = resolve_request_full_access(request)
+    full_access = break_glass_reason is not None
     permission_policy: dict[str, Any]
     if full_access:
         permission_policy = {
@@ -169,6 +198,7 @@ def build_executor_dispatch_payload(
             "require_manual_approval_for_write": False,
             "secret_broker_enabled": True,
             "workspace_mode": WorkspaceMode.WORKTREE,
+            "break_glass_reason": asdict(break_glass_reason),
         }
     else:
         permission_policy = {
@@ -239,6 +269,10 @@ class WorkflowExecutionPolicy:
     @staticmethod
     def resolve_runtime_full_access(metadata: dict[str, Any]) -> bool:
         return resolve_runtime_full_access(metadata)
+
+    @staticmethod
+    def resolve_request_full_access(request: WorkflowRequest) -> BreakGlassReason | None:
+        return resolve_request_full_access(request)
 
     def workspace_root_path(self) -> str:
         return workspace_root_path(self._request.metadata)

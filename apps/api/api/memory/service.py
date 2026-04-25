@@ -15,9 +15,9 @@ from api.executors.contracts import (
     MemoryWriteCandidate,
     RetentionPolicy,
 )
+from api.integrations.memory.mem0 import Mem0MemoryAdapter, map_mem0_item
+from api.integrations.memory.openviking import OpenVikingMemoryAdapter, OpenVikingWriteResult
 from api.memory.governance import WriteAction, WriteGovernancePolicy
-from api.memory.mem0 import Mem0MemoryAdapter, map_mem0_item
-from api.memory.openviking import OpenVikingMemoryAdapter, OpenVikingWriteResult
 from api.memory.ranking import MemoryRankingService, RankingContext
 from api.observability.logging import get_logger
 from api.observability.metrics import get_metrics

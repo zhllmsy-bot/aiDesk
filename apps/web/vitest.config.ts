@@ -24,6 +24,19 @@ export default defineConfig({
         __dirname,
         "../../packages/contracts/api/src/index.ts",
       ),
+      "@ai-desk/contracts-projects": path.resolve(
+        __dirname,
+        "../../packages/contracts/projects/src/index.ts",
+      ),
+      "@ai-desk/contracts-runtime": path.resolve(
+        __dirname,
+        "../../packages/contracts/runtime/src/index.ts",
+      ),
+      "@ai-desk/contracts-execution": path.resolve(
+        __dirname,
+        "../../packages/contracts/execution/src/index.ts",
+      ),
+      "@ai-desk/ui": path.resolve(__dirname, "../../packages/ui/src/index.tsx"),
     },
   },
 });

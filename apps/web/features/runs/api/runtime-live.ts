@@ -222,9 +222,9 @@ export async function fetchTaskDetailLive(
     verificationStatus: completed ? "passed" : failed ? "failed" : "warning",
     retryCount: Math.max(0, attempts.length - 1),
     failureCategory: failed ? "runtime" : "none",
-    failureReason: failed ? node.blockedReason : null,
+    failureReason: failed ? (node.blockedReason ?? null) : null,
     waitingApprovalReason: null,
-    blockedReason: node.blockedReason,
+    blockedReason: node.blockedReason ?? null,
     linkedArtifactIds: [],
     approvalId: null,
   };

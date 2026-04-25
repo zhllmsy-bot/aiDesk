@@ -1,6 +1,8 @@
 from __future__ import annotations
 
+# pyright: reportUnknownVariableType=false
 from dataclasses import dataclass, field
+from enum import StrEnum
 from typing import Any
 
 
@@ -24,6 +26,26 @@ class WorkflowSimulationOptions:
     interrupt_task_ids: list[str] = field(default_factory=list)
 
 
+class BreakGlassKind(StrEnum):
+    INCIDENT_RESPONSE = "incident_response"
+    MAINTENANCE = "maintenance"
+    OPERATOR_OVERRIDE = "operator_override"
+
+
+@dataclass(slots=True)
+class BreakGlassReason:
+    kind: BreakGlassKind
+    reason: str
+    approved_by: str
+    ticket_id: str | None = None
+    expires_at: str | None = None
+
+
+@dataclass(slots=True)
+class RequestOptions:
+    full_access: BreakGlassReason | None = None
+
+
 @dataclass(slots=True)
 class WorkflowRequest:
     workflow_run_id: str
@@ -37,6 +59,7 @@ class WorkflowRequest:
     signal_timeout_seconds: int = 300
     lease_timeout_seconds: int = 30
     metadata: dict[str, Any] = field(default_factory=dict)
+    request_options: RequestOptions = field(default_factory=RequestOptions)
     simulation: WorkflowSimulationOptions = field(default_factory=WorkflowSimulationOptions)
 
 

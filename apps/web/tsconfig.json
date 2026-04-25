@@ -16,11 +16,29 @@
       "@ai-desk/contracts-projects": ["../../packages/contracts/projects/src/index.ts"],
       "@ai-desk/contracts-runtime": ["../../packages/contracts/runtime/src/index.ts"],
       "@ai-desk/contracts-execution": ["../../packages/contracts/execution/src/index.ts"],
-      "@ai-desk/ui": ["../../packages/ui/src/index.ts"]
+      "@ai-desk/ui": ["../../packages/ui/src/index.tsx"]
     },
     "types": ["vitest/globals"],
     "plugins": [{ "name": "next" }]
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules"]
+  "include": [
+    "next-env.d.ts",
+    "next.config.ts",
+    "app/**/*.ts",
+    "app/**/*.tsx",
+    "components/**/*.ts",
+    "components/**/*.tsx",
+    "features/**/*.ts",
+    "features/**/*.tsx",
+    "lib/**/*.ts",
+    "lib/**/*.tsx"
+  ],
+  "exclude": [
+    "node_modules",
+    "tests",
+    "vitest.config.ts",
+    "vitest.setup.ts",
+    "playwright.config.ts",
+    ".next"
+  ]
 }

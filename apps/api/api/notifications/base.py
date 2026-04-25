@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+# pyright: reportUnknownVariableType=false
 from datetime import datetime
 from typing import Any, Protocol
 

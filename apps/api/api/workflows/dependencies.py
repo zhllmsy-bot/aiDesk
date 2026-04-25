@@ -61,7 +61,7 @@ def _build_runtime_container(settings: Settings) -> RuntimeContainer:
         notification_service=notification_service,
         agent_runtime=agent_runtime,
         persistence=persistence,
-        projector=persistence.projector,
+        projector=persistence.require_projector(),
     )
 
 

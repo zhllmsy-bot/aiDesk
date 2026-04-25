@@ -83,7 +83,7 @@ export function ApprovalCenterScreen() {
                 <div className="list-card-header">
                   <div>
                     <div className="ui-eyebrow">{approval.type}</div>
-                    <h3 style={{ margin: 0 }}>{approval.title}</h3>
+                    <h3 className="list-card-title">{approval.title}</h3>
                   </div>
                   <div className="inline-actions">
                     <StatusBadge
@@ -100,7 +100,7 @@ export function ApprovalCenterScreen() {
                   <span>Run: {approval.correlation.runId}</span>
                   <span>Task: {approval.correlation.taskId}</span>
                 </div>
-                <Stack gap="var(--space-3)">
+                <Stack gap="3">
                   <Link href={approval.linkHref}>
                     <Button>Open detail</Button>
                   </Link>

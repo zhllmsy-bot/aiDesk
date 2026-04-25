@@ -15,13 +15,19 @@ from api.context.query import (
 )
 from api.context.service import ContextBuilderService
 from api.database import create_session_factory
-from api.executors.providers import CodexExecutorAdapter, OpenHandsExecutorAdapter
+from api.executors.providers import (
+    AiderExecutorAdapter,
+    ClaudeAgentExecutorAdapter,
+    ClaudeCodeExecutorAdapter,
+    CodexExecutorAdapter,
+    OpenAIAgentsExecutorAdapter,
+    OpenHandsExecutorAdapter,
+)
 from api.executors.registry import ExecutorRegistry
 from api.executors.service import ExecutorDispatchService
 from api.executors.transports import codex_config_from_settings
+from api.integrations.memory import Mem0MemoryAdapter, OpenVikingMemoryAdapter
 from api.memory.maintenance import MemoryMaintenanceService
-from api.memory.mem0 import Mem0MemoryAdapter
-from api.memory.openviking import OpenVikingMemoryAdapter
 from api.memory.service import MemoryGovernanceService
 from api.review.service import ApprovalService, ArtifactService, AttemptStore, EvidenceService
 from api.security.service import AuditLogService, SecurityPolicyService
@@ -47,6 +53,15 @@ def configure_execution_container(settings: Settings) -> ExecutionContainer:
     session_factory = create_session_factory(settings.database_url)
     registry = ExecutorRegistry()
     registry.register(CodexExecutorAdapter(codex_config_from_settings(settings)))
+    registry.register(
+        ClaudeCodeExecutorAdapter(
+            command=settings.claude_code_command,
+            model=settings.claude_code_model,
+        )
+    )
+    registry.register(ClaudeAgentExecutorAdapter(model=settings.claude_agent_model))
+    registry.register(OpenAIAgentsExecutorAdapter(model=settings.openai_agents_model))
+    registry.register(AiderExecutorAdapter(model=settings.aider_model))
     registry.register(
         OpenHandsExecutorAdapter(
             base_url=settings.openhands_api_url,

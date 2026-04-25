@@ -4,15 +4,15 @@ import Link from "next/link";
 
 import { Button, Panel, StatusBadge } from "@ai-desk/ui";
 
-import { getRunRecord } from "../fixtures/runtime-data";
-import { useRunEvents } from "../hooks/use-run-events";
-import { useTaskGraph } from "../hooks/use-task-graph";
-import type { RunRecord } from "../types";
+import { getRunRecord } from "@/lib/demo-data/runtime-data";
 import {
   timelineItemViewModel,
   workflowStatusLabel,
   workflowStatusTone,
-} from "../view-models/runtime-view-models";
+} from "@/lib/view-models/runtime-view-models";
+import { useRunEvents } from "../hooks/use-run-events";
+import { useTaskGraph } from "../hooks/use-task-graph";
+import type { RunRecord } from "../types";
 import { RunTimelinePanel } from "./run-timeline-panel";
 import { TaskGraphPanel } from "./task-graph-panel";
 

@@ -2,7 +2,7 @@
 
 import { useQuery } from "@tanstack/react-query";
 
-import { runKeys } from "@/features/runs/hooks/use-run-timeline";
+import { runKeys } from "@/lib/query-keys";
 
 import { type RuntimeSlaQuery, getRuntimeSla } from "../api/get-runtime-sla";
 

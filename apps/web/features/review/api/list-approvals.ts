@@ -1,7 +1,7 @@
 import type { ApprovalSummary } from "@ai-desk/contracts-execution";
 
 import { getApiErrorMessage, getApiHeaders, webApiClient } from "@/lib/api-client";
-import { listApprovalFixtures } from "../fixtures/review-data";
+import { listApprovalFixtures } from "@/lib/demo-data/review-data";
 
 export async function listApprovals(): Promise<ApprovalSummary[]> {
   try {

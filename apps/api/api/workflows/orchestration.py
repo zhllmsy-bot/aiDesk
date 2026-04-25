@@ -4,7 +4,7 @@ from collections.abc import Callable
 from typing import Any
 
 from api.context.assembly import AssemblyRequest
-from api.executors.contracts import WorkspaceMode
+from api.executors.contracts import EvidenceRef, WorkspaceMode
 from api.workflows.types import WorkflowRequest, WorkflowTaskSpec
 
 
@@ -15,6 +15,10 @@ def build_context_assembly_payload(
     metadata_int_resolver: Callable[[str, int], int],
     evidence_serializer: Callable[[dict[str, Any]], list[dict[str, Any]]],
 ) -> dict[str, Any]:
+    evidence_refs = [
+        EvidenceRef.model_validate(item)
+        for item in evidence_serializer(request.metadata)
+    ]
     return AssemblyRequest(
         project_id=request.project_id,
         task_id=task.task_id,
@@ -36,7 +40,7 @@ def build_context_assembly_payload(
         fact_limit=max(metadata_int_resolver("fact_limit", 5), 1),
         token_budget=max(metadata_int_resolver("context_token_budget", 4000), 100),
         max_blocks_per_level=max(metadata_int_resolver("context_blocks_per_level", 5), 1),
-        extra_evidence_refs=evidence_serializer(request.metadata),
+        extra_evidence_refs=evidence_refs,
     ).model_dump(mode="json")
 
 

@@ -9,7 +9,7 @@ import {
   notificationViewModel,
   traceViewModel,
   workerHealthViewModel,
-} from "@/features/runs/view-models/runtime-view-models";
+} from "@/lib/view-models/runtime-view-models";
 import { useRunNotifications } from "../hooks/use-run-notifications";
 import { useRunTrace } from "../hooks/use-run-trace";
 import { useRuntimeBacklog } from "../hooks/use-runtime-backlog";
@@ -161,7 +161,7 @@ export function RunTelemetryScreen({ runId }: { runId: string }) {
           </div>
         </div>
 
-        <Stack gap="var(--space-3)">
+        <Stack gap="3">
           {runtimeSlaTrend.length ? (
             runtimeSlaTrend.map((point) => (
               <div key={point.bucket_start} className="list-card">
@@ -191,13 +191,12 @@ export function RunTelemetryScreen({ runId }: { runId: string }) {
 
       <div className="detail-grid">
         <Panel eyebrow="Span Tree" title="Correlated spans">
-          <Stack gap="var(--space-3)">
+          <Stack gap="3">
             {trace.spans.map((span) => (
               <article
                 key={span.spanId}
-                className="list-card"
+                className={`list-card trace-span-depth-${Math.min(span.depth, 3)}`}
                 id={`trace-${trace.traceId}`}
-                style={{ marginLeft: `${span.depth * 1.25}rem` }}
               >
                 <div className="list-card-header">
                   <div>
@@ -221,7 +220,7 @@ export function RunTelemetryScreen({ runId }: { runId: string }) {
 
         <div className="detail-sidebar">
           <Panel eyebrow="Runtime Health" title="Workers and backlog">
-            <Stack gap="var(--space-3)">
+            <Stack gap="3">
               <div className="surface-note">
                 Last heartbeat {backlog.lastHeartbeatLabel}, waiting signals{" "}
                 {backlog.waitingSignals}, lag tone {backlog.lagTone}.
@@ -244,7 +243,7 @@ export function RunTelemetryScreen({ runId }: { runId: string }) {
           </Panel>
 
           <Panel eyebrow="Notifications" title="Delivery records">
-            <Stack gap="var(--space-3)">
+            <Stack gap="3">
               {notifications.map((notification) => (
                 <div key={notification.notificationId} className="list-card">
                   <div className="list-card-header">

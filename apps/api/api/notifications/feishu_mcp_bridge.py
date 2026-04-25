@@ -5,7 +5,7 @@ import os
 import subprocess
 from datetime import UTC, datetime
 from pathlib import Path
-from typing import Any
+from typing import Any, cast
 from uuid import uuid4
 
 from api.notifications.base import NotificationMessage, NotificationReceipt
@@ -100,7 +100,7 @@ class FeishuMcpBridgeNotificationAdapter:
             except json.JSONDecodeError:
                 continue
             if isinstance(parsed, dict):
-                return parsed
+                return cast(dict[str, Any], parsed)
         raise RuntimeError("Feishu MCP bridge did not return a JSON result")
 
     def _run_command(

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+# pyright: reportUnknownVariableType=false, reportUnknownMemberType=false, reportUnknownArgumentType=false, reportAttributeAccessIssue=false, reportPrivateUsage=false, reportPossiblyUnboundVariable=false
 import asyncio
 import hashlib
 from collections.abc import Callable

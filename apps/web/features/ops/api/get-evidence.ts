@@ -1,7 +1,7 @@
 import type { EvidenceRef } from "@ai-desk/contracts-execution";
 
 import { getApiErrorMessage, getApiHeaders, webApiClient } from "@/lib/api-client";
-import { getEvidenceFixture } from "../fixtures/ops-data";
+import { getEvidenceFixture } from "@/lib/demo-data/ops-data";
 
 export async function getEvidence(attemptId: string): Promise<EvidenceRef[]> {
   try {

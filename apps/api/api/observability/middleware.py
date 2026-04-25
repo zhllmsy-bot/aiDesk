@@ -7,6 +7,7 @@ from starlette.requests import Request
 from starlette.responses import Response
 
 from api.observability.logging import clear_correlation, get_logger, set_correlation
+from api.observability.otel import resolve_traceparent
 
 logger = get_logger("middleware.correlation")
 
@@ -22,6 +23,7 @@ class CorrelationMiddleware(BaseHTTPMiddleware):
             response = await call_next(request)
             response.headers["X-Trace-ID"] = trace_id
             response.headers["X-Request-ID"] = request_id
+            response.headers["traceparent"] = resolve_traceparent(dict(request.headers), trace_id)
             return response
         finally:
             clear_correlation()

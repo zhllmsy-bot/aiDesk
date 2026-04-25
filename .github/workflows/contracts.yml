@@ -1,0 +1,26 @@
+name: contracts
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  snapshots:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.33.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - uses: astral-sh/setup-uv@v5
+      - run: pnpm install --frozen-lockfile
+      - run: uv sync --project apps/api --all-groups
+      - run: pnpm openapi:export
+      - run: pnpm --filter @ai-desk/contracts-api typecheck
+      - run: cd apps/api && uv run --project . pytest tests/contract tests/test_openapi_snapshot.py
+      - run: git diff --exit-code packages/contracts apps/api/tests/contracts_snapshots

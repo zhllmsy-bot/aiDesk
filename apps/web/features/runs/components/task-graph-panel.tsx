@@ -4,8 +4,8 @@ import Link from "next/link";
 
 import { Button, Panel, StatusBadge } from "@ai-desk/ui";
 
+import { graphNodeViewModel } from "@/lib/view-models/runtime-view-models";
 import { useTaskGraph } from "../hooks/use-task-graph";
-import { graphNodeViewModel } from "../view-models/runtime-view-models";
 
 const todoToneByStatus = {
   queued: "neutral",

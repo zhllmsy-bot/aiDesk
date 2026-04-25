@@ -1,7 +1,7 @@
 import type { ArtifactRecord } from "@ai-desk/contracts-execution";
 
 import { getApiErrorMessage, getApiHeaders, webApiClient } from "@/lib/api-client";
-import { getArtifactFixture } from "../fixtures/artifact-data";
+import { getArtifactFixture } from "@/lib/demo-data/artifact-data";
 
 export async function getArtifact(artifactId: string): Promise<ArtifactRecord> {
   try {
@@ -16,7 +16,7 @@ export async function getArtifact(artifactId: string): Promise<ArtifactRecord> {
     if (!data) {
       throw new Error(getApiErrorMessage(error, response.status));
     }
-    return data as ArtifactRecord;
+    return data as unknown as ArtifactRecord;
   } catch {
     await new Promise((resolve) => setTimeout(resolve, 90));
     const artifact = getArtifactFixture(artifactId);

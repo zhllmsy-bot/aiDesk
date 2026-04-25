@@ -15,6 +15,7 @@ from api.context.query import (
     SecurityContextQueryService,
 )
 from api.context.service import ContextAssemblyInput, ContextBuilderService
+from api.domain.context.skills import ContextSkill, ContextSkillLedger, skill_context_block
 from api.executors.contracts import ContextBundle, EvidenceRef, ExecutionModel
 
 
@@ -32,6 +33,7 @@ class AssemblyRequest(ExecutionModel):
     token_budget: int = Field(default=4000, ge=100)
     max_blocks_per_level: int = Field(default=5, ge=1)
     extra_evidence_refs: list[EvidenceRef] = Field(default_factory=list)
+    skills: list[ContextSkill] = Field(default_factory=list)
 
 
 class ContextAssemblyService:
@@ -43,12 +45,18 @@ class ContextAssemblyService:
         runtime_query: RuntimeContextQueryService,
         memory_query: MemoryRecallQueryService,
         security_query: SecurityContextQueryService,
+        skill_ledger: ContextSkillLedger | None = None,
     ) -> None:
         self._builder = builder
         self._project_query = project_query
         self._runtime_query = runtime_query
         self._memory_query = memory_query
         self._security_query = security_query
+        self._skill_ledger = skill_ledger or ContextSkillLedger()
+
+    @property
+    def skill_ledger(self) -> ContextSkillLedger:
+        return self._skill_ledger
 
     def assemble(self, request: AssemblyRequest) -> ContextBundle:
         task_core = self._project_query.query_task_core(request.task_id)
@@ -96,7 +104,12 @@ class ContextAssemblyService:
             max_blocks_per_level=request.max_blocks_per_level,
         )
 
-        return self._builder.build_from_records(assembly_input)
+        bundle = self._builder.build_from_records(assembly_input)
+        for skill in request.skills:
+            ledger_entry = self._skill_ledger.record(task_id=request.task_id, skill=skill)
+            bundle.blocks.append(skill_context_block(skill, ledger_entry))
+            bundle.evidence_refs.extend(skill.evidence_refs)
+        return bundle
 
     @staticmethod
     def _derive_workflow_summary(

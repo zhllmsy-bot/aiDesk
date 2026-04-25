@@ -4,3290 +4,3450 @@
  */
 
 export interface paths {
-  "/": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Root Endpoint */
+        get: operations["root_endpoint__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    /** Root Endpoint */
-    get: operations["root_endpoint__get"];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/auth/me": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/auth/me": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Me */
+        get: operations["get_me_auth_me_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    /** Get Me */
-    get: operations["get_me_auth_me_get"];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/auth/register": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/auth/register": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Register */
+        post: operations["register_auth_register_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    get?: never;
-    put?: never;
-    /** Register */
-    post: operations["register_auth_register_post"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/auth/sessions": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/auth/sessions": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Create Session */
+        post: operations["create_session_auth_sessions_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    get?: never;
-    put?: never;
-    /** Create Session */
-    post: operations["create_session_auth_sessions_post"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/context/assemble": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/context/assemble": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Assemble Context */
+        post: operations["assemble_context_context_assemble_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    get?: never;
-    put?: never;
-    /** Assemble Context */
-    post: operations["assemble_context_context_assemble_post"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/context/build": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/context/build": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Build Context */
+        post: operations["build_context_context_build_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    get?: never;
-    put?: never;
-    /** Build Context */
-    post: operations["build_context_context_build_post"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/contracts/execution": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/contracts/execution": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Execution Contract Endpoint */
+        get: operations["execution_contract_endpoint_contracts_execution_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    /** Execution Contract Endpoint */
-    get: operations["execution_contract_endpoint_contracts_execution_get"];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/executors/capabilities": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/executors/capabilities": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** List Capabilities */
+        get: operations["list_capabilities_executors_capabilities_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    /** List Capabilities */
-    get: operations["list_capabilities_executors_capabilities_get"];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/executors/dispatch": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/executors/dispatch": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Dispatch Execution */
+        post: operations["dispatch_execution_executors_dispatch_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    get?: never;
-    put?: never;
-    /** Dispatch Execution */
-    post: operations["dispatch_execution_executors_dispatch_post"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/health/live": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/health/live": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Live */
+        get: operations["live_health_live_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    /** Live */
-    get: operations["live_health_live_get"];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/health/ready": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/health/ready": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Ready */
+        get: operations["ready_health_ready_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    /** Ready */
-    get: operations["ready_health_ready_get"];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/memory/hits": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/memory/hits": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** List Memory Hits */
+        get: operations["list_memory_hits_memory_hits_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    /** List Memory Hits */
-    get: operations["list_memory_hits_memory_hits_get"];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/memory/maintenance": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/memory/maintenance": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Run Maintenance */
+        post: operations["run_maintenance_memory_maintenance_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    get?: never;
-    put?: never;
-    /** Run Maintenance */
-    post: operations["run_maintenance_memory_maintenance_post"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/memory/writes": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/memory/writes": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Write Memory */
+        post: operations["write_memory_memory_writes_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    get?: never;
-    put?: never;
-    /** Write Memory */
-    post: operations["write_memory_memory_writes_post"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/notifications/deliveries": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/notifications/deliveries": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** List Notification Deliveries */
+        get: operations["list_notification_deliveries_notifications_deliveries_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    /** List Notification Deliveries */
-    get: operations["list_notification_deliveries_notifications_deliveries_get"];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/observability/evals/runtime-regression": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/notifications/deliveries/{receipt_id}/status": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Update Notification Delivery Status */
+        post: operations["update_notification_delivery_status_notifications_deliveries__receipt_id__status_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    /** Runtime Regression */
-    get: operations["runtime_regression_observability_evals_runtime_regression_get"];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/observability/metrics": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/observability/evals/runtime-regression": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Runtime Regression */
+        get: operations["runtime_regression_observability_evals_runtime_regression_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    /** Metrics */
-    get: operations["metrics_observability_metrics_get"];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/observability/runtime-sla": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/observability/metrics": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Metrics */
+        get: operations["metrics_observability_metrics_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    /** Runtime Sla */
-    get: operations["runtime_sla_observability_runtime_sla_get"];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/projects": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/observability/runtime-sla": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Runtime Sla */
+        get: operations["runtime_sla_observability_runtime_sla_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    /** List Projects */
-    get: operations["list_projects_projects_get"];
-    put?: never;
-    /** Create Project */
-    post: operations["create_project_projects_post"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/projects/{project_id}": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/projects": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** List Projects */
+        get: operations["list_projects_projects_get"];
+        put?: never;
+        /** Create Project */
+        post: operations["create_project_projects_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    /** Get Project */
-    get: operations["get_project_projects__project_id__get"];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    /** Update Project */
-    patch: operations["update_project_projects__project_id__patch"];
-    trace?: never;
-  };
-  "/projects/{project_id}/archive": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/projects/{project_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Project */
+        get: operations["get_project_projects__project_id__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        /** Update Project */
+        patch: operations["update_project_projects__project_id__patch"];
+        trace?: never;
     };
-    get?: never;
-    put?: never;
-    /** Archive Project */
-    post: operations["archive_project_projects__project_id__archive_post"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/projects/{project_id}/iterations": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/projects/{project_id}/archive": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Archive Project */
+        post: operations["archive_project_projects__project_id__archive_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    /** List Iterations */
-    get: operations["list_iterations_projects__project_id__iterations_get"];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/projects/{project_id}/plan-summary": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/projects/{project_id}/iterations": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** List Iterations */
+        get: operations["list_iterations_projects__project_id__iterations_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    /** Get Plan Summary */
-    get: operations["get_plan_summary_projects__project_id__plan_summary_get"];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/review/approvals": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/projects/{project_id}/plan-summary": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Plan Summary */
+        get: operations["get_plan_summary_projects__project_id__plan_summary_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    /** List Approvals */
-    get: operations["list_approvals_review_approvals_get"];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/review/approvals/{approval_id}": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/review/approvals": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** List Approvals */
+        get: operations["list_approvals_review_approvals_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    /** Get Approval Detail */
-    get: operations["get_approval_detail_review_approvals__approval_id__get"];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/review/approvals/{approval_id}/resolve": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/review/approvals/{approval_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Approval Detail */
+        get: operations["get_approval_detail_review_approvals__approval_id__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    get?: never;
-    put?: never;
-    /** Resolve Approval */
-    post: operations["resolve_approval_review_approvals__approval_id__resolve_post"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/review/artifacts": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/review/approvals/{approval_id}/resolve": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Resolve Approval */
+        post: operations["resolve_approval_review_approvals__approval_id__resolve_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    /** List Artifacts */
-    get: operations["list_artifacts_review_artifacts_get"];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/review/artifacts/{artifact_id}": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/review/artifacts": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** List Artifacts */
+        get: operations["list_artifacts_review_artifacts_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    /** Get Artifact Detail */
-    get: operations["get_artifact_detail_review_artifacts__artifact_id__get"];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/review/attempts": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/review/artifacts/{artifact_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Artifact Detail */
+        get: operations["get_artifact_detail_review_artifacts__artifact_id__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    /** List Attempts */
-    get: operations["list_attempts_review_attempts_get"];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/review/attempts/{attempt_id}": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/review/attempts": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** List Attempts */
+        get: operations["list_attempts_review_attempts_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    /** Get Attempt Detail */
-    get: operations["get_attempt_detail_review_attempts__attempt_id__get"];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/review/evidence/{attempt_id}": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/review/attempts/{attempt_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Attempt Detail */
+        get: operations["get_attempt_detail_review_attempts__attempt_id__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    /** Get Evidence Summary */
-    get: operations["get_evidence_summary_review_evidence__attempt_id__get"];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/runtime/dev/bootstrap": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/review/evidence/{attempt_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Evidence Summary */
+        get: operations["get_evidence_summary_review_evidence__attempt_id__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    get?: never;
-    put?: never;
-    /**
-     * DEV ONLY: bootstrap runtime fixtures
-     * @deprecated
-     */
-    post: operations["bootstrap_runtime_dev_runtime_dev_bootstrap_post"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/runtime/recovery/reclaim-stale": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/runtime/dev/bootstrap": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * DEV ONLY: bootstrap runtime fixtures
+         * @deprecated
+         */
+        post: operations["bootstrap_runtime_dev_runtime_dev_bootstrap_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    get?: never;
-    put?: never;
-    /** Reclaim Stale Claims Endpoint */
-    post: operations["reclaim_stale_claims_endpoint_runtime_recovery_reclaim_stale_post"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/runtime/recovery/reconcile-terminal": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/runtime/recovery/reclaim-stale": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Reclaim Stale Claims Endpoint */
+        post: operations["reclaim_stale_claims_endpoint_runtime_recovery_reclaim_stale_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    get?: never;
-    put?: never;
-    /** Reconcile Terminal Runs Endpoint */
-    post: operations["reconcile_terminal_runs_endpoint_runtime_recovery_reconcile_terminal_post"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/runtime/runs/start": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/runtime/recovery/reconcile-terminal": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Reconcile Terminal Runs Endpoint */
+        post: operations["reconcile_terminal_runs_endpoint_runtime_recovery_reconcile_terminal_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    get?: never;
-    put?: never;
-    /** Production entry: start a runtime workflow via Temporal */
-    post: operations["start_runtime_workflow_runtime_runs_start_post"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/runtime/runs/{workflow_run_id}/approval": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/runtime/runs/start": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Production entry: start a runtime workflow via Temporal */
+        post: operations["start_runtime_workflow_runtime_runs_start_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    get?: never;
-    put?: never;
-    /** Resolve Runtime Approval */
-    post: operations["resolve_runtime_approval_runtime_runs__workflow_run_id__approval_post"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/runtime/runs/{workflow_run_id}/graph": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/runtime/runs/{workflow_run_id}/approval": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Resolve Runtime Approval */
+        post: operations["resolve_runtime_approval_runtime_runs__workflow_run_id__approval_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    /** Get Runtime Graph */
-    get: operations["get_runtime_graph_runtime_runs__workflow_run_id__graph_get"];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/runtime/runs/{workflow_run_id}/timeline": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/runtime/runs/{workflow_run_id}/graph": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Runtime Graph */
+        get: operations["get_runtime_graph_runtime_runs__workflow_run_id__graph_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    /** Get Runtime Timeline */
-    get: operations["get_runtime_timeline_runtime_runs__workflow_run_id__timeline_get"];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/runtime/tasks/{task_id}/attempts": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/runtime/runs/{workflow_run_id}/timeline": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Runtime Timeline */
+        get: operations["get_runtime_timeline_runtime_runs__workflow_run_id__timeline_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    /** List Runtime Attempts */
-    get: operations["list_runtime_attempts_runtime_tasks__task_id__attempts_get"];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/runtime/workers/health": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/runtime/tasks/{task_id}/attempts": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** List Runtime Attempts */
+        get: operations["list_runtime_attempts_runtime_tasks__task_id__attempts_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    /** Worker Health */
-    get: operations["worker_health_runtime_workers_health_get"];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
+    "/runtime/workers/health": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Worker Health */
+        get: operations["worker_health_runtime_workers_health_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
-  schemas: {
-    /** Actor */
-    Actor: {
-      /** Id */
-      id: string;
-      /** Name */
-      name: string;
-      /** Role */
-      role: string;
-    };
-    /** ApprovalDetailView */
-    ApprovalDetailView: {
-      correlation: components["schemas"]["Correlation"];
-      /** Expiresat */
-      expiresAt?: string | null;
-      /** Id */
-      id: string;
-      /** Reason */
-      reason: string;
-      /** Relatedartifacts */
-      relatedArtifacts?: string[];
-      /** Requestedat */
-      requestedAt: string;
-      requestedBy: components["schemas"]["Actor"];
-      /** Resolutionnote */
-      resolutionNote?: string | null;
-      riskLevel: components["schemas"]["RiskLevel"];
-      /**
-       * Schemaversion
-       * @default 2026-04-19.execution.v1
-       */
-      schemaVersion: string;
-      status: components["schemas"]["ApprovalStatus"];
-      /** Title */
-      title: string;
-      /** Type */
-      type: string;
-    };
-    /** ApprovalListResponse */
-    ApprovalListResponse: {
-      /** Items */
-      items: components["schemas"]["ApprovalSummaryView"][];
-    };
-    /** ApprovalRecord */
-    ApprovalRecord: {
-      /** Approval Id */
-      approval_id: string;
-      approval_type: components["schemas"]["ApprovalType"];
-      /** Project Id */
-      project_id: string;
-      /** Reason */
-      reason: string;
-      /**
-       * Requested At
-       * Format: date-time
-       */
-      requested_at?: string;
-      /** Requested By */
-      requested_by: string;
-      /** Required Scope */
-      required_scope?: string[];
-      resolution_payload?: components["schemas"]["ApprovalResolutionPayload"] | null;
-      /** Resolved At */
-      resolved_at?: string | null;
-      /** Resolved By */
-      resolved_by?: string | null;
-      /** Run Id */
-      run_id: string;
-      status: components["schemas"]["ApprovalStatus"];
-      /** Task Id */
-      task_id: string;
-    };
-    /** ApprovalResolutionPayload */
-    ApprovalResolutionPayload: {
-      /** Approved Write Paths */
-      approved_write_paths?: string[];
-      decision: components["schemas"]["ApprovalStatus"];
-      /** Metadata */
-      metadata?: {
-        [key: string]: unknown;
-      };
-      /** Reason */
-      reason: string;
-    };
-    /**
-     * ApprovalStatus
-     * @enum {string}
-     */
-    ApprovalStatus: "pending" | "approved" | "rejected" | "expired" | "cancelled";
-    /** ApprovalSummaryView */
-    ApprovalSummaryView: {
-      correlation: components["schemas"]["Correlation"];
-      /** Id */
-      id: string;
-      /** Reason */
-      reason: string;
-      /** Requestedat */
-      requestedAt: string;
-      requestedBy: components["schemas"]["Actor"];
-      riskLevel: components["schemas"]["RiskLevel"];
-      /**
-       * Schemaversion
-       * @default 2026-04-19.execution.v1
-       */
-      schemaVersion: string;
-      status: components["schemas"]["ApprovalStatus"];
-      /** Title */
-      title: string;
-      /** Type */
-      type: string;
-    };
-    /**
-     * ApprovalType
-     * @enum {string}
-     */
-    ApprovalType: "write_execution" | "secret_access" | "command_exception";
-    /** ArtifactDescriptor */
-    ArtifactDescriptor: {
-      artifact_type: components["schemas"]["ArtifactType"];
-      /** Content Hash */
-      content_hash: string;
-      /** Evidence Refs */
-      evidence_refs?: components["schemas"]["EvidenceRef"][];
-      /** Metadata */
-      metadata?: {
-        [key: string]: unknown;
-      };
-      /** Path */
-      path: string;
-      /** Producer */
-      producer: string;
-      provenance: components["schemas"]["ExecutionProvenance"];
-      /**
-       * Retention Policy
-       * @default retain_for_run
-       */
-      retention_policy: string;
-      /** Summary */
-      summary?: string | null;
-      /** Workspace Ref */
-      workspace_ref: string;
-    };
-    /** ArtifactListResponse */
-    ArtifactListResponse: {
-      /** Items */
-      items: components["schemas"]["ArtifactView"][];
-    };
-    /**
-     * ArtifactType
-     * @enum {string}
-     */
-    ArtifactType:
-      | "patch"
-      | "log"
-      | "report"
-      | "screenshot"
-      | "trace_snapshot"
-      | "test_report"
-      | "file"
-      | "summary"
-      | "evidence"
-      | "command_output";
-    /** ArtifactView */
-    ArtifactView: {
-      /** Content */
-      content: string;
-      /** Id */
-      id: string;
-      /** Mimetype */
-      mimeType: string;
-      /** Preview */
-      preview: string;
-      provenance: components["schemas"]["ProvenanceRecord"];
-      /**
-       * Schemaversion
-       * @default 2026-04-19.execution.v1
-       */
-      schemaVersion: string;
-      /** Title */
-      title: string;
-      /** Type */
-      type: string;
-    };
-    /** AssemblyRequest */
-    AssemblyRequest: {
-      /**
-       * Attempt Limit
-       * @default 3
-       */
-      attempt_limit: number;
-      /** Extra Evidence Refs */
-      extra_evidence_refs?: components["schemas"]["EvidenceRef"][];
-      /**
-       * Fact Limit
-       * @default 5
-       */
-      fact_limit: number;
-      /** Iteration Id */
-      iteration_id?: string | null;
-      /**
-       * Max Blocks Per Level
-       * @default 5
-       */
-      max_blocks_per_level: number;
-      /**
-       * Memory Limit
-       * @default 5
-       */
-      memory_limit: number;
-      /** Namespace Prefix */
-      namespace_prefix?: string | null;
-      /** Project Id */
-      project_id: string;
-      /**
-       * Require Approval
-       * @default true
-       */
-      require_approval: boolean;
-      /**
-       * Secret Broker Enabled
-       * @default false
-       */
-      secret_broker_enabled: boolean;
-      /** Task Id */
-      task_id: string;
-      /**
-       * Token Budget
-       * @default 4000
-       */
-      token_budget: number;
-      /**
-       * Workspace Mode
-       * @default read_only
-       */
-      workspace_mode: string;
-    };
-    /** AttemptHistoryReadModel */
-    AttemptHistoryReadModel: {
-      /** Attempts */
-      attempts?: components["schemas"]["AttemptRecord"][];
-      /** Task Id */
-      task_id: string;
-    };
-    /** AttemptListResponse */
-    AttemptListResponse: {
-      /** Items */
-      items: components["schemas"]["ExecutorAttemptView"][];
-    };
-    /** AttemptRecord */
-    AttemptRecord: {
-      /** Attempt Id */
-      attempt_id: string;
-      /** Ended At */
-      ended_at?: string | null;
-      /** Event Sequence */
-      event_sequence?: number[];
-      /** Started At */
-      started_at?: string | null;
-      status?: components["schemas"]["TaskStatus"] | null;
-      /** Task Id */
-      task_id: string;
-    };
-    /** AuthenticatedUserModel */
-    AuthenticatedUserModel: {
-      /**
-       * Created At
-       * Format: date-time
-       */
-      created_at: string;
-      /** Display Name */
-      display_name: string;
-      /** Email */
-      email: string;
-      /** Id */
-      id: string;
-      /** Is Platform Admin */
-      is_platform_admin: boolean;
-      /**
-       * Updated At
-       * Format: date-time
-       */
-      updated_at: string;
-    };
-    /** ContextBlock */
-    ContextBlock: {
-      /** Body */
-      body: string;
-      /** Evidence Refs */
-      evidence_refs?: components["schemas"]["EvidenceRef"][];
-      level: components["schemas"]["ContextLevel"];
-      /** Source */
-      source: string;
-      /** Title */
-      title: string;
-      /**
-       * Truncated
-       * @default false
-       */
-      truncated: boolean;
-    };
-    /** ContextBuilderInput */
-    ContextBuilderInput: {
-      /** Evidence Refs */
-      evidence_refs: components["schemas"]["EvidenceRef"][];
-      /** Memory Recall */
-      memory_recall: string[];
-      /** Project Facts */
-      project_facts: string[];
-      /** Recent Attempts */
-      recent_attempts: string[];
-      /** Security Summary */
-      security_summary: string;
-      /** Task Core */
-      task_core: string;
-      /** Task Id */
-      task_id: string;
-      /** Workflow Summary */
-      workflow_summary: string;
-    };
-    /** ContextBundle */
-    ContextBundle: {
-      /** Blocks */
-      blocks: components["schemas"]["ContextBlock"][];
-      /** Evidence Refs */
-      evidence_refs?: components["schemas"]["EvidenceRef"][];
-      /**
-       * Schema Version
-       * @default 2026-04-19.execution.v1
-       */
-      schema_version: string;
-      /** Task Id */
-      task_id: string;
-    };
-    /**
-     * ContextLevel
-     * @enum {string}
-     */
-    ContextLevel: "L0" | "L1" | "L2" | "L3";
-    /** Correlation */
-    Correlation: {
-      /** Attemptid */
-      attemptId?: string | null;
-      /** Projectid */
-      projectId: string;
-      /** Runid */
-      runId: string;
-      /** Taskid */
-      taskId: string;
-    };
-    /** CreateProjectRequest */
-    CreateProjectRequest: {
-      /**
-       * Default Branch
-       * @default main
-       */
-      default_branch: string;
-      /** Description */
-      description?: string | null;
-      /** Name */
-      name: string;
-      /** Root Path */
-      root_path: string;
-    };
-    /** CreateSessionRequest */
-    CreateSessionRequest: {
-      /**
-       * Email
-       * Format: email
-       */
-      email: string;
-      /** Password */
-      password: string;
-    };
-    /** DispatchControl */
-    DispatchControl: {
-      /** Attempt Id */
-      attempt_id?: string | null;
-      /**
-       * Heartbeat Interval Seconds
-       * @default 30
-       */
-      heartbeat_interval_seconds: number;
-      /** Idempotency Key */
-      idempotency_key: string;
-      /** Replay Of Attempt Id */
-      replay_of_attempt_id?: string | null;
-      /**
-       * Timeout Seconds
-       * @default 1800
-       */
-      timeout_seconds: number;
-    };
-    /** DispatchExecutionResponse */
-    DispatchExecutionResponse: {
-      approval?: components["schemas"]["ApprovalRecord"] | null;
-      result?: components["schemas"]["ExecutorResultBundle"] | null;
-    };
-    /**
-     * EventType
-     * @enum {string}
-     */
-    EventType:
-      | "workflow.started"
-      | "workflow.completed"
-      | "workflow.failed"
-      | "workflow.retrying"
-      | "workflow.waiting_approval"
-      | "task.claimed"
-      | "task.running"
-      | "task.verifying"
-      | "task.completed"
-      | "task.failed"
-      | "task.heartbeat"
-      | "task.reclaimed"
-      | "task.graph.updated"
-      | "approval.requested"
-      | "approval.resolved"
-      | "notification.sent"
-      | "artifact.linked"
-      | "memory.recalled"
-      | "memory.written"
-      | "runtime.graph.interrupted"
-      | "runtime.graph.completed"
-      | "worker.health.reported";
-    /**
-     * EvidenceKind
-     * @enum {string}
-     */
-    EvidenceKind: "artifact" | "memory" | "verification" | "approval" | "provenance";
-    /** EvidenceRef */
-    EvidenceRef: {
-      kind: components["schemas"]["EvidenceKind"];
-      /** Ref */
-      ref: string;
-      /** Summary */
-      summary?: string | null;
-    };
-    /** EvidenceRefView */
-    EvidenceRefView: {
-      /** Href */
-      href: string;
-      /** Id */
-      id: string;
-      /** Label */
-      label: string;
-      type: components["schemas"]["EvidenceKind"];
-    };
-    /** EvidenceSummaryView */
-    EvidenceSummaryView: {
-      /** Artifactids */
-      artifactIds?: string[];
-      /** Attemptid */
-      attemptId: string;
-      /** Evidencerefs */
-      evidenceRefs?: components["schemas"]["EvidenceRefView"][];
-      /** Memoryhits */
-      memoryHits?: components["schemas"]["MemoryHitView"][];
-      /**
-       * Schemaversion
-       * @default 2026-04-19.execution.v1
-       */
-      schemaVersion: string;
-      verification?: components["schemas"]["VerificationView"] | null;
-    };
-    /** ExecutionProvenance */
-    ExecutionProvenance: {
-      /** Attempt Id */
-      attempt_id: string;
-      /** Executor */
-      executor: string;
-      /** Metadata */
-      metadata?: {
-        [key: string]: unknown;
-      };
-      /** Model */
-      model?: string | null;
-      /** Operator */
-      operator?: string | null;
-      /** Provider Request Id */
-      provider_request_id: string;
-      /** Trigger */
-      trigger: string;
-      /** Workspace Ref */
-      workspace_ref: string;
-    };
-    /**
-     * ExecutionStatus
-     * @enum {string}
-     */
-    ExecutionStatus: "succeeded" | "failed" | "waiting_approval" | "cancelled" | "timed_out";
-    /** ExecutorAttemptView */
-    ExecutorAttemptView: {
-      correlation: components["schemas"]["Correlation"];
-      /** Evidencerefs */
-      evidenceRefs?: components["schemas"]["EvidenceRefView"][];
-      /** Executor */
-      executor: string;
-      /** Finishedat */
-      finishedAt: string;
-      /** Id */
-      id: string;
-      /** Memoryhits */
-      memoryHits?: components["schemas"]["MemoryHitView"][];
-      /**
-       * Schemaversion
-       * @default 2026-04-19.execution.v1
-       */
-      schemaVersion: string;
-      security: components["schemas"]["SecuritySummaryView"];
-      /** Startedat */
-      startedAt: string;
-      /** Summary */
-      summary: string;
-      verification: components["schemas"]["VerificationView"];
-    };
-    /** ExecutorCapabilitiesResponse */
-    ExecutorCapabilitiesResponse: {
-      /** Items */
-      items: components["schemas"]["ExecutorCapability"][];
-    };
-    /** ExecutorCapability */
-    ExecutorCapability: {
-      /** Executor */
-      executor: string;
-      /** Supports Screenshots */
-      supports_screenshots: boolean;
-      /** Supports Tools */
-      supports_tools: boolean;
-      /** Supports Verify */
-      supports_verify: boolean;
-      /** Supports Write */
-      supports_write: boolean;
-    };
-    /** ExecutorInputBundle */
-    ExecutorInputBundle: {
-      /** Context Blocks */
-      context_blocks?: components["schemas"]["ContextBlock"][];
-      dispatch: components["schemas"]["DispatchControl"];
-      /** Evidence Refs */
-      evidence_refs?: components["schemas"]["EvidenceRef"][];
-      permission_policy: components["schemas"]["PermissionPolicy"];
-      /** Proposed Commands */
-      proposed_commands?: string[];
-      /**
-       * Schema Version
-       * @default 2026-04-19.execution.v1
-       */
-      schema_version: string;
-      /** Secret Usages */
-      secret_usages?: components["schemas"]["SecretUsage"][];
-      task: components["schemas"]["TaskInfo"];
-      /** Verify Commands */
-      verify_commands?: components["schemas"]["VerifyCommand"][];
-      workspace: components["schemas"]["WorkspaceInfo"];
-    };
-    /** ExecutorResultBundle */
-    ExecutorResultBundle: {
-      /** Artifacts */
-      artifacts?: components["schemas"]["ArtifactDescriptor"][];
-      failure?: components["schemas"]["FailureInfo"] | null;
-      /**
-       * Finished At
-       * Format: date-time
-       */
-      finished_at?: string;
-      /**
-       * Heartbeat Count
-       * @default 0
-       */
-      heartbeat_count: number;
-      /** Logs */
-      logs?: components["schemas"]["LogEntry"][];
-      provenance: components["schemas"]["ExecutionProvenance"];
-      /**
-       * Schema Version
-       * @default 2026-04-19.execution.v1
-       */
-      schema_version: string;
-      /**
-       * Started At
-       * Format: date-time
-       */
-      started_at?: string;
-      status: components["schemas"]["ExecutionStatus"];
-      verification?: components["schemas"]["VerificationResult"] | null;
-    };
-    /** FailureInfo */
-    FailureInfo: {
-      /** Category */
-      category: string;
-      /** Detail */
-      detail?: {
-        [key: string]: unknown;
-      };
-      kind: components["schemas"]["FailureKind"];
-      /** Reason */
-      reason: string;
-      /** Retry After Seconds */
-      retry_after_seconds?: number | null;
-    };
-    /**
-     * FailureKind
-     * @enum {string}
-     */
-    FailureKind: "retryable" | "terminal";
-    /** HTTPValidationError */
-    HTTPValidationError: {
-      /** Detail */
-      detail?: components["schemas"]["ValidationError"][];
-    };
-    /** IterationListResponse */
-    IterationListResponse: {
-      /** Items */
-      items: components["schemas"]["IterationRecordModel"][];
-      /**
-       * Schema Version
-       * @default 2026-04-19.1
-       */
-      schema_version: string;
-    };
-    /** IterationRecordModel */
-    IterationRecordModel: {
-      /**
-       * Created At
-       * Format: date-time
-       */
-      created_at: string;
-      /** Id */
-      id: string;
-      /** Project Id */
-      project_id: string;
-      /** Sequence Number */
-      sequence_number: number;
-      status: components["schemas"]["IterationStatus"];
-      /** Title */
-      title: string;
-      /**
-       * Updated At
-       * Format: date-time
-       */
-      updated_at: string;
-    };
-    /**
-     * IterationStatus
-     * @enum {string}
-     */
-    IterationStatus: "planned" | "active" | "completed";
-    /** LogEntry */
-    LogEntry: {
-      /** Message */
-      message: string;
-      /** Stream */
-      stream: string;
-      /**
-       * Timestamp
-       * Format: date-time
-       */
-      timestamp?: string;
-    };
-    /** MembershipCountSummaryModel */
-    MembershipCountSummaryModel: {
-      /** Admin */
-      admin: number;
-      /** Maintainer */
-      maintainer: number;
-      /** Reviewer */
-      reviewer: number;
-      /** Viewer */
-      viewer: number;
-    };
-    /**
-     * MembershipStatus
-     * @enum {string}
-     */
-    MembershipStatus: "active" | "invited" | "suspended";
-    /** MemoryHitView */
-    MemoryHitView: {
-      /** Externalref */
-      externalRef?: string | null;
-      /** Id */
-      id: string;
-      /** Namespace */
-      namespace: string;
-      /**
-       * Recallcount
-       * @default 0
-       */
-      recallCount: number;
-      /**
-       * Retentionpolicy
-       * @default retain_for_project
-       */
-      retentionPolicy: string;
-      /** Score */
-      score: number;
-      /** Staleat */
-      staleAt?: string | null;
-      /** Summary */
-      summary: string;
-      /** Supersedesrecordid */
-      supersedesRecordId?: string | null;
-      /**
-       * Version
-       * @default 1
-       */
-      version: number;
-    };
-    /** MemoryHitsResponse */
-    MemoryHitsResponse: {
-      /** Items */
-      items: components["schemas"]["MemoryHitView"][];
-    };
-    /**
-     * MemoryType
-     * @enum {string}
-     */
-    MemoryType: "long_term_knowledge" | "project_fact" | "lesson";
-    /** MemoryWriteCandidate */
-    MemoryWriteCandidate: {
-      /** Content Hash */
-      content_hash: string;
-      /** Evidence Refs */
-      evidence_refs?: components["schemas"]["EvidenceRef"][];
-      /** External Ref */
-      external_ref: string;
-      /**
-       * Force
-       * @default false
-       */
-      force: boolean;
-      /** Iteration Id */
-      iteration_id?: string | null;
-      memory_type: components["schemas"]["MemoryType"];
-      /** Metadata */
-      metadata?: {
-        [key: string]: unknown;
-      };
-      /** Namespace */
-      namespace?: string | null;
-      /** Project Id */
-      project_id: string;
-      /** Quality Score */
-      quality_score: number;
-      /** @default retain_for_project */
-      retention_policy: components["schemas"]["RetentionPolicy"];
-      /** Summary */
-      summary: string;
-      /** Supersedes Record Id */
-      supersedes_record_id?: string | null;
-    };
-    /** NotificationDeliveryListResponse */
-    NotificationDeliveryListResponse: {
-      /** Items */
-      items?: components["schemas"]["NotificationDeliveryRecord"][];
-    };
-    /** NotificationDeliveryRecord */
-    NotificationDeliveryRecord: {
-      /** Body */
-      body: string;
-      /**
-       * Created At
-       * Format: date-time
-       */
-      created_at: string;
-      /** Delivery Channel */
-      delivery_channel: string;
-      /** Delivery Id */
-      delivery_id: string;
-      /** Delivery Status */
-      delivery_status: string;
-      /** Metadata */
-      metadata?: {
-        [key: string]: unknown;
-      };
-      /** Provider Message Id */
-      provider_message_id?: string | null;
-      /** Receipt Id */
-      receipt_id: string;
-      /**
-       * Sent At
-       * Format: date-time
-       */
-      sent_at: string;
-      /** Source Channel */
-      source_channel: string;
-      /** Title */
-      title: string;
-      /** Trace Id */
-      trace_id: string;
-      /** Workflow Run Id */
-      workflow_run_id: string;
-    };
-    /** PermissionPolicy */
-    PermissionPolicy: {
-      /** Allowed Write Paths */
-      allowed_write_paths?: string[];
-      /** Command Allowlist */
-      command_allowlist?: string[];
-      /** Command Denylist */
-      command_denylist?: string[];
-      /**
-       * Require Manual Approval For Write
-       * @default true
-       */
-      require_manual_approval_for_write: boolean;
-      /**
-       * Secret Broker Enabled
-       * @default false
-       */
-      secret_broker_enabled: boolean;
-      /** Workspace Allowlist */
-      workspace_allowlist?: string[];
-      /** @default read_only */
-      workspace_mode: components["schemas"]["WorkspaceMode"];
-    };
-    /**
-     * PlanStatus
-     * @enum {string}
-     */
-    PlanStatus: "draft" | "ready" | "archived";
-    /** PlanSummaryByStatusModel */
-    PlanSummaryByStatusModel: {
-      /** Archived */
-      archived: number;
-      /** Draft */
-      draft: number;
-      /** Ready */
-      ready: number;
-    };
-    /** PlanSummaryRecordModel */
-    PlanSummaryRecordModel: {
-      /**
-       * Created At
-       * Format: date-time
-       */
-      created_at: string;
-      /** Id */
-      id: string;
-      /** Iteration Id */
-      iteration_id: string | null;
-      status: components["schemas"]["PlanStatus"];
-      /** Title */
-      title: string;
-      /**
-       * Updated At
-       * Format: date-time
-       */
-      updated_at: string;
-    };
-    /** PlanSummaryResponse */
-    PlanSummaryResponse: {
-      by_status: components["schemas"]["PlanSummaryByStatusModel"];
-      latest_plan: components["schemas"]["PlanSummaryRecordModel"] | null;
-      /**
-       * Schema Version
-       * @default 2026-04-19.1
-       */
-      schema_version: string;
-      /** Total Plans */
-      total_plans: number;
-    };
-    /** ProjectDetailResponse */
-    ProjectDetailResponse: {
-      /** Active Iteration Count */
-      active_iteration_count: number;
-      /** Active Plan Count */
-      active_plan_count: number;
-      /** Can Archive */
-      can_archive: boolean;
-      /** Can Edit */
-      can_edit: boolean;
-      /**
-       * Created At
-       * Format: date-time
-       */
-      created_at: string;
-      current_user_role: components["schemas"]["ProjectRole"] | null;
-      /** Default Branch */
-      default_branch: string;
-      /** Description */
-      description: string | null;
-      /** Id */
-      id: string;
-      membership_counts: components["schemas"]["MembershipCountSummaryModel"];
-      /** Name */
-      name: string;
-      /** Root Path */
-      root_path: string;
-      /** Slug */
-      slug: string;
-      status: components["schemas"]["ProjectStatus"];
-      /**
-       * Updated At
-       * Format: date-time
-       */
-      updated_at: string;
-    };
-    /** ProjectListItemModel */
-    ProjectListItemModel: {
-      /** Active Iteration Count */
-      active_iteration_count: number;
-      /** Active Plan Count */
-      active_plan_count: number;
-      /**
-       * Created At
-       * Format: date-time
-       */
-      created_at: string;
-      current_user_role: components["schemas"]["ProjectRole"] | null;
-      /** Default Branch */
-      default_branch: string;
-      /** Description */
-      description: string | null;
-      /** Id */
-      id: string;
-      /** Name */
-      name: string;
-      /** Root Path */
-      root_path: string;
-      /** Slug */
-      slug: string;
-      status: components["schemas"]["ProjectStatus"];
-      /**
-       * Updated At
-       * Format: date-time
-       */
-      updated_at: string;
-    };
-    /** ProjectListResponse */
-    ProjectListResponse: {
-      /** Items */
-      items: components["schemas"]["ProjectListItemModel"][];
-      pagination: components["schemas"]["ProjectPaginationModel"];
-      /**
-       * Schema Version
-       * @default 2026-04-19.1
-       */
-      schema_version: string;
-    };
-    /** ProjectPaginationModel */
-    ProjectPaginationModel: {
-      /** Page */
-      page: number;
-      /** Page Size */
-      page_size: number;
-      /** Sort By */
-      sort_by: string;
-      /** Sort Order */
-      sort_order: string;
-      status_filter: components["schemas"]["ProjectStatus"] | null;
-      /** Total Items */
-      total_items: number;
-      /** Total Pages */
-      total_pages: number;
-    };
-    /**
-     * ProjectRole
-     * @enum {string}
-     */
-    ProjectRole: "admin" | "maintainer" | "reviewer" | "viewer";
-    /**
-     * ProjectStatus
-     * @enum {string}
-     */
-    ProjectStatus: "active" | "archived";
-    /** ProvenanceRecord */
-    ProvenanceRecord: {
-      /** Contenthash */
-      contentHash: string;
-      correlation: components["schemas"]["Correlation"];
-      /** Createdat */
-      createdAt: string;
-      /** Producer */
-      producer: string;
-      /** Source */
-      source: string;
-    };
-    /** RegisterUserRequest */
-    RegisterUserRequest: {
-      /** Display Name */
-      display_name: string;
-      /**
-       * Email
-       * Format: email
-       */
-      email: string;
-      /** Password */
-      password: string;
-    };
-    /**
-     * RetentionPolicy
-     * @enum {string}
-     */
-    RetentionPolicy:
-      | "retain_for_run"
-      | "retain_for_project"
-      | "retain_permanent"
-      | "decay_30d"
-      | "decay_90d";
-    /**
-     * RiskLevel
-     * @enum {string}
-     */
-    RiskLevel: "low" | "medium" | "high" | "critical";
-    /**
-     * SecretSource
-     * @enum {string}
-     */
-    SecretSource: "broker" | "operator" | "environment";
-    /** SecretUsage */
-    SecretUsage: {
-      /** Expires At */
-      expires_at?: string | null;
-      /** Name */
-      name: string;
-      /** Scope */
-      scope: string;
-      source: components["schemas"]["SecretSource"];
-    };
-    /** SecuritySummaryView */
-    SecuritySummaryView: {
-      /** Approvalrequired */
-      approvalRequired: boolean;
-      /** Scope */
-      scope: string;
-      /** Usedsecret */
-      usedSecret: boolean;
-      /** Writeallowed */
-      writeAllowed: boolean;
-    };
-    /** SessionContextResponse */
-    SessionContextResponse: {
-      /** Memberships */
-      memberships: components["schemas"]["SessionMembershipModel"][];
-      /**
-       * Schema Version
-       * @default 2026-04-19.1
-       */
-      schema_version: string;
-      session: components["schemas"]["SessionRecordModel"];
-      user: components["schemas"]["AuthenticatedUserModel"];
-    };
-    /** SessionMembershipModel */
-    SessionMembershipModel: {
-      /** Project Id */
-      project_id: string;
-      /** Project Name */
-      project_name: string;
-      role: components["schemas"]["ProjectRole"];
-      status: components["schemas"]["MembershipStatus"];
-    };
-    /** SessionRecordModel */
-    SessionRecordModel: {
-      /**
-       * Expires At
-       * Format: date-time
-       */
-      expires_at: string;
-      /** Id */
-      id: string;
-      /** Token */
-      token: string;
-    };
-    /** TaskGraphEdge */
-    TaskGraphEdge: {
-      /** Kind */
-      kind: string;
-      /** Source Task Id */
-      source_task_id: string;
-      /** Target Task Id */
-      target_task_id: string;
-    };
-    /** TaskGraphNode */
-    TaskGraphNode: {
-      /** Blocked Reason */
-      blocked_reason?: string | null;
-      /** Executor Summary */
-      executor_summary?: string | null;
-      status?: components["schemas"]["TaskStatus"] | null;
-      /** Task Id */
-      task_id: string;
-      /** Title */
-      title: string;
-    };
-    /** TaskGraphReadModel */
-    TaskGraphReadModel: {
-      /** Edges */
-      edges?: components["schemas"]["TaskGraphEdge"][];
-      /** Nodes */
-      nodes?: components["schemas"]["TaskGraphNode"][];
-      /** Workflow Run Id */
-      workflow_run_id: string;
-    };
-    /** TaskInfo */
-    TaskInfo: {
-      /** Description */
-      description: string;
-      /** Executor */
-      executor: string;
-      /** Expected Artifact Types */
-      expected_artifact_types?: components["schemas"]["ArtifactType"][];
-      /** Metadata */
-      metadata?: {
-        [key: string]: unknown;
-      };
-      /**
-       * Priority
-       * @default normal
-       */
-      priority: string;
-      /** Run Id */
-      run_id: string;
-      /** Task Id */
-      task_id: string;
-      /** Title */
-      title: string;
-    };
-    /**
-     * TaskStatus
-     * @enum {string}
-     */
-    TaskStatus:
-      | "queued"
-      | "claimed"
-      | "running"
-      | "verifying"
-      | "waiting_approval"
-      | "retrying"
-      | "completed"
-      | "failed"
-      | "reclaimed"
-      | "cancelled";
-    /** TimelineEntry */
-    TimelineEntry: {
-      /** Attempt Id */
-      attempt_id?: string | null;
-      event_type: components["schemas"]["EventType"];
-      /** Label */
-      label: string;
-      /** Occurred At */
-      occurred_at: string;
-      /** Sequence */
-      sequence: number;
-      /** Summary */
-      summary?: string | null;
-      /** Task Id */
-      task_id?: string | null;
-      /** Trace Id */
-      trace_id: string;
-    };
-    /** TimelineReadModel */
-    TimelineReadModel: {
-      /** Entries */
-      entries?: components["schemas"]["TimelineEntry"][];
-      /** Workflow Run Id */
-      workflow_run_id: string;
-    };
-    /** UpdateProjectRequest */
-    UpdateProjectRequest: {
-      /** Default Branch */
-      default_branch?: string | null;
-      /** Description */
-      description?: string | null;
-      /** Name */
-      name?: string | null;
-      /** Root Path */
-      root_path?: string | null;
-      status?: components["schemas"]["ProjectStatus"] | null;
-    };
-    /** ValidationError */
-    ValidationError: {
-      /** Context */
-      ctx?: Record<string, never>;
-      /** Input */
-      input?: unknown;
-      /** Location */
-      loc: (string | number)[];
-      /** Message */
-      msg: string;
-      /** Error Type */
-      type: string;
-    };
-    /** VerificationCheckView */
-    VerificationCheckView: {
-      /** Detail */
-      detail: string;
-      /** Label */
-      label: string;
-      /** Status */
-      status: string;
-    };
-    /** VerificationCommandResult */
-    VerificationCommandResult: {
-      /** Command */
-      command: string;
-      /** Exit Code */
-      exit_code: number;
-      /** Output */
-      output: string;
-      /** Passed */
-      passed: boolean;
-    };
-    /** VerificationResult */
-    VerificationResult: {
-      /** Evidence Refs */
-      evidence_refs?: components["schemas"]["EvidenceRef"][];
-      /** Passed */
-      passed: boolean;
-      /** Results */
-      results?: components["schemas"]["VerificationCommandResult"][];
-      /** Summary */
-      summary: string;
-    };
-    /** VerificationView */
-    VerificationView: {
-      /** Checks */
-      checks?: components["schemas"]["VerificationCheckView"][];
-      /** Summary */
-      summary: string;
-      /** Verdict */
-      verdict: string;
-    };
-    /** VerifyCommand */
-    VerifyCommand: {
-      /** Command */
-      command: string;
-      /** Id */
-      id: string;
-      /**
-       * Required
-       * @default true
-       */
-      required: boolean;
-    };
-    /** WorkerHealthReadModel */
-    WorkerHealthReadModel: {
-      /** Active Workflow Names */
-      active_workflow_names?: components["schemas"]["WorkflowName"][];
-      /** Detail */
-      detail?: string | null;
-      /** Last Seen At */
-      last_seen_at: string;
-      status: components["schemas"]["WorkerHealthStatus"];
-      /** Task Queue */
-      task_queue: string;
-      /** Worker Id */
-      worker_id: string;
-    };
-    /**
-     * WorkerHealthStatus
-     * @enum {string}
-     */
-    WorkerHealthStatus: "healthy" | "degraded" | "unhealthy";
-    /**
-     * WorkflowName
-     * @enum {string}
-     */
-    WorkflowName:
-      | "project.import"
-      | "project.audit"
-      | "project.planning"
-      | "task.execution"
-      | "project.improvement";
-    /** WorkflowRequest */
-    WorkflowRequest: {
-      /** Initiated By */
-      initiated_by: string;
-      /**
-       * Lease Timeout Seconds
-       * @default 30
-       */
-      lease_timeout_seconds: number;
-      /**
-       * Max Attempts
-       * @default 2
-       */
-      max_attempts: number;
-      /** Metadata */
-      metadata?: {
-        [key: string]: unknown;
-      };
-      /** Objective */
-      objective: string;
-      /** Project Id */
-      project_id: string;
-      /**
-       * Require Manual Approval
-       * @default false
-       */
-      require_manual_approval: boolean;
-      /**
-       * Signal Timeout Seconds
-       * @default 300
-       */
-      signal_timeout_seconds: number;
-      simulation?: components["schemas"]["WorkflowSimulationOptions"];
-      /** Tasks */
-      tasks?: components["schemas"]["WorkflowTaskSpec"][];
-      /** Trace Id */
-      trace_id: string;
-      /** Workflow Run Id */
-      workflow_run_id: string;
-    };
-    /** WorkflowSimulationOptions */
-    WorkflowSimulationOptions: {
-      /** Approval Task Ids */
-      approval_task_ids?: string[];
-      /** Interrupt Task Ids */
-      interrupt_task_ids?: string[];
-      /** Reclaim Task Ids */
-      reclaim_task_ids?: string[];
-      /** Retry Task Ids */
-      retry_task_ids?: string[];
-      /** Terminal Failure Task Ids */
-      terminal_failure_task_ids?: string[];
-    };
-    /** WorkflowTaskSpec */
-    WorkflowTaskSpec: {
-      /** Depends On */
-      depends_on?: string[];
-      /** Executor Name */
-      executor_name?: string | null;
-      /** Executor Summary */
-      executor_summary?: string | null;
-      /** Graph Kind */
-      graph_kind: string;
-      /**
-       * Requires Approval
-       * @default false
-       */
-      requires_approval: boolean;
-      /** Task Id */
-      task_id: string;
-      /** Title */
-      title: string;
-    };
-    /** WorkspaceInfo */
-    WorkspaceInfo: {
-      /** Base Commit Sha */
-      base_commit_sha?: string | null;
-      /** Iteration Id */
-      iteration_id?: string | null;
-      /** @default read_only */
-      mode: components["schemas"]["WorkspaceMode"];
-      /** Project Id */
-      project_id: string;
-      /** Root Path */
-      root_path: string;
-      /** Workspace Ref */
-      workspace_ref: string;
-      /** Writable Paths */
-      writable_paths?: string[];
-    };
-    /**
-     * WorkspaceMode
-     * @enum {string}
-     */
-    WorkspaceMode: "read_only" | "worktree" | "direct";
-  };
-  responses: never;
-  parameters: never;
-  requestBodies: never;
-  headers: never;
-  pathItems: never;
+    schemas: {
+        /** Actor */
+        Actor: {
+            /** Id */
+            id: string;
+            /** Name */
+            name: string;
+            /** Role */
+            role: string;
+        };
+        /** ApprovalDetailView */
+        ApprovalDetailView: {
+            correlation: components["schemas"]["Correlation"];
+            /** Expiresat */
+            expiresAt?: string | null;
+            /** Id */
+            id: string;
+            /** Reason */
+            reason: string;
+            /** Relatedartifacts */
+            relatedArtifacts?: string[];
+            /** Requestedat */
+            requestedAt: string;
+            requestedBy: components["schemas"]["Actor"];
+            /** Resolutionnote */
+            resolutionNote?: string | null;
+            riskLevel: components["schemas"]["RiskLevel"];
+            /**
+             * Schemaversion
+             * @default 2026-04-19.execution.v1
+             */
+            schemaVersion: string;
+            status: components["schemas"]["ApprovalStatus"];
+            /** Title */
+            title: string;
+            /** Type */
+            type: string;
+        };
+        /** ApprovalListResponse */
+        ApprovalListResponse: {
+            /** Items */
+            items: components["schemas"]["ApprovalSummaryView"][];
+        };
+        /** ApprovalRecord */
+        ApprovalRecord: {
+            /** Approval Id */
+            approval_id: string;
+            approval_type: components["schemas"]["ApprovalType"];
+            /** Project Id */
+            project_id: string;
+            /** Reason */
+            reason: string;
+            /**
+             * Requested At
+             * Format: date-time
+             */
+            requested_at?: string;
+            /** Requested By */
+            requested_by: string;
+            /** Required Scope */
+            required_scope?: string[];
+            resolution_payload?: components["schemas"]["ApprovalResolutionPayload"] | null;
+            /** Resolved At */
+            resolved_at?: string | null;
+            /** Resolved By */
+            resolved_by?: string | null;
+            /** Run Id */
+            run_id: string;
+            status: components["schemas"]["ApprovalStatus"];
+            /** Task Id */
+            task_id: string;
+        };
+        /** ApprovalResolutionPayload */
+        ApprovalResolutionPayload: {
+            /** Approved Write Paths */
+            approved_write_paths?: string[];
+            decision: components["schemas"]["ApprovalStatus"];
+            /** Metadata */
+            metadata?: {
+                [key: string]: unknown;
+            };
+            /** Reason */
+            reason: string;
+        };
+        /**
+         * ApprovalStatus
+         * @enum {string}
+         */
+        ApprovalStatus: "pending" | "approved" | "rejected" | "expired" | "cancelled";
+        /** ApprovalSummaryView */
+        ApprovalSummaryView: {
+            correlation: components["schemas"]["Correlation"];
+            /** Id */
+            id: string;
+            /** Reason */
+            reason: string;
+            /** Requestedat */
+            requestedAt: string;
+            requestedBy: components["schemas"]["Actor"];
+            riskLevel: components["schemas"]["RiskLevel"];
+            /**
+             * Schemaversion
+             * @default 2026-04-19.execution.v1
+             */
+            schemaVersion: string;
+            status: components["schemas"]["ApprovalStatus"];
+            /** Title */
+            title: string;
+            /** Type */
+            type: string;
+        };
+        /**
+         * ApprovalType
+         * @enum {string}
+         */
+        ApprovalType: "write_execution" | "secret_access" | "command_exception";
+        /** ArtifactDescriptor */
+        ArtifactDescriptor: {
+            artifact_type: components["schemas"]["ArtifactType"];
+            /** Content Hash */
+            content_hash: string;
+            /** Evidence Refs */
+            evidence_refs?: components["schemas"]["EvidenceRef"][];
+            /** Metadata */
+            metadata?: {
+                [key: string]: unknown;
+            };
+            /** Path */
+            path: string;
+            /** Producer */
+            producer: string;
+            provenance: components["schemas"]["ExecutionProvenance"];
+            /**
+             * Retention Policy
+             * @default retain_for_run
+             */
+            retention_policy: string;
+            /** Summary */
+            summary?: string | null;
+            /** Workspace Ref */
+            workspace_ref: string;
+        };
+        /** ArtifactListResponse */
+        ArtifactListResponse: {
+            /** Items */
+            items: components["schemas"]["ArtifactView"][];
+        };
+        /**
+         * ArtifactType
+         * @enum {string}
+         */
+        ArtifactType: "patch" | "log" | "report" | "screenshot" | "trace_snapshot" | "test_report" | "file" | "summary" | "evidence" | "command_output";
+        /** ArtifactView */
+        ArtifactView: {
+            /** Content */
+            content: string;
+            /** Id */
+            id: string;
+            /** Mimetype */
+            mimeType: string;
+            /** Preview */
+            preview: string;
+            provenance: components["schemas"]["ProvenanceRecord"];
+            /**
+             * Schemaversion
+             * @default 2026-04-19.execution.v1
+             */
+            schemaVersion: string;
+            /** Title */
+            title: string;
+            /** Type */
+            type: string;
+        };
+        /** AssemblyRequest */
+        AssemblyRequest: {
+            /**
+             * Attempt Limit
+             * @default 3
+             */
+            attempt_limit: number;
+            /** Extra Evidence Refs */
+            extra_evidence_refs?: components["schemas"]["EvidenceRef"][];
+            /**
+             * Fact Limit
+             * @default 5
+             */
+            fact_limit: number;
+            /** Iteration Id */
+            iteration_id?: string | null;
+            /**
+             * Max Blocks Per Level
+             * @default 5
+             */
+            max_blocks_per_level: number;
+            /**
+             * Memory Limit
+             * @default 5
+             */
+            memory_limit: number;
+            /** Namespace Prefix */
+            namespace_prefix?: string | null;
+            /** Project Id */
+            project_id: string;
+            /**
+             * Require Approval
+             * @default true
+             */
+            require_approval: boolean;
+            /**
+             * Secret Broker Enabled
+             * @default false
+             */
+            secret_broker_enabled: boolean;
+            /** Skills */
+            skills?: components["schemas"]["ContextSkill"][];
+            /** Task Id */
+            task_id: string;
+            /**
+             * Token Budget
+             * @default 4000
+             */
+            token_budget: number;
+            /**
+             * Workspace Mode
+             * @default read_only
+             */
+            workspace_mode: string;
+        };
+        /** AttemptHistoryReadModel */
+        AttemptHistoryReadModel: {
+            /** Attempts */
+            attempts?: components["schemas"]["AttemptRecord"][];
+            /** Task Id */
+            task_id: string;
+        };
+        /** AttemptListResponse */
+        AttemptListResponse: {
+            /** Items */
+            items: components["schemas"]["ExecutorAttemptView"][];
+        };
+        /** AttemptRecord */
+        AttemptRecord: {
+            /** Attempt Id */
+            attempt_id: string;
+            /** Ended At */
+            ended_at?: string | null;
+            /** Event Sequence */
+            event_sequence?: number[];
+            /** Started At */
+            started_at?: string | null;
+            status?: components["schemas"]["TaskStatus"] | null;
+            /** Task Id */
+            task_id: string;
+        };
+        /** AuthenticatedUserModel */
+        AuthenticatedUserModel: {
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /** Display Name */
+            display_name: string;
+            /** Email */
+            email: string;
+            /** Id */
+            id: string;
+            /** Is Platform Admin */
+            is_platform_admin: boolean;
+            /**
+             * Updated At
+             * Format: date-time
+             */
+            updated_at: string;
+        };
+        /**
+         * BreakGlassKind
+         * @enum {string}
+         */
+        BreakGlassKind: "incident_response" | "maintenance" | "operator_override";
+        /** BreakGlassReason */
+        BreakGlassReason: {
+            /** Approved By */
+            approved_by: string;
+            /** Expires At */
+            expires_at?: string | null;
+            kind: components["schemas"]["BreakGlassKind"];
+            /** Reason */
+            reason: string;
+            /** Ticket Id */
+            ticket_id?: string | null;
+        };
+        /** ContextBlock */
+        ContextBlock: {
+            /** Body */
+            body: string;
+            /** Evidence Refs */
+            evidence_refs?: components["schemas"]["EvidenceRef"][];
+            level: components["schemas"]["ContextLevel"];
+            /** Source */
+            source: string;
+            /** Title */
+            title: string;
+            /**
+             * Truncated
+             * @default false
+             */
+            truncated: boolean;
+        };
+        /** ContextBuilderInput */
+        ContextBuilderInput: {
+            /** Evidence Refs */
+            evidence_refs: components["schemas"]["EvidenceRef"][];
+            /** Memory Recall */
+            memory_recall: string[];
+            /** Project Facts */
+            project_facts: string[];
+            /** Recent Attempts */
+            recent_attempts: string[];
+            /** Security Summary */
+            security_summary: string;
+            /** Task Core */
+            task_core: string;
+            /** Task Id */
+            task_id: string;
+            /** Workflow Summary */
+            workflow_summary: string;
+        };
+        /** ContextBundle */
+        ContextBundle: {
+            /** Blocks */
+            blocks: components["schemas"]["ContextBlock"][];
+            /** Evidence Refs */
+            evidence_refs?: components["schemas"]["EvidenceRef"][];
+            /**
+             * Schema Version
+             * @default 2026-04-19.execution.v1
+             */
+            schema_version: string;
+            /** Task Id */
+            task_id: string;
+        };
+        /**
+         * ContextLevel
+         * @enum {string}
+         */
+        ContextLevel: "L0" | "L1" | "L2" | "L3";
+        /** ContextSkill */
+        ContextSkill: {
+            /** Body */
+            body: string;
+            /** Evidence Refs */
+            evidence_refs?: components["schemas"]["EvidenceRef"][];
+            /** Metadata */
+            metadata?: {
+                [key: string]: unknown;
+            };
+            /** Skill Id */
+            skill_id: string;
+            /**
+             * Source
+             * @default context.skill
+             */
+            source: string;
+            /** Title */
+            title: string;
+        };
+        /** Correlation */
+        Correlation: {
+            /** Attemptid */
+            attemptId?: string | null;
+            /** Projectid */
+            projectId: string;
+            /** Runid */
+            runId: string;
+            /** Taskid */
+            taskId: string;
+        };
+        /** CreateProjectRequest */
+        CreateProjectRequest: {
+            /**
+             * Default Branch
+             * @default main
+             */
+            default_branch: string;
+            /** Description */
+            description?: string | null;
+            /** Name */
+            name: string;
+            /** Root Path */
+            root_path: string;
+        };
+        /** CreateSessionRequest */
+        CreateSessionRequest: {
+            /**
+             * Email
+             * Format: email
+             */
+            email: string;
+            /** Password */
+            password: string;
+        };
+        /** DispatchControl */
+        DispatchControl: {
+            /** Attempt Id */
+            attempt_id?: string | null;
+            /**
+             * Heartbeat Interval Seconds
+             * @default 30
+             */
+            heartbeat_interval_seconds: number;
+            /** Idempotency Key */
+            idempotency_key: string;
+            /** Replay Of Attempt Id */
+            replay_of_attempt_id?: string | null;
+            /**
+             * Timeout Seconds
+             * @default 1800
+             */
+            timeout_seconds: number;
+        };
+        /** DispatchExecutionResponse */
+        DispatchExecutionResponse: {
+            approval?: components["schemas"]["ApprovalRecord"] | null;
+            result?: components["schemas"]["ExecutorResultBundle"] | null;
+        };
+        /**
+         * EventType
+         * @enum {string}
+         */
+        EventType: "workflow.started" | "workflow.completed" | "workflow.failed" | "workflow.retrying" | "workflow.waiting_approval" | "task.claimed" | "task.running" | "task.verifying" | "task.completed" | "task.failed" | "task.heartbeat" | "task.reclaimed" | "task.graph.updated" | "task.todo.updated" | "approval.requested" | "approval.resolved" | "notification.sent" | "artifact.linked" | "memory.recalled" | "memory.written" | "runtime.graph.interrupted" | "runtime.graph.completed" | "worker.health.reported";
+        /**
+         * EvidenceKind
+         * @enum {string}
+         */
+        EvidenceKind: "artifact" | "memory" | "verification" | "approval" | "provenance";
+        /** EvidenceRef */
+        EvidenceRef: {
+            kind: components["schemas"]["EvidenceKind"];
+            /** Ref */
+            ref: string;
+            /** Summary */
+            summary?: string | null;
+        };
+        /** EvidenceRefView */
+        EvidenceRefView: {
+            /** Href */
+            href: string;
+            /** Id */
+            id: string;
+            /** Label */
+            label: string;
+            type: components["schemas"]["EvidenceKind"];
+        };
+        /** EvidenceSummaryView */
+        EvidenceSummaryView: {
+            /** Artifactids */
+            artifactIds?: string[];
+            /** Attemptid */
+            attemptId: string;
+            /** Evidencerefs */
+            evidenceRefs?: components["schemas"]["EvidenceRefView"][];
+            /** Memoryhits */
+            memoryHits?: components["schemas"]["MemoryHitView"][];
+            /**
+             * Schemaversion
+             * @default 2026-04-19.execution.v1
+             */
+            schemaVersion: string;
+            verification?: components["schemas"]["VerificationView"] | null;
+        };
+        /** ExecutionProvenance */
+        ExecutionProvenance: {
+            /** Attempt Id */
+            attempt_id: string;
+            /** Executor */
+            executor: string;
+            /** Metadata */
+            metadata?: {
+                [key: string]: unknown;
+            };
+            /** Model */
+            model?: string | null;
+            /** Operator */
+            operator?: string | null;
+            /** Provider Request Id */
+            provider_request_id: string;
+            /** Trigger */
+            trigger: string;
+            /** Workspace Ref */
+            workspace_ref: string;
+        };
+        /**
+         * ExecutionStatus
+         * @enum {string}
+         */
+        ExecutionStatus: "succeeded" | "failed" | "waiting_approval" | "cancelled" | "timed_out";
+        /** ExecutorAttemptView */
+        ExecutorAttemptView: {
+            correlation: components["schemas"]["Correlation"];
+            /** Evidencerefs */
+            evidenceRefs?: components["schemas"]["EvidenceRefView"][];
+            /** Executor */
+            executor: string;
+            /** Finishedat */
+            finishedAt: string;
+            /** Id */
+            id: string;
+            /** Memoryhits */
+            memoryHits?: components["schemas"]["MemoryHitView"][];
+            /**
+             * Schemaversion
+             * @default 2026-04-19.execution.v1
+             */
+            schemaVersion: string;
+            security: components["schemas"]["SecuritySummaryView"];
+            /** Startedat */
+            startedAt: string;
+            /** Summary */
+            summary: string;
+            verification: components["schemas"]["VerificationView"];
+        };
+        /** ExecutorCapabilitiesResponse */
+        ExecutorCapabilitiesResponse: {
+            /** Items */
+            items: components["schemas"]["ExecutorCapability"][];
+        };
+        /** ExecutorCapability */
+        ExecutorCapability: {
+            /** Executor */
+            executor: string;
+            /** Supports Screenshots */
+            supports_screenshots: boolean;
+            /** Supports Tools */
+            supports_tools: boolean;
+            /** Supports Verify */
+            supports_verify: boolean;
+            /** Supports Write */
+            supports_write: boolean;
+        };
+        /** ExecutorInputBundle */
+        ExecutorInputBundle: {
+            /** Context Blocks */
+            context_blocks?: components["schemas"]["ContextBlock"][];
+            dispatch: components["schemas"]["DispatchControl"];
+            /** Evidence Refs */
+            evidence_refs?: components["schemas"]["EvidenceRef"][];
+            permission_policy: components["schemas"]["PermissionPolicy"];
+            /** Proposed Commands */
+            proposed_commands?: string[];
+            /**
+             * Schema Version
+             * @default 2026-04-19.execution.v1
+             */
+            schema_version: string;
+            /** Secret Usages */
+            secret_usages?: components["schemas"]["SecretUsage"][];
+            task: components["schemas"]["TaskInfo"];
+            /** Verify Commands */
+            verify_commands?: components["schemas"]["VerifyCommand"][];
+            workspace: components["schemas"]["WorkspaceInfo"];
+        };
+        /** ExecutorResultBundle */
+        ExecutorResultBundle: {
+            /** Artifacts */
+            artifacts?: components["schemas"]["ArtifactDescriptor"][];
+            failure?: components["schemas"]["FailureInfo"] | null;
+            /**
+             * Finished At
+             * Format: date-time
+             */
+            finished_at?: string;
+            /**
+             * Heartbeat Count
+             * @default 0
+             */
+            heartbeat_count: number;
+            /** Logs */
+            logs?: components["schemas"]["LogEntry"][];
+            provenance: components["schemas"]["ExecutionProvenance"];
+            /**
+             * Schema Version
+             * @default 2026-04-19.execution.v1
+             */
+            schema_version: string;
+            /**
+             * Started At
+             * Format: date-time
+             */
+            started_at?: string;
+            status: components["schemas"]["ExecutionStatus"];
+            verification?: components["schemas"]["VerificationResult"] | null;
+        };
+        /** FailureInfo */
+        FailureInfo: {
+            /** Category */
+            category: string;
+            /** Detail */
+            detail?: {
+                [key: string]: unknown;
+            };
+            kind: components["schemas"]["FailureKind"];
+            /** Reason */
+            reason: string;
+            /** Retry After Seconds */
+            retry_after_seconds?: number | null;
+        };
+        /**
+         * FailureKind
+         * @enum {string}
+         */
+        FailureKind: "retryable" | "terminal";
+        /** HTTPValidationError */
+        HTTPValidationError: {
+            /** Detail */
+            detail?: components["schemas"]["ValidationError"][];
+        };
+        /** IterationListResponse */
+        IterationListResponse: {
+            /** Items */
+            items: components["schemas"]["IterationRecordModel"][];
+            /**
+             * Schema Version
+             * @default 2026-04-19.1
+             */
+            schema_version: string;
+        };
+        /** IterationRecordModel */
+        IterationRecordModel: {
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /** Id */
+            id: string;
+            /** Project Id */
+            project_id: string;
+            /** Sequence Number */
+            sequence_number: number;
+            status: components["schemas"]["IterationStatus"];
+            /** Title */
+            title: string;
+            /**
+             * Updated At
+             * Format: date-time
+             */
+            updated_at: string;
+        };
+        /**
+         * IterationStatus
+         * @enum {string}
+         */
+        IterationStatus: "planned" | "active" | "completed";
+        /** LogEntry */
+        LogEntry: {
+            /** Message */
+            message: string;
+            /** Stream */
+            stream: string;
+            /**
+             * Timestamp
+             * Format: date-time
+             */
+            timestamp?: string;
+        };
+        /** MembershipCountSummaryModel */
+        MembershipCountSummaryModel: {
+            /** Admin */
+            admin: number;
+            /** Maintainer */
+            maintainer: number;
+            /** Reviewer */
+            reviewer: number;
+            /** Viewer */
+            viewer: number;
+        };
+        /**
+         * MembershipStatus
+         * @enum {string}
+         */
+        MembershipStatus: "active" | "invited" | "suspended";
+        /** MemoryHitView */
+        MemoryHitView: {
+            /** Externalref */
+            externalRef?: string | null;
+            /** Id */
+            id: string;
+            /** Namespace */
+            namespace: string;
+            /**
+             * Recallcount
+             * @default 0
+             */
+            recallCount: number;
+            /**
+             * Retentionpolicy
+             * @default retain_for_project
+             */
+            retentionPolicy: string;
+            /** Score */
+            score: number;
+            /** Staleat */
+            staleAt?: string | null;
+            /** Summary */
+            summary: string;
+            /** Supersedesrecordid */
+            supersedesRecordId?: string | null;
+            /**
+             * Version
+             * @default 1
+             */
+            version: number;
+        };
+        /** MemoryHitsResponse */
+        MemoryHitsResponse: {
+            /** Items */
+            items: components["schemas"]["MemoryHitView"][];
+        };
+        /**
+         * MemoryType
+         * @enum {string}
+         */
+        MemoryType: "long_term_knowledge" | "project_fact" | "lesson";
+        /** MemoryWriteCandidate */
+        MemoryWriteCandidate: {
+            /** Content Hash */
+            content_hash: string;
+            /** Evidence Refs */
+            evidence_refs?: components["schemas"]["EvidenceRef"][];
+            /** External Ref */
+            external_ref: string;
+            /**
+             * Force
+             * @default false
+             */
+            force: boolean;
+            /** Iteration Id */
+            iteration_id?: string | null;
+            memory_type: components["schemas"]["MemoryType"];
+            /** Metadata */
+            metadata?: {
+                [key: string]: unknown;
+            };
+            /** Namespace */
+            namespace?: string | null;
+            /** Project Id */
+            project_id: string;
+            /** Quality Score */
+            quality_score: number;
+            /** @default retain_for_project */
+            retention_policy: components["schemas"]["RetentionPolicy"];
+            /** Summary */
+            summary: string;
+            /** Supersedes Record Id */
+            supersedes_record_id?: string | null;
+        };
+        /** NotificationDeliveryListResponse */
+        NotificationDeliveryListResponse: {
+            /** Items */
+            items?: components["schemas"]["NotificationDeliveryRecord"][];
+        };
+        /** NotificationDeliveryRecord */
+        NotificationDeliveryRecord: {
+            /** Body */
+            body: string;
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /** Delivery Channel */
+            delivery_channel: string;
+            /** Delivery Id */
+            delivery_id: string;
+            /** Delivery Status */
+            delivery_status: string;
+            /** Metadata */
+            metadata?: {
+                [key: string]: unknown;
+            };
+            /** Provider Message Id */
+            provider_message_id?: string | null;
+            /** Receipt Id */
+            receipt_id: string;
+            /**
+             * Sent At
+             * Format: date-time
+             */
+            sent_at: string;
+            /** Source Channel */
+            source_channel: string;
+            /** Title */
+            title: string;
+            /** Trace Id */
+            trace_id: string;
+            /** Workflow Run Id */
+            workflow_run_id: string;
+        };
+        /** NotificationDeliveryStatusUpdateRequest */
+        NotificationDeliveryStatusUpdateRequest: {
+            /** Delivery Status */
+            delivery_status: string;
+            /** Metadata Patch */
+            metadata_patch?: {
+                [key: string]: unknown;
+            };
+            /** Provider Message Id */
+            provider_message_id?: string | null;
+        };
+        /** PermissionPolicy */
+        PermissionPolicy: {
+            /** Allowed Write Paths */
+            allowed_write_paths?: string[];
+            /** Command Allowlist */
+            command_allowlist?: string[];
+            /** Command Denylist */
+            command_denylist?: string[];
+            /**
+             * Require Manual Approval For Write
+             * @default true
+             */
+            require_manual_approval_for_write: boolean;
+            /**
+             * Secret Broker Enabled
+             * @default false
+             */
+            secret_broker_enabled: boolean;
+            /** Workspace Allowlist */
+            workspace_allowlist?: string[];
+            /** @default read_only */
+            workspace_mode: components["schemas"]["WorkspaceMode"];
+        };
+        /**
+         * PlanStatus
+         * @enum {string}
+         */
+        PlanStatus: "draft" | "ready" | "archived";
+        /** PlanSummaryByStatusModel */
+        PlanSummaryByStatusModel: {
+            /** Archived */
+            archived: number;
+            /** Draft */
+            draft: number;
+            /** Ready */
+            ready: number;
+        };
+        /** PlanSummaryRecordModel */
+        PlanSummaryRecordModel: {
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /** Id */
+            id: string;
+            /** Iteration Id */
+            iteration_id: string | null;
+            status: components["schemas"]["PlanStatus"];
+            /** Title */
+            title: string;
+            /**
+             * Updated At
+             * Format: date-time
+             */
+            updated_at: string;
+        };
+        /** PlanSummaryResponse */
+        PlanSummaryResponse: {
+            by_status: components["schemas"]["PlanSummaryByStatusModel"];
+            latest_plan: components["schemas"]["PlanSummaryRecordModel"] | null;
+            /**
+             * Schema Version
+             * @default 2026-04-19.1
+             */
+            schema_version: string;
+            /** Total Plans */
+            total_plans: number;
+        };
+        /** ProjectDetailResponse */
+        ProjectDetailResponse: {
+            /** Active Iteration Count */
+            active_iteration_count: number;
+            /** Active Plan Count */
+            active_plan_count: number;
+            /** Can Archive */
+            can_archive: boolean;
+            /** Can Edit */
+            can_edit: boolean;
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            current_user_role: components["schemas"]["ProjectRole"] | null;
+            /** Default Branch */
+            default_branch: string;
+            /** Description */
+            description: string | null;
+            /** Id */
+            id: string;
+            membership_counts: components["schemas"]["MembershipCountSummaryModel"];
+            /** Name */
+            name: string;
+            /** Root Path */
+            root_path: string;
+            /** Slug */
+            slug: string;
+            status: components["schemas"]["ProjectStatus"];
+            /**
+             * Updated At
+             * Format: date-time
+             */
+            updated_at: string;
+        };
+        /** ProjectListItemModel */
+        ProjectListItemModel: {
+            /** Active Iteration Count */
+            active_iteration_count: number;
+            /** Active Plan Count */
+            active_plan_count: number;
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            current_user_role: components["schemas"]["ProjectRole"] | null;
+            /** Default Branch */
+            default_branch: string;
+            /** Description */
+            description: string | null;
+            /** Id */
+            id: string;
+            /** Name */
+            name: string;
+            /** Root Path */
+            root_path: string;
+            /** Slug */
+            slug: string;
+            status: components["schemas"]["ProjectStatus"];
+            /**
+             * Updated At
+             * Format: date-time
+             */
+            updated_at: string;
+        };
+        /** ProjectListResponse */
+        ProjectListResponse: {
+            /** Items */
+            items: components["schemas"]["ProjectListItemModel"][];
+            pagination: components["schemas"]["ProjectPaginationModel"];
+            /**
+             * Schema Version
+             * @default 2026-04-19.1
+             */
+            schema_version: string;
+        };
+        /** ProjectPaginationModel */
+        ProjectPaginationModel: {
+            /** Page */
+            page: number;
+            /** Page Size */
+            page_size: number;
+            /** Sort By */
+            sort_by: string;
+            /** Sort Order */
+            sort_order: string;
+            status_filter: components["schemas"]["ProjectStatus"] | null;
+            /** Total Items */
+            total_items: number;
+            /** Total Pages */
+            total_pages: number;
+        };
+        /**
+         * ProjectRole
+         * @enum {string}
+         */
+        ProjectRole: "admin" | "maintainer" | "reviewer" | "viewer";
+        /**
+         * ProjectStatus
+         * @enum {string}
+         */
+        ProjectStatus: "active" | "archived";
+        /** ProvenanceRecord */
+        ProvenanceRecord: {
+            /** Contenthash */
+            contentHash: string;
+            correlation: components["schemas"]["Correlation"];
+            /** Createdat */
+            createdAt: string;
+            /** Producer */
+            producer: string;
+            /** Source */
+            source: string;
+        };
+        /** RegisterUserRequest */
+        RegisterUserRequest: {
+            /** Display Name */
+            display_name: string;
+            /**
+             * Email
+             * Format: email
+             */
+            email: string;
+            /** Password */
+            password: string;
+        };
+        /** RequestOptions */
+        RequestOptions: {
+            full_access?: components["schemas"]["BreakGlassReason"] | null;
+        };
+        /**
+         * RetentionPolicy
+         * @enum {string}
+         */
+        RetentionPolicy: "retain_for_run" | "retain_for_project" | "retain_permanent" | "decay_30d" | "decay_90d";
+        /**
+         * RiskLevel
+         * @enum {string}
+         */
+        RiskLevel: "low" | "medium" | "high" | "critical";
+        /**
+         * SecretSource
+         * @enum {string}
+         */
+        SecretSource: "broker" | "operator" | "environment";
+        /** SecretUsage */
+        SecretUsage: {
+            /** Expires At */
+            expires_at?: string | null;
+            /** Name */
+            name: string;
+            /** Scope */
+            scope: string;
+            source: components["schemas"]["SecretSource"];
+        };
+        /** SecuritySummaryView */
+        SecuritySummaryView: {
+            /** Approvalrequired */
+            approvalRequired: boolean;
+            /** Scope */
+            scope: string;
+            /** Usedsecret */
+            usedSecret: boolean;
+            /** Writeallowed */
+            writeAllowed: boolean;
+        };
+        /** SessionContextResponse */
+        SessionContextResponse: {
+            /** Memberships */
+            memberships: components["schemas"]["SessionMembershipModel"][];
+            /**
+             * Schema Version
+             * @default 2026-04-19.1
+             */
+            schema_version: string;
+            session: components["schemas"]["SessionRecordModel"];
+            user: components["schemas"]["AuthenticatedUserModel"];
+        };
+        /** SessionMembershipModel */
+        SessionMembershipModel: {
+            /** Project Id */
+            project_id: string;
+            /** Project Name */
+            project_name: string;
+            role: components["schemas"]["ProjectRole"];
+            status: components["schemas"]["MembershipStatus"];
+        };
+        /** SessionRecordModel */
+        SessionRecordModel: {
+            /**
+             * Expires At
+             * Format: date-time
+             */
+            expires_at: string;
+            /** Id */
+            id: string;
+            /** Token */
+            token: string;
+        };
+        /** TaskGraphEdge */
+        TaskGraphEdge: {
+            /** Kind */
+            kind: string;
+            /** Source Task Id */
+            source_task_id: string;
+            /** Target Task Id */
+            target_task_id: string;
+        };
+        /** TaskGraphNode */
+        TaskGraphNode: {
+            /** Blocked Reason */
+            blocked_reason?: string | null;
+            /** Executor Summary */
+            executor_summary?: string | null;
+            status?: components["schemas"]["TaskStatus"] | null;
+            /** Task Id */
+            task_id: string;
+            /** Title */
+            title: string;
+            /** Todo Items */
+            todo_items?: components["schemas"]["TaskTodoItem"][];
+        };
+        /** TaskGraphReadModel */
+        TaskGraphReadModel: {
+            /** Edges */
+            edges?: components["schemas"]["TaskGraphEdge"][];
+            /** Nodes */
+            nodes?: components["schemas"]["TaskGraphNode"][];
+            /** Workflow Run Id */
+            workflow_run_id: string;
+        };
+        /** TaskInfo */
+        TaskInfo: {
+            /** Description */
+            description: string;
+            /** Executor */
+            executor: string;
+            /** Expected Artifact Types */
+            expected_artifact_types?: components["schemas"]["ArtifactType"][];
+            /** Metadata */
+            metadata?: {
+                [key: string]: unknown;
+            };
+            /**
+             * Priority
+             * @default normal
+             */
+            priority: string;
+            /** Run Id */
+            run_id: string;
+            /** Task Id */
+            task_id: string;
+            /** Title */
+            title: string;
+        };
+        /**
+         * TaskStatus
+         * @enum {string}
+         */
+        TaskStatus: "queued" | "claimed" | "running" | "verifying" | "waiting_approval" | "retrying" | "completed" | "failed" | "reclaimed" | "cancelled";
+        /** TaskTodoItem */
+        TaskTodoItem: {
+            /** Detail */
+            detail?: string | null;
+            /** Id */
+            id: string;
+            /**
+             * Status
+             * @default queued
+             */
+            status: string;
+            /** Title */
+            title: string;
+        };
+        /** TimelineEntry */
+        TimelineEntry: {
+            /** Attempt Id */
+            attempt_id?: string | null;
+            event_type: components["schemas"]["EventType"];
+            /** Label */
+            label: string;
+            /** Occurred At */
+            occurred_at: string;
+            /** Sequence */
+            sequence: number;
+            /** Summary */
+            summary?: string | null;
+            /** Task Id */
+            task_id?: string | null;
+            /** Trace Id */
+            trace_id: string;
+        };
+        /** TimelineReadModel */
+        TimelineReadModel: {
+            /** Entries */
+            entries?: components["schemas"]["TimelineEntry"][];
+            /** Workflow Run Id */
+            workflow_run_id: string;
+        };
+        /** UpdateProjectRequest */
+        UpdateProjectRequest: {
+            /** Default Branch */
+            default_branch?: string | null;
+            /** Description */
+            description?: string | null;
+            /** Name */
+            name?: string | null;
+            /** Root Path */
+            root_path?: string | null;
+            status?: components["schemas"]["ProjectStatus"] | null;
+        };
+        /** ValidationError */
+        ValidationError: {
+            /** Context */
+            ctx?: Record<string, never>;
+            /** Input */
+            input?: unknown;
+            /** Location */
+            loc: (string | number)[];
+            /** Message */
+            msg: string;
+            /** Error Type */
+            type: string;
+        };
+        /** VerificationCheckView */
+        VerificationCheckView: {
+            /** Detail */
+            detail: string;
+            /** Label */
+            label: string;
+            /** Status */
+            status: string;
+        };
+        /** VerificationCommandResult */
+        VerificationCommandResult: {
+            /** Command */
+            command: string;
+            /** Exit Code */
+            exit_code: number;
+            /** Output */
+            output: string;
+            /** Passed */
+            passed: boolean;
+        };
+        /** VerificationResult */
+        VerificationResult: {
+            /** Evidence Refs */
+            evidence_refs?: components["schemas"]["EvidenceRef"][];
+            /** Passed */
+            passed: boolean;
+            /** Results */
+            results?: components["schemas"]["VerificationCommandResult"][];
+            /** Summary */
+            summary: string;
+        };
+        /** VerificationView */
+        VerificationView: {
+            /** Checks */
+            checks?: components["schemas"]["VerificationCheckView"][];
+            /** Summary */
+            summary: string;
+            /** Verdict */
+            verdict: string;
+        };
+        /** VerifyCommand */
+        VerifyCommand: {
+            /** Command */
+            command: string;
+            /** Id */
+            id: string;
+            /**
+             * Required
+             * @default true
+             */
+            required: boolean;
+        };
+        /** WorkerHealthReadModel */
+        WorkerHealthReadModel: {
+            /** Active Workflow Names */
+            active_workflow_names?: components["schemas"]["WorkflowName"][];
+            /** Detail */
+            detail?: string | null;
+            /** Last Seen At */
+            last_seen_at: string;
+            status: components["schemas"]["WorkerHealthStatus"];
+            /** Task Queue */
+            task_queue: string;
+            /** Worker Id */
+            worker_id: string;
+        };
+        /**
+         * WorkerHealthStatus
+         * @enum {string}
+         */
+        WorkerHealthStatus: "healthy" | "degraded" | "unhealthy";
+        /**
+         * WorkflowName
+         * @enum {string}
+         */
+        WorkflowName: "project.import" | "project.audit" | "project.planning" | "task.execution" | "project.improvement";
+        /** WorkflowRequest */
+        WorkflowRequest: {
+            /** Initiated By */
+            initiated_by: string;
+            /**
+             * Lease Timeout Seconds
+             * @default 30
+             */
+            lease_timeout_seconds: number;
+            /**
+             * Max Attempts
+             * @default 2
+             */
+            max_attempts: number;
+            /** Metadata */
+            metadata?: {
+                [key: string]: unknown;
+            };
+            /** Objective */
+            objective: string;
+            /** Project Id */
+            project_id: string;
+            request_options?: components["schemas"]["RequestOptions"];
+            /**
+             * Require Manual Approval
+             * @default false
+             */
+            require_manual_approval: boolean;
+            /**
+             * Signal Timeout Seconds
+             * @default 300
+             */
+            signal_timeout_seconds: number;
+            simulation?: components["schemas"]["WorkflowSimulationOptions"];
+            /** Tasks */
+            tasks?: components["schemas"]["WorkflowTaskSpec"][];
+            /** Trace Id */
+            trace_id: string;
+            /** Workflow Run Id */
+            workflow_run_id: string;
+        };
+        /** WorkflowSimulationOptions */
+        WorkflowSimulationOptions: {
+            /** Approval Task Ids */
+            approval_task_ids?: string[];
+            /** Interrupt Task Ids */
+            interrupt_task_ids?: string[];
+            /** Reclaim Task Ids */
+            reclaim_task_ids?: string[];
+            /** Retry Task Ids */
+            retry_task_ids?: string[];
+            /** Terminal Failure Task Ids */
+            terminal_failure_task_ids?: string[];
+        };
+        /** WorkflowTaskSpec */
+        WorkflowTaskSpec: {
+            /** Depends On */
+            depends_on?: string[];
+            /** Executor Name */
+            executor_name?: string | null;
+            /** Executor Summary */
+            executor_summary?: string | null;
+            /** Graph Kind */
+            graph_kind: string;
+            /**
+             * Requires Approval
+             * @default false
+             */
+            requires_approval: boolean;
+            /** Task Id */
+            task_id: string;
+            /** Title */
+            title: string;
+        };
+        /** WorkspaceInfo */
+        WorkspaceInfo: {
+            /** Base Commit Sha */
+            base_commit_sha?: string | null;
+            /** Iteration Id */
+            iteration_id?: string | null;
+            /** @default read_only */
+            mode: components["schemas"]["WorkspaceMode"];
+            /** Project Id */
+            project_id: string;
+            /** Root Path */
+            root_path: string;
+            /** Workspace Ref */
+            workspace_ref: string;
+            /** Writable Paths */
+            writable_paths?: string[];
+        };
+        /**
+         * WorkspaceMode
+         * @enum {string}
+         */
+        WorkspaceMode: "read_only" | "worktree" | "direct";
+    };
+    responses: never;
+    parameters: never;
+    requestBodies: never;
+    headers: never;
+    pathItems: never;
 }
 export type $defs = Record<string, never>;
 export interface operations {
-  root_endpoint__get: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": {
-            [key: string]: string;
-          };
-        };
-      };
-    };
-  };
-  get_me_auth_me_get: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["SessionContextResponse"];
-        };
-      };
-    };
-  };
-  register_auth_register_post: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["RegisterUserRequest"];
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      201: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["SessionContextResponse"];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
-        };
-      };
-    };
-  };
-  create_session_auth_sessions_post: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["CreateSessionRequest"];
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["SessionContextResponse"];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
-        };
-      };
-    };
-  };
-  assemble_context_context_assemble_post: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["AssemblyRequest"];
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ContextBundle"];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
-        };
-      };
-    };
-  };
-  build_context_context_build_post: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["ContextBuilderInput"];
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ContextBundle"];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
-        };
-      };
-    };
-  };
-  execution_contract_endpoint_contracts_execution_get: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": {
-            [key: string]: unknown;
-          };
-        };
-      };
-    };
-  };
-  list_capabilities_executors_capabilities_get: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ExecutorCapabilitiesResponse"];
-        };
-      };
-    };
-  };
-  dispatch_execution_executors_dispatch_post: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["ExecutorInputBundle"];
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["DispatchExecutionResponse"];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
-        };
-      };
-    };
-  };
-  live_health_live_get: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": {
-            [key: string]: string;
-          };
-        };
-      };
-    };
-  };
-  ready_health_ready_get: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": {
-            [key: string]: unknown;
-          };
-        };
-      };
-    };
-  };
-  list_memory_hits_memory_hits_get: {
-    parameters: {
-      query: {
-        project_id: string;
-        namespace_prefix?: string | null;
-        limit?: number;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["MemoryHitsResponse"];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
-        };
-      };
-    };
-  };
-  run_maintenance_memory_maintenance_post: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": {
-            [key: string]: unknown;
-          };
-        };
-      };
-    };
-  };
-  write_memory_memory_writes_post: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["MemoryWriteCandidate"];
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      201: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["MemoryHitsResponse"];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
-        };
-      };
-    };
-  };
-  list_notification_deliveries_notifications_deliveries_get: {
-    parameters: {
-      query?: {
-        workflow_run_id?: string | null;
-        project_id?: string | null;
-        source_channel?: string | null;
-        delivery_channel?: string | null;
-        delivery_status?: string | null;
-        limit?: number;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["NotificationDeliveryListResponse"];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
-        };
-      };
-    };
-  };
-  runtime_regression_observability_evals_runtime_regression_get: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": {
-            [key: string]: unknown;
-          };
-        };
-      };
-    };
-  };
-  metrics_observability_metrics_get: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": {
-            [key: string]: unknown;
-          };
-        };
-      };
-    };
-  };
-  runtime_sla_observability_runtime_sla_get: {
-    parameters: {
-      query?: {
-        window_hours?: number;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": {
-            [key: string]: unknown;
-          };
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
-        };
-      };
-    };
-  };
-  list_projects_projects_get: {
-    parameters: {
-      query?: {
-        page?: number;
-        page_size?: number;
-        sort_by?: string;
-        sort_order?: string;
-        status?: components["schemas"]["ProjectStatus"] | null;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ProjectListResponse"];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
-        };
-      };
-    };
-  };
-  create_project_projects_post: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["CreateProjectRequest"];
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      201: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ProjectDetailResponse"];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
-        };
-      };
-    };
-  };
-  get_project_projects__project_id__get: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        project_id: string;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ProjectDetailResponse"];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
-        };
-      };
-    };
-  };
-  update_project_projects__project_id__patch: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        project_id: string;
-      };
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["UpdateProjectRequest"];
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ProjectDetailResponse"];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
-        };
-      };
-    };
-  };
-  archive_project_projects__project_id__archive_post: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        project_id: string;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ProjectDetailResponse"];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
-        };
-      };
-    };
-  };
-  list_iterations_projects__project_id__iterations_get: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        project_id: string;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["IterationListResponse"];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
-        };
-      };
-    };
-  };
-  get_plan_summary_projects__project_id__plan_summary_get: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        project_id: string;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["PlanSummaryResponse"];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
-        };
-      };
-    };
-  };
-  list_approvals_review_approvals_get: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ApprovalListResponse"];
-        };
-      };
-    };
-  };
-  get_approval_detail_review_approvals__approval_id__get: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        approval_id: string;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ApprovalDetailView"];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
-        };
-      };
-    };
-  };
-  resolve_approval_review_approvals__approval_id__resolve_post: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        approval_id: string;
-      };
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["ApprovalResolutionPayload"];
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ApprovalDetailView"];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
-        };
-      };
-    };
-  };
-  list_artifacts_review_artifacts_get: {
-    parameters: {
-      query?: {
-        project_id?: string | null;
-        run_id?: string | null;
-        task_id?: string | null;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ArtifactListResponse"];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
-        };
-      };
-    };
-  };
-  get_artifact_detail_review_artifacts__artifact_id__get: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        artifact_id: string;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ArtifactView"];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
-        };
-      };
-    };
-  };
-  list_attempts_review_attempts_get: {
-    parameters: {
-      query?: {
-        project_id?: string | null;
-        run_id?: string | null;
-        task_id?: string | null;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["AttemptListResponse"];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
-        };
-      };
-    };
-  };
-  get_attempt_detail_review_attempts__attempt_id__get: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        attempt_id: string;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ExecutorAttemptView"];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
-        };
-      };
-    };
-  };
-  get_evidence_summary_review_evidence__attempt_id__get: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        attempt_id: string;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["EvidenceSummaryView"];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
-        };
-      };
-    };
-  };
-  bootstrap_runtime_dev_runtime_dev_bootstrap_post: {
-    parameters: {
-      query: {
-        workflow_name: components["schemas"]["WorkflowName"];
-        include_retry?: boolean;
-        include_interrupt?: boolean;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Successful Response */
-      202: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": {
-            [key: string]: string;
-          };
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
-        };
-      };
-    };
-  };
-  reclaim_stale_claims_endpoint_runtime_recovery_reclaim_stale_post: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": {
-            [key: string]: unknown;
-          };
-        };
-      };
-    };
-  };
-  reconcile_terminal_runs_endpoint_runtime_recovery_reconcile_terminal_post: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": {
-            [key: string]: unknown;
-          };
-        };
-      };
-    };
-  };
-  start_runtime_workflow_runtime_runs_start_post: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["WorkflowRequest"];
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      202: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": {
-            [key: string]: string;
-          };
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
-        };
-      };
-    };
-  };
-  resolve_runtime_approval_runtime_runs__workflow_run_id__approval_post: {
-    parameters: {
-      query: {
-        approved: boolean;
-        actor: string;
-        comment?: string | null;
-        approval_id?: string | null;
-      };
-      header?: never;
-      path: {
-        workflow_run_id: string;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Successful Response */
-      202: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": {
-            [key: string]: string;
-          };
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
-        };
-      };
-    };
-  };
-  get_runtime_graph_runtime_runs__workflow_run_id__graph_get: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        workflow_run_id: string;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["TaskGraphReadModel"];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
-        };
-      };
-    };
-  };
-  get_runtime_timeline_runtime_runs__workflow_run_id__timeline_get: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        workflow_run_id: string;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["TimelineReadModel"];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
-        };
-      };
-    };
-  };
-  list_runtime_attempts_runtime_tasks__task_id__attempts_get: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        task_id: string;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["AttemptHistoryReadModel"];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
-        };
-      };
-    };
-  };
-  worker_health_runtime_workers_health_get: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["WorkerHealthReadModel"][];
-        };
-      };
-    };
-  };
+    root_endpoint__get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        [key: string]: string;
+                    };
+                };
+            };
+        };
+    };
+    get_me_auth_me_get: {
+        parameters: {
+            query?: never;
+            header?: {
+                Authorization?: string | null;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SessionContextResponse"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    register_auth_register_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["RegisterUserRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SessionContextResponse"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    create_session_auth_sessions_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CreateSessionRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SessionContextResponse"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    assemble_context_context_assemble_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                Authorization?: string | null;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["AssemblyRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ContextBundle"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    build_context_context_build_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                Authorization?: string | null;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ContextBuilderInput"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ContextBundle"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    execution_contract_endpoint_contracts_execution_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        [key: string]: unknown;
+                    };
+                };
+            };
+        };
+    };
+    list_capabilities_executors_capabilities_get: {
+        parameters: {
+            query?: never;
+            header?: {
+                Authorization?: string | null;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ExecutorCapabilitiesResponse"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    dispatch_execution_executors_dispatch_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                Authorization?: string | null;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ExecutorInputBundle"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DispatchExecutionResponse"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    live_health_live_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        [key: string]: string;
+                    };
+                };
+            };
+        };
+    };
+    ready_health_ready_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        [key: string]: unknown;
+                    };
+                };
+            };
+        };
+    };
+    list_memory_hits_memory_hits_get: {
+        parameters: {
+            query: {
+                project_id: string;
+                namespace_prefix?: string | null;
+                limit?: number;
+            };
+            header?: {
+                Authorization?: string | null;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MemoryHitsResponse"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    run_maintenance_memory_maintenance_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                Authorization?: string | null;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        [key: string]: unknown;
+                    };
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    write_memory_memory_writes_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                Authorization?: string | null;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["MemoryWriteCandidate"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MemoryHitsResponse"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    list_notification_deliveries_notifications_deliveries_get: {
+        parameters: {
+            query?: {
+                workflow_run_id?: string | null;
+                project_id?: string | null;
+                source_channel?: string | null;
+                delivery_channel?: string | null;
+                delivery_status?: string | null;
+                limit?: number;
+            };
+            header?: {
+                Authorization?: string | null;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["NotificationDeliveryListResponse"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    update_notification_delivery_status_notifications_deliveries__receipt_id__status_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                Authorization?: string | null;
+            };
+            path: {
+                receipt_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["NotificationDeliveryStatusUpdateRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["NotificationDeliveryRecord"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    runtime_regression_observability_evals_runtime_regression_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        [key: string]: unknown;
+                    };
+                };
+            };
+        };
+    };
+    metrics_observability_metrics_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        [key: string]: unknown;
+                    };
+                };
+            };
+        };
+    };
+    runtime_sla_observability_runtime_sla_get: {
+        parameters: {
+            query?: {
+                window_hours?: number;
+                project_id?: string | null;
+                iteration_id?: string | null;
+                bucket_minutes?: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        [key: string]: unknown;
+                    };
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    list_projects_projects_get: {
+        parameters: {
+            query?: {
+                page?: number;
+                page_size?: number;
+                sort_by?: string;
+                sort_order?: string;
+                status?: components["schemas"]["ProjectStatus"] | null;
+            };
+            header?: {
+                Authorization?: string | null;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ProjectListResponse"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    create_project_projects_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                Authorization?: string | null;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CreateProjectRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ProjectDetailResponse"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    get_project_projects__project_id__get: {
+        parameters: {
+            query?: never;
+            header?: {
+                Authorization?: string | null;
+            };
+            path: {
+                project_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ProjectDetailResponse"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    update_project_projects__project_id__patch: {
+        parameters: {
+            query?: never;
+            header?: {
+                Authorization?: string | null;
+            };
+            path: {
+                project_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["UpdateProjectRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ProjectDetailResponse"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    archive_project_projects__project_id__archive_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                Authorization?: string | null;
+            };
+            path: {
+                project_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ProjectDetailResponse"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    list_iterations_projects__project_id__iterations_get: {
+        parameters: {
+            query?: never;
+            header?: {
+                Authorization?: string | null;
+            };
+            path: {
+                project_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["IterationListResponse"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    get_plan_summary_projects__project_id__plan_summary_get: {
+        parameters: {
+            query?: never;
+            header?: {
+                Authorization?: string | null;
+            };
+            path: {
+                project_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PlanSummaryResponse"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    list_approvals_review_approvals_get: {
+        parameters: {
+            query?: never;
+            header?: {
+                Authorization?: string | null;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApprovalListResponse"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    get_approval_detail_review_approvals__approval_id__get: {
+        parameters: {
+            query?: never;
+            header?: {
+                Authorization?: string | null;
+            };
+            path: {
+                approval_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApprovalDetailView"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    resolve_approval_review_approvals__approval_id__resolve_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                Authorization?: string | null;
+            };
+            path: {
+                approval_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ApprovalResolutionPayload"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApprovalDetailView"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    list_artifacts_review_artifacts_get: {
+        parameters: {
+            query?: {
+                project_id?: string | null;
+                run_id?: string | null;
+                task_id?: string | null;
+            };
+            header?: {
+                Authorization?: string | null;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ArtifactListResponse"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    get_artifact_detail_review_artifacts__artifact_id__get: {
+        parameters: {
+            query?: never;
+            header?: {
+                Authorization?: string | null;
+            };
+            path: {
+                artifact_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ArtifactView"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    list_attempts_review_attempts_get: {
+        parameters: {
+            query?: {
+                project_id?: string | null;
+                run_id?: string | null;
+                task_id?: string | null;
+            };
+            header?: {
+                Authorization?: string | null;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AttemptListResponse"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    get_attempt_detail_review_attempts__attempt_id__get: {
+        parameters: {
+            query?: never;
+            header?: {
+                Authorization?: string | null;
+            };
+            path: {
+                attempt_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ExecutorAttemptView"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    get_evidence_summary_review_evidence__attempt_id__get: {
+        parameters: {
+            query?: never;
+            header?: {
+                Authorization?: string | null;
+            };
+            path: {
+                attempt_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["EvidenceSummaryView"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    bootstrap_runtime_dev_runtime_dev_bootstrap_post: {
+        parameters: {
+            query: {
+                workflow_name: components["schemas"]["WorkflowName"];
+                include_retry?: boolean;
+                include_interrupt?: boolean;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            202: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        [key: string]: string;
+                    };
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    reclaim_stale_claims_endpoint_runtime_recovery_reclaim_stale_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        [key: string]: unknown;
+                    };
+                };
+            };
+        };
+    };
+    reconcile_terminal_runs_endpoint_runtime_recovery_reconcile_terminal_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        [key: string]: unknown;
+                    };
+                };
+            };
+        };
+    };
+    start_runtime_workflow_runtime_runs_start_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["WorkflowRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            202: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        [key: string]: string;
+                    };
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    resolve_runtime_approval_runtime_runs__workflow_run_id__approval_post: {
+        parameters: {
+            query: {
+                approved: boolean;
+                actor: string;
+                comment?: string | null;
+                approval_id?: string | null;
+            };
+            header?: never;
+            path: {
+                workflow_run_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            202: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        [key: string]: string;
+                    };
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    get_runtime_graph_runtime_runs__workflow_run_id__graph_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                workflow_run_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TaskGraphReadModel"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    get_runtime_timeline_runtime_runs__workflow_run_id__timeline_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                workflow_run_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TimelineReadModel"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    list_runtime_attempts_runtime_tasks__task_id__attempts_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                task_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AttemptHistoryReadModel"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    worker_health_runtime_workers_health_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["WorkerHealthReadModel"][];
+                };
+            };
+        };
+    };
 }

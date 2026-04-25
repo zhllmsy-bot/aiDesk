@@ -12,7 +12,11 @@ PROVIDER_CONTRACT_VERSION = "2026-04-19.provider.v1"
 
 
 class ProviderName(StrEnum):
+    AIDER = "aider"
+    CLAUDE_AGENT = "claude_agent"
+    CLAUDE_CODE = "claude_code"
     CODEX = "codex"
+    OPENAI_AGENTS = "openai_agents"
     OPENHANDS = "openhands"
 
 

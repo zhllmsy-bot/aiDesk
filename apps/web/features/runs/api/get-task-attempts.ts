@@ -1,6 +1,6 @@
 import type { TaskAttempt } from "@ai-desk/contracts-runtime";
 
-import { getTaskAttemptsFixture } from "../fixtures/runtime-data";
+import { getTaskAttemptsFixture } from "@/lib/demo-data/runtime-data";
 import { fetchTaskAttemptsLive } from "./runtime-live";
 
 export async function getTaskAttempts(runId: string, taskId: string): Promise<TaskAttempt[]> {

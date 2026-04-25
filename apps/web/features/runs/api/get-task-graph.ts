@@ -1,6 +1,6 @@
 import type { TaskGraphReadModel } from "@ai-desk/contracts-runtime";
 
-import { getTaskGraphFixture } from "../fixtures/runtime-data";
+import { getTaskGraphFixture } from "@/lib/demo-data/runtime-data";
 import { fetchTaskGraphLive } from "./runtime-live";
 
 export async function getTaskGraph(runId: string): Promise<TaskGraphReadModel> {

@@ -1,6 +1,6 @@
 import type { TaskDetailRecord } from "../types";
 
-import { getTaskDetailFixture } from "../fixtures/runtime-data";
+import { getTaskDetailFixture } from "@/lib/demo-data/runtime-data";
 import { fetchTaskDetailLive } from "./runtime-live";
 
 export async function getTaskDetail(runId: string, taskId: string): Promise<TaskDetailRecord> {

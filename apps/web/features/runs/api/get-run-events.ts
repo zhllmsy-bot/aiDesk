@@ -1,6 +1,6 @@
 import type { RunEvent } from "@ai-desk/contracts-runtime";
 
-import { listRunEvents } from "../fixtures/runtime-data";
+import { listRunEvents } from "@/lib/demo-data/runtime-data";
 import { fetchRunEventsLive } from "./runtime-live";
 
 export async function getRunEvents(runId: string): Promise<RunEvent[]> {

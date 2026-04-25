@@ -102,20 +102,34 @@ importers:
 
   packages/contracts/execution:
     dependencies:
-      zod:
-        specifier: ^3.24.3
-        version: 3.25.76
+      '@ai-desk/contracts-api':
+        specifier: workspace:*
+        version: link:../api
     devDependencies:
       typescript:
         specifier: ^5.9.3
         version: 5.9.3
 
-  packages/contracts/projects: {}
+  packages/contracts/llm:
+    devDependencies:
+      typescript:
+        specifier: ^5.9.3
+        version: 5.9.3
+
+  packages/contracts/projects:
+    dependencies:
+      '@ai-desk/contracts-api':
+        specifier: workspace:*
+        version: link:../api
+    devDependencies:
+      typescript:
+        specifier: ^5.9.3
+        version: 5.9.3
 
   packages/contracts/runtime:
     devDependencies:
       typescript:
-        specifier: ^5.8.3
+        specifier: ^5.9.3
         version: 5.9.3
 
   packages/ui:
@@ -133,6 +147,9 @@ importers:
       '@types/react-dom':
         specifier: ^19.2.2
         version: 19.2.3(@types/react@19.2.14)
+      typescript:
+        specifier: ^5.9.3
+        version: 5.9.3
 
 packages:
 
