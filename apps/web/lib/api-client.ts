@@ -13,6 +13,7 @@ const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL ?? "";
 const webApiClient = createApiClient({ baseUrl });
 
 let devSessionBootstrap: Promise<StoredWorkspaceSession | null> | null = null;
+let traceCounter = 0;
 
 function isBrowser() {
   return typeof window !== "undefined";
@@ -41,7 +42,7 @@ async function bootstrapDevSession(): Promise<StoredWorkspaceSession | null> {
   }
 
   devSessionBootstrap = (async () => {
-    const response = await fetch("/api/dev/session", {
+    const response = await webFetch("/api/dev/session", {
       method: "POST",
       cache: "no-store",
     });
@@ -58,6 +59,41 @@ async function bootstrapDevSession(): Promise<StoredWorkspaceSession | null> {
   });
 
   return devSessionBootstrap;
+}
+
+function createClientTraceId() {
+  traceCounter += 1;
+  const random = Math.random().toString(16).slice(2).padEnd(16, "0");
+  return `${Date.now().toString(16)}${traceCounter.toString(16).padStart(4, "0")}${random}`;
+}
+
+export function withClientTraceHeaders(headers?: HeadersInit): Headers {
+  const merged = new Headers(headers);
+  if (!merged.has("X-Trace-ID")) {
+    merged.set("X-Trace-ID", createClientTraceId());
+  }
+  if (!merged.has("traceparent")) {
+    const traceId = (merged.get("X-Trace-ID") ?? createClientTraceId())
+      .replaceAll("-", "")
+      .slice(0, 32)
+      .padEnd(32, "0");
+    merged.set("traceparent", `00-${traceId}-0000000000000001-01`);
+  }
+  return merged;
+}
+
+export async function webFetch(input: RequestInfo | URL, init: RequestInit = {}) {
+  return fetch(input, {
+    ...init,
+    headers: withClientTraceHeaders(init.headers),
+  });
+}
+
+export async function apiFetch(input: RequestInfo | URL, init: RequestInit = {}) {
+  return fetch(input, {
+    ...init,
+    headers: await getApiHeaders(withClientTraceHeaders(init.headers)),
+  });
 }
 
 export async function getApiHeaders(headers?: HeadersInit): Promise<HeadersInit | undefined> {

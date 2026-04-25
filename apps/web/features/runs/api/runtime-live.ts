@@ -7,7 +7,7 @@ import type {
 } from "@ai-desk/contracts-runtime";
 import { runtimeSchemaVersion } from "@ai-desk/contracts-runtime";
 
-import { getApiErrorMessage, getApiHeaders } from "@/lib/api-client";
+import { apiFetch, getApiErrorMessage } from "@/lib/api-client";
 
 import type { TaskDetailRecord } from "../types";
 
@@ -65,9 +65,8 @@ type RawAttemptHistoryReadModel = {
 
 async function fetchRuntimeJson(path: string): Promise<unknown> {
   const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:8000";
-  const response = await fetch(`${baseUrl}${path}`, {
+  const response = await apiFetch(`${baseUrl}${path}`, {
     method: "GET",
-    headers: await getApiHeaders(),
     cache: "no-store",
   });
 

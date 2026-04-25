@@ -17,3 +17,4 @@
 7. [project-audit-three-pass-mode.md](./project-audit-three-pass-mode.md)
 8. [project-improvement-drive-modes.md](./project-improvement-drive-modes.md)
 9. [modular-boundaries-and-oss-adoption.md](./modular-boundaries-and-oss-adoption.md)
+10. [global-reassessment-architecture-governance.md](./global-reassessment-architecture-governance.md)

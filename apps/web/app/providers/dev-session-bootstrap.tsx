@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 
 import { sessionStorageKey } from "@/features/access/storage";
+import { webFetch } from "@/lib/api-client";
 import { createFallbackWorkspaceSession } from "@/lib/server-api-client";
 
 export function DevSessionBootstrap() {
@@ -19,7 +20,7 @@ export function DevSessionBootstrap() {
           return;
         }
 
-        const response = await fetch("/api/dev/session", {
+        const response = await webFetch("/api/dev/session", {
           method: "POST",
           cache: "no-store",
         });

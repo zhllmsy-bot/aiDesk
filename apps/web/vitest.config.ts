@@ -36,6 +36,7 @@ export default defineConfig({
         __dirname,
         "../../packages/contracts/execution/src/index.ts",
       ),
+      "@ai-desk/ui/primitives": path.resolve(__dirname, "../../packages/ui/src/primitives.tsx"),
       "@ai-desk/ui": path.resolve(__dirname, "../../packages/ui/src/index.tsx"),
     },
   },

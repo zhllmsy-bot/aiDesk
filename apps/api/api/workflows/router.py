@@ -30,10 +30,24 @@ from api.workflows.recovery import recover_stale_claims
 from api.workflows.types import BreakGlassKind, BreakGlassReason, WorkflowRequest
 
 router = APIRouter(prefix="/runtime", tags=["runtime"])
+MAX_WORKFLOW_RUN_ID_LENGTH = 36
 
 
 def get_runtime_container(request: Request) -> RuntimeContainer:
     return request.app.state.runtime_container
+
+
+def _validate_workflow_run_id(workflow_run_id: str) -> None:
+    if not workflow_run_id.strip():
+        raise HTTPException(status_code=422, detail="workflow_run_id is required")
+    if len(workflow_run_id) > MAX_WORKFLOW_RUN_ID_LENGTH:
+        raise HTTPException(
+            status_code=422,
+            detail=(
+                "workflow_run_id must be "
+                f"{MAX_WORKFLOW_RUN_ID_LENGTH} characters or fewer"
+            ),
+        )
 
 
 async def _temporal_client(request: Request) -> Client:
@@ -270,6 +284,7 @@ async def start_runtime_workflow(
     request: Request,
 ) -> dict[str, str]:
     container = get_runtime_container(request)
+    _validate_workflow_run_id(payload.workflow_run_id)
     workflow_name_raw = payload.metadata.get("workflow_name")
     if not isinstance(workflow_name_raw, str):
         raise HTTPException(status_code=422, detail="metadata.workflow_name is required")

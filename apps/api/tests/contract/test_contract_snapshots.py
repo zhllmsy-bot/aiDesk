@@ -8,6 +8,7 @@ import pytest
 from api.app import create_app
 from api.config import CONTRACTS_DIR, RUNTIME_CONTRACTS_DIR
 from api.executors.contracts import EXECUTION_SCHEMA_VERSION, contract_snapshot
+from api.generated_contracts.openapi_models import WorkflowRequest
 from api.runtime_contracts import (
     RUNTIME_SCHEMA_VERSION,
     ApprovalStatus,
@@ -118,6 +119,10 @@ def test_openapi_control_plane_snapshot_matches() -> None:
         include_execution_surface=False,
     ).openapi()
     assert json.loads(snapshot_path.read_text(encoding="utf-8")) == generated
+
+
+def test_openapi_python_models_are_generated_from_contract() -> None:
+    assert WorkflowRequest.model_fields["workflow_run_id"].is_required()
 
 
 def test_review_api_contract_models_stable() -> None:

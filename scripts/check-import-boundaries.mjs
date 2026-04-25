@@ -47,16 +47,30 @@ function hasRestrictedImport(source, moduleName) {
 const failures = [];
 
 for (const file of walk(apiRoot).filter((path) => path.endsWith(".py"))) {
-  if (!isServiceFile(file) || isAllowedLlmBoundary(file)) {
-    continue;
-  }
   const source = readFileSync(file, "utf8");
-  for (const moduleName of llmSdkImports) {
-    if (hasRestrictedImport(source, moduleName)) {
-      failures.push(
-        `${relative(root, file)} imports ${moduleName}; route LLM access through api.integrations.llm instead.`,
-      );
+
+  if (isServiceFile(file) && !isAllowedLlmBoundary(file)) {
+    for (const moduleName of llmSdkImports) {
+      if (hasRestrictedImport(source, moduleName)) {
+        failures.push(
+          `${relative(root, file)} imports ${moduleName}; route LLM access through api.integrations.llm instead.`,
+        );
+      }
     }
+  }
+
+  const path = relative(root, file);
+  if (
+    (path.startsWith("apps/api/api/domain/") || path.startsWith("apps/api/api/kernel/")) &&
+    /from\s+api\.integrations\.|import\s+api\.integrations\./.test(source)
+  ) {
+    failures.push(`${path} imports concrete integrations; depend on contracts or protocols.`);
+  }
+  if (
+    path.startsWith("apps/api/api/integrations/") &&
+    /from\s+api\.[\w.]+\.router\b|import\s+api\.[\w.]+\.router\b/.test(source)
+  ) {
+    failures.push(`${path} imports a router; integrations must stay below application IO.`);
   }
 }
 

@@ -2,8 +2,10 @@
 
 - 日期：`2026-04-25`
 - 范围：工程治理、LLM/Agent 抽象、kernel/integrations 重构、ECC 融合、UI 机器硬约束、安全策略化、可观测性
-- 状态：`Executed and verified`
+- 状态：`Historical backlog, superseded for current evidence by 2026-04-26 completion manifest`
 - 原则：架构向头部开源学习，产品定位不动摇；UI 约束必须机器可执行；CI 失败即 PR 拒绝。
+
+> 当前状态以 [`2026-04-26-global-reassessment-completion-todo.md`](./2026-04-26-global-reassessment-completion-todo.md) 和 [`../specs/global-reassessment-architecture-governance.md`](../specs/global-reassessment-architecture-governance.md) 为准。本文保留为 2026-04-25 的阶段性 backlog，不再作为当前仓库初扫证据。
 
 ---
 

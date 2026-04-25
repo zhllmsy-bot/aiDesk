@@ -1,4 +1,4 @@
-import { getApiErrorMessage, getApiHeaders } from "@/lib/api-client";
+import { apiFetch, getApiErrorMessage } from "@/lib/api-client";
 
 export type RuntimeSlaQuery = {
   windowHours?: number;
@@ -89,9 +89,8 @@ export async function getRuntimeSla(query: RuntimeSlaQuery = {}): Promise<Runtim
   const url = `${baseUrl}/observability/runtime-sla?${params.toString()}`;
 
   try {
-    const response = await fetch(url, {
+    const response = await apiFetch(url, {
       method: "GET",
-      headers: await getApiHeaders(),
       cache: "no-store",
     });
     if (!response.ok) {

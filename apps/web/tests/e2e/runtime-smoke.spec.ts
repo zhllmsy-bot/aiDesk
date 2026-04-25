@@ -1,3 +1,4 @@
+import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 
 test.beforeEach(async ({ page }) => {
@@ -32,4 +33,13 @@ test("runtime timeline, task detail, and telemetry deep links work", async ({ pa
 
   await page.goto("/runs/run_20260419_main/telemetry");
   await expect(page.getByText("Runtime Health")).toBeVisible();
+
+  const accessibility = await new AxeBuilder({ page }).analyze();
+  const seriousViolations = accessibility.violations.filter((violation) =>
+    ["critical", "serious"].includes(violation.impact ?? ""),
+  );
+  expect(seriousViolations).toEqual([]);
+  await expect(page).toHaveScreenshot("runtime-telemetry.png", {
+    maxDiffPixelRatio: 0.001,
+  });
 });

@@ -21,6 +21,7 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: uv sync --project apps/api --all-groups
       - run: pnpm openapi:export
+      - run: pnpm openapi:python-models
       - run: pnpm --filter @ai-desk/contracts-api typecheck
       - run: cd apps/api && uv run --project . pytest tests/contract tests/test_openapi_snapshot.py
-      - run: git diff --exit-code packages/contracts apps/api/tests/contracts_snapshots
+      - run: git diff --exit-code packages/contracts apps/api/api/generated_contracts apps/api/tests/contracts_snapshots

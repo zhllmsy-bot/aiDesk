@@ -429,6 +429,33 @@ def test_start_runtime_workflow_preserves_explicit_runtime_full_access_metadata(
         assert bool(row.metadata_json.get("runtime_full_access")) is True
 
 
+def test_start_runtime_workflow_rejects_oversized_workflow_run_id() -> None:
+    from fastapi import FastAPI
+    from fastapi.testclient import TestClient
+
+    from api.workflows.router import MAX_WORKFLOW_RUN_ID_LENGTH, router
+    from api.workflows.types import WorkflowRequest
+
+    app = FastAPI()
+    app.state.runtime_container = object()
+    app.include_router(router)
+    client = TestClient(app)
+
+    payload = WorkflowRequest(
+        workflow_run_id="r" * (MAX_WORKFLOW_RUN_ID_LENGTH + 1),
+        project_id="project-too-long",
+        initiated_by="tests",
+        trace_id="trace-too-long",
+        objective="validate run id length",
+        metadata={"workflow_name": WorkflowName.PROJECT_IMPROVEMENT.value},
+    )
+
+    response = client.post("/runtime/runs/start", json=asdict(payload))
+
+    assert response.status_code == 422
+    assert "workflow_run_id must be 36 characters or fewer" in response.text
+
+
 def test_start_runtime_workflow_defaults_project_improvement_to_self_driven_loops(
     monkeypatch,
     tmp_path,

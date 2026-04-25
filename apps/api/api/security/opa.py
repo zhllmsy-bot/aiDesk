@@ -30,9 +30,30 @@ class OpaPolicyEngine:
             )
         if policy == "execution":
             return self._evaluate_execution(input_data)
+        if policy == "workspace_allowlist":
+            return self._evaluate_workspace_allowlist(input_data)
+        if policy == "tool_allowlist":
+            return self._evaluate_tool_allowlist(input_data)
+        if policy == "write_gate":
+            return self._evaluate_write_gate(input_data)
         return OpaDecision(allowed=True)
 
     def _evaluate_execution(self, input_data: dict[str, Any]) -> OpaDecision:
+        workspace_decision = self._evaluate_workspace_allowlist(input_data)
+        if not workspace_decision.allowed:
+            return workspace_decision
+
+        tool_decision = self._evaluate_tool_allowlist(input_data)
+        if not tool_decision.allowed:
+            return tool_decision
+
+        write_decision = self._evaluate_write_gate(input_data)
+        if not write_decision.allowed:
+            return write_decision
+
+        return OpaDecision(allowed=True)
+
+    def _evaluate_workspace_allowlist(self, input_data: dict[str, Any]) -> OpaDecision:
         workspace = _mapping(input_data.get("workspace"))
         permission = _mapping(input_data.get("permission"))
         root_path = str(workspace.get("root_path") or "")
@@ -43,8 +64,12 @@ class OpaPolicyEngine:
                 reason="workspace root outside allowlist",
                 required_scope=[root_path],
             )
+        return OpaDecision(allowed=True)
 
+    def _evaluate_tool_allowlist(self, input_data: dict[str, Any]) -> OpaDecision:
+        permission = _mapping(input_data.get("permission"))
         commands = _string_list(input_data.get("commands"))
+        allowlist = _string_list(permission.get("command_allowlist"))
         denylist = _string_list(permission.get("command_denylist"))
         for command in commands:
             if any(command.startswith(prefix) for prefix in denylist):
@@ -53,7 +78,17 @@ class OpaPolicyEngine:
                     reason=f"blocked command: {command}",
                     required_scope=[command],
                 )
+            if allowlist and not any(command.startswith(prefix) for prefix in allowlist):
+                return OpaDecision(
+                    allowed=False,
+                    reason=f"command outside allowlist: {command}",
+                    required_scope=[command],
+                )
+        return OpaDecision(allowed=True)
 
+    def _evaluate_write_gate(self, input_data: dict[str, Any]) -> OpaDecision:
+        workspace = _mapping(input_data.get("workspace"))
+        permission = _mapping(input_data.get("permission"))
         writable_paths = _string_list(workspace.get("writable_paths"))
         break_glass_reason = permission.get("break_glass_reason")
         if (

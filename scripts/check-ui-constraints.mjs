@@ -18,6 +18,18 @@ const forbiddenImports = [
   "gsap",
   "animejs",
 ];
+const requiredUiPrimitives = [
+  "Button",
+  "Input",
+  "Select",
+  "Dialog",
+  "Sheet",
+  "Toast",
+  "Table",
+  "Tabs",
+  "Tooltip",
+  "Badge",
+];
 
 function walk(dir) {
   const entries = [];
@@ -95,6 +107,9 @@ for (const file of sourceRoots.flatMap(walk).filter(isSourceFile)) {
   if (/console\.log\s*\(/.test(source)) {
     failures.push(`${path} uses console.log.`);
   }
+  if (/\bfetch\s*\(/.test(source) && path !== "apps/web/lib/api-client.ts") {
+    failures.push(`${path} calls fetch directly; use webFetch/apiFetch from lib/api-client.`);
+  }
   if (/\b[a-z][a-z0-9-]*-\[[^\]]+\]/.test(source)) {
     failures.push(`${path} uses arbitrary Tailwind values; add a token or ADR-backed class.`);
   }
@@ -109,6 +124,25 @@ for (const file of sourceRoots.flatMap(walk).filter(isSourceFile)) {
     }
   }
   checkImportBoundaries(file, source);
+}
+
+const uiIndexPath = join(root, "packages/ui/src/index.tsx");
+const uiPrimitivesPath = join(root, "packages/ui/src/primitives.tsx");
+const uiStoryPath = join(root, "packages/ui/src/primitives.stories.tsx");
+const uiIndex = readFileSync(uiIndexPath, "utf8");
+const uiPrimitives = readFileSync(uiPrimitivesPath, "utf8");
+const uiStory = readFileSync(uiStoryPath, "utf8");
+if (!uiIndex.includes("cva(")) {
+  failures.push("packages/ui/src/index.tsx must use cva for primitive variants.");
+}
+for (const primitive of requiredUiPrimitives) {
+  const primitivePattern = new RegExp(`\\b${primitive}\\b`);
+  if (!primitivePattern.test(`${uiIndex}\n${uiPrimitives}`)) {
+    failures.push(`packages/ui/src does not export ${primitive}.`);
+  }
+  if (!primitivePattern.test(uiStory)) {
+    failures.push(`packages/ui/src/primitives.stories.tsx does not cover ${primitive}.`);
+  }
 }
 
 for (const file of walk(join(root, "apps/web/components")).filter(isSourceFile)) {

@@ -7,10 +7,11 @@
   },
   "scripts": {
     "dev": "node ./scripts/dev.mjs",
-    "build": "pnpm --filter @ai-desk/contracts-projects build && pnpm --filter @ai-desk/contracts-runtime build && pnpm --filter @ai-desk/contracts-execution build && pnpm --filter @ai-desk/contracts-llm build && pnpm --filter @ai-desk/contracts-api build && pnpm --filter @ai-desk/web build && pnpm --filter @ai-desk/api build",
+    "build": "pnpm --filter @ai-desk/contracts-projects build && pnpm --filter @ai-desk/contracts-runtime build && pnpm --filter @ai-desk/contracts-execution build && pnpm --filter @ai-desk/contracts-llm build && pnpm --filter @ai-desk/contracts-api build && pnpm --filter @ai-desk/web build && pnpm quality:web && pnpm --filter @ai-desk/api build",
     "lint": "pnpm exec biome check . && pnpm run lint:boundaries && pnpm run lint:ui && pnpm --filter @ai-desk/api lint",
     "lint:boundaries": "node ./scripts/check-import-boundaries.mjs",
     "lint:ui": "node ./scripts/check-ui-constraints.mjs",
+    "quality:web": "node ./scripts/check-web-quality-gates.mjs",
     "typecheck": "pnpm --filter @ai-desk/contracts-projects typecheck && pnpm --filter @ai-desk/contracts-runtime typecheck && pnpm --filter @ai-desk/contracts-execution typecheck && pnpm --filter @ai-desk/contracts-llm typecheck && pnpm --filter @ai-desk/contracts-api typecheck && pnpm --filter @ai-desk/web typecheck && pnpm --filter @ai-desk/api typecheck",
     "test": "pnpm --filter @ai-desk/api test && pnpm --filter @ai-desk/web test",
     "test:temporal": "pnpm --filter @ai-desk/api test:temporal",
@@ -21,6 +22,7 @@
     "infra:down": "docker compose -f infra/dev/docker-compose.yml down --remove-orphans",
     "db:migrate": "pnpm --filter @ai-desk/api migrate",
     "openapi:export": "pnpm --filter @ai-desk/api openapi:export && node ./scripts/sync-openapi-artifacts.mjs && pnpm --filter @ai-desk/contracts-api generate",
+    "openapi:python-models": "node ./scripts/generate-python-openapi-models.mjs",
     "smoke": "pnpm --filter @ai-desk/api smoke"
   },
   "devDependencies": {

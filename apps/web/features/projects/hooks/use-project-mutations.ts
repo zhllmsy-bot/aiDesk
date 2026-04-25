@@ -7,8 +7,10 @@ import type {
   WorkspaceProjectDetailResponse,
 } from "@ai-desk/contracts-projects";
 
+import { webFetch } from "@/lib/api-client";
+
 async function importProject(input: CreateWorkspaceProjectInput) {
-  const response = await fetch("/api/projects/import", {
+  const response = await webFetch("/api/projects/import", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(input),

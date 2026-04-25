@@ -7,6 +7,8 @@ import type {
   WorkspaceProjectListResponse,
 } from "@ai-desk/contracts-projects";
 
+import { webFetch } from "@/lib/api-client";
+
 async function fetchProjects(
   query: Required<WorkspaceProjectListQuery>,
 ): Promise<WorkspaceProjectListResponse> {
@@ -24,7 +26,7 @@ async function fetchProjects(
     params.set("view", query.view);
   }
 
-  const response = await fetch(`/api/projects?${params.toString()}`, { cache: "no-store" });
+  const response = await webFetch(`/api/projects?${params.toString()}`, { cache: "no-store" });
   if (!response.ok) {
     throw new Error("Could not load projects.");
   }

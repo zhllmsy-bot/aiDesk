@@ -23,6 +23,38 @@ def test_opa_execution_policy_denies_workspace_outside_allowlist(tmp_path: Path)
     assert decision.reason == "workspace root outside allowlist"
 
 
+def test_opa_policy_facade_covers_tool_and_write_gates(tmp_path: Path) -> None:
+    for policy in ("tool_allowlist", "write_gate"):
+        (tmp_path / f"{policy}.rego").write_text(f"package ai_desk.{policy}\n", encoding="utf-8")
+    engine = OpaPolicyEngine(policy_dir=tmp_path)
+
+    tool_decision = engine.evaluate(
+        "tool_allowlist",
+        {
+            "permission": {
+                "command_allowlist": ["pytest"],
+                "command_denylist": ["rm"],
+            },
+            "commands": ["python manage.py"],
+        },
+    )
+    assert tool_decision.allowed is False
+    assert tool_decision.reason == "command outside allowlist: python manage.py"
+
+    write_decision = engine.evaluate(
+        "write_gate",
+        {
+            "workspace": {"writable_paths": ["/repo"]},
+            "permission": {
+                "require_manual_approval_for_write": True,
+                "break_glass_reason": None,
+            },
+        },
+    )
+    assert write_decision.allowed is False
+    assert write_decision.reason == "manual approval required for write execution"
+
+
 def test_traceparent_is_preserved_or_created() -> None:
     existing = "00-0123456789abcdef0123456789abcdef-0123456789abcdef-01"
     assert resolve_traceparent({"traceparent": existing}, "trace-1") == existing
