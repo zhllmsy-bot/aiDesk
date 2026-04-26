@@ -1,0 +1,75 @@
+{
+  "access": {
+    "eyebrow": "运行控制访问",
+    "title": "进入 AI 运行控制台",
+    "description": "登录后即可访问项目控制、运行时监控、审批决策与证据链路。",
+    "sessionEyebrow": "会话",
+    "sessionTitle": "登录工作区",
+    "displayName": "显示名称",
+    "email": "邮箱",
+    "role": "角色",
+    "signingIn": "登录中...",
+    "submit": "进入工作区"
+  },
+  "review": {
+    "approve": "批准",
+    "reject": "拒绝",
+    "filters": {
+      "all": "全部",
+      "approved": "已批准",
+      "expired": "已过期",
+      "pending": "待处理",
+      "rejected": "已拒绝"
+    },
+    "filterLabel": "筛选审批",
+    "searchLabel": "搜索审批",
+    "searchPlaceholder": "按标题、运行或申请人搜索",
+    "overviewEyebrow": "审批中心",
+    "overviewTitle": "带溯源的操作员决策",
+    "overviewCopy": "每条决策都会保留请求意图、运行关联和链接工件，方便操作员在完整运行时上下文中审批范围。",
+    "pendingLabel": "待处理队列",
+    "pendingDescription": "等待操作员决策的请求。",
+    "runsLabel": "关联运行",
+    "runsDescription": "每条记录都可回溯到运行与任务上下文。",
+    "queueEyebrow": "队列",
+    "queueTitle": "审批项",
+    "loading": "正在加载审批队列...",
+    "empty": "当前筛选条件下没有审批项。",
+    "openDetail": "打开详情",
+    "metadata": {
+      "requester": "申请人",
+      "requested": "申请时间",
+      "run": "运行",
+      "task": "任务"
+    },
+    "detail": {
+      "reviewEyebrow": "决策详情",
+      "decisionEyebrow": "处理动作",
+      "decisionTitle": "批准、拒绝或补充处理说明",
+      "evidenceEyebrow": "溯源",
+      "evidenceTitle": "运行时与工件链路",
+      "backToQueue": "返回队列",
+      "openRuntime": "打开运行证明",
+      "openAttempt": "打开尝试记录",
+      "openArtifact": "打开工件",
+      "approve": "批准",
+      "reject": "拒绝",
+      "approveSuccess": "审批已记录，运行可继续推进。",
+      "rejectSuccess": "拒绝已记录，运行将保持阻塞。",
+      "loading": "正在加载审批详情...",
+      "unavailable": "审批详情暂不可用。",
+      "noteLabel": "处理说明",
+      "notePlaceholder": "记录操作员的原因、范围约束或后续条件。",
+      "resolutionNote": "处理说明",
+      "resolvedState": "当前状态",
+      "metadata": {
+        "requester": "申请人",
+        "requested": "申请时间",
+        "project": "项目",
+        "run": "运行",
+        "task": "任务",
+        "attempt": "尝试"
+      }
+    }
+  }
+}

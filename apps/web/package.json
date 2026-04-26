@@ -3,13 +3,19 @@
   "private": true,
   "scripts": {
     "dev": "next dev --hostname 0.0.0.0 --port 3000",
+    "prebuild": "pnpm --filter @ai-desk/ui build",
     "build": "next build",
     "start": "next start --hostname 0.0.0.0 --port 3000",
     "lint": "pnpm exec biome check .",
+    "pretypecheck": "pnpm --filter @ai-desk/ui build",
     "typecheck": "tsc --project tsconfig.json --noEmit",
+    "pretest": "pnpm --filter @ai-desk/ui build",
     "test": "vitest run",
+    "pretest:a11y": "pnpm --filter @ai-desk/ui build",
     "test:a11y": "playwright test --config playwright.config.ts --grep @a11y",
+    "pretest:visual": "pnpm --filter @ai-desk/ui build",
     "test:visual": "playwright test --config playwright.config.ts --grep @visual",
+    "pretest:e2e": "pnpm --filter @ai-desk/ui build",
     "test:e2e": "playwright test --config playwright.config.ts"
   },
   "dependencies": {

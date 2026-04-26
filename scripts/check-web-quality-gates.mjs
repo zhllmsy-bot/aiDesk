@@ -6,13 +6,22 @@ const root = process.cwd();
 const failures = [];
 const maxRouteGzipBytes = 180 * 1024;
 
-const e2ePath = join(root, "apps/web/tests/e2e/runtime-smoke.spec.ts");
-const e2eSource = readFileSync(e2ePath, "utf8");
-if (!e2eSource.includes("@axe-core/playwright") || !e2eSource.includes("analyze()")) {
-  failures.push("apps/web e2e must run axe checks through @axe-core/playwright.");
-}
-if (!e2eSource.includes("toHaveScreenshot")) {
-  failures.push("apps/web e2e must include a Playwright visual-regression assertion.");
+const surfaceQualityPath = join(root, "apps/web/tests/e2e/surface-quality.spec.ts");
+const surfaceQualitySource = readFileSync(surfaceQualityPath, "utf8");
+for (const needle of [
+  "@axe-core/playwright",
+  "analyze()",
+  "toHaveScreenshot",
+  "/login",
+  "/projects",
+  "/review",
+  "/projects/proj_meridian/audit",
+  "/runs",
+  "/runs/run_20260419_main/timeline",
+]) {
+  if (!surfaceQualitySource.includes(needle)) {
+    failures.push(`apps/web/tests/e2e/surface-quality.spec.ts must include ${needle}.`);
+  }
 }
 
 const statsPath = join(root, "apps/web/.next/diagnostics/route-bundle-stats.json");

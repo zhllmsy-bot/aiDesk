@@ -5,17 +5,7 @@ import * as ToastPrimitive from "@radix-ui/react-toast";
 import * as TooltipPrimitive from "@radix-ui/react-tooltip";
 import * as React from "react";
 
-type TestIdProps = {
-  "data-testid"?: string;
-};
-
-function cx(...values: Array<string | false | null | undefined>) {
-  return values.filter(Boolean).join(" ");
-}
-
-function dataTestId(props: object, fallback: string) {
-  return (props as TestIdProps)["data-testid"] ?? fallback;
-}
+import { cx, dataTestId } from "./internal";
 
 export const Dialog = DialogPrimitive.Root;
 export const DialogTrigger = DialogPrimitive.Trigger;
@@ -189,21 +179,34 @@ export {
   CardBody,
   CardFooter,
   CardHeader,
+  CodeBlock,
+  DescriptionItem,
   DescriptionList,
   EmptyState,
   InlineActions,
   Input,
   KeyValue,
+  PageHeader,
   PageLayout,
+  Panel,
   SearchInput,
   SegmentedControl,
   Sidebar,
   SidebarFooter,
+  SidebarGroup,
   SidebarHeader,
   SidebarItem,
   SidebarNav,
+  Stack,
   StatCard,
   StatusBadge,
   SurfaceNote,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
   TextField,
-} from "./index.js";
+  Textarea,
+} from "./index";

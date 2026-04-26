@@ -15,9 +15,7 @@
       "@ai-desk/contracts-api": ["../../packages/contracts/api"],
       "@ai-desk/contracts-projects": ["../../packages/contracts/projects/src/index.ts"],
       "@ai-desk/contracts-runtime": ["../../packages/contracts/runtime/src/index.ts"],
-      "@ai-desk/contracts-execution": ["../../packages/contracts/execution/src/index.ts"],
-      "@ai-desk/ui": ["../../packages/ui/src/index.tsx"],
-      "@ai-desk/ui/primitives": ["../../packages/ui/src/primitives.tsx"]
+      "@ai-desk/contracts-execution": ["../../packages/contracts/execution/src/index.ts"]
     },
     "types": ["vitest/globals"],
     "plugins": [{ "name": "next" }]

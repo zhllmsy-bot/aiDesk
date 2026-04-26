@@ -13,6 +13,7 @@ from api.integrations.llm.base import (
     ChatRequest,
     ChatResponse,
     ChatRole,
+    ImplementationStatus,
     JsonObject,
     JsonValue,
     LLMProvider,
@@ -148,6 +149,7 @@ class LiteLLMProvider(LLMProvider):
         return ProviderCapabilities(
             provider=self._provider_name,
             kind=ProviderKind.CHAT,
+            implementation_status=ImplementationStatus.GA,
             models=[self._default_model],
             flags=[
                 CapabilityFlag.STREAMING,

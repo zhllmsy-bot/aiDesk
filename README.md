@@ -2,6 +2,10 @@
 
 企业项目级自治 Backbone：把 Temporal durability、三段式项目评估、审批 ledger、break-glass 与通知 ledger 组合成可自托管的 Agent 编排层。
 
+![AI Desk approval center](docs/media/approval-center.png)
+
+![AI Desk product tour](docs/media/ai-desk-tour.gif)
+
 ```mermaid
 flowchart LR
   U[Operator] --> W[apps/web]
@@ -82,6 +86,9 @@ AI_DESK_SKIP_INFRA=1 pnpm dev
 
 - Contribution workflow: [`CONTRIBUTING.md`](CONTRIBUTING.md)
 - Security reporting: [`SECURITY.md`](SECURITY.md)
+- Brand system: [`docs/brand/README.md`](docs/brand/README.md)
+- License: [`LICENSE`](LICENSE)
+- Release notes: [`CHANGELOG.md`](CHANGELOG.md)
 - Release path: [`docs/roadmap.md`](docs/roadmap.md)
 
 ## API Surface

@@ -1,6 +1,6 @@
-import { ApprovalCenterScreen } from "@/features/review/components/approval-center-screen";
+import { ApprovalCenterShell } from "@/features/review/components/approval-center-shell";
 import { getApprovalCenterCopy } from "@/features/review/i18n";
 
-export default function ReviewPage() {
-  return <ApprovalCenterScreen copy={getApprovalCenterCopy()} />;
+export default async function ReviewPage() {
+  return <ApprovalCenterShell copy={await getApprovalCenterCopy()} />;
 }

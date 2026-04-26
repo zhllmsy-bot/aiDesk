@@ -3,6 +3,7 @@
 import { useDeferredValue, useState } from "react";
 
 import {
+  Button,
   ButtonLink,
   Card,
   CardBody,
@@ -22,10 +23,13 @@ import {
 } from "@ai-desk/ui";
 
 import { useApprovalsList } from "../hooks/use-approvals-list";
+import { useResolveApproval } from "../hooks/use-resolve-approval";
 import { approvalListItemViewModel, approvalStatusLabel } from "../view-models";
 
 export type ApprovalCenterCopy = {
+  approve: string;
   empty: string;
+  filterLabel: string;
   filters: Record<"all" | "approved" | "expired" | "pending" | "rejected", string>;
   loading: string;
   metadata: {
@@ -42,6 +46,7 @@ export type ApprovalCenterCopy = {
   pendingLabel: string;
   queueEyebrow: string;
   queueTitle: string;
+  reject: string;
   runsDescription: string;
   runsLabel: string;
   searchLabel: string;
@@ -50,6 +55,7 @@ export type ApprovalCenterCopy = {
 
 export function ApprovalCenterScreen({ copy }: { copy: ApprovalCenterCopy }) {
   const { data, isLoading } = useApprovalsList();
+  const resolveMutation = useResolveApproval();
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
   const deferredSearch = useDeferredValue(search);
@@ -72,6 +78,15 @@ export function ApprovalCenterScreen({ copy }: { copy: ApprovalCenterCopy }) {
     value,
   }));
 
+  function handleResolve(approvalId: string, status: "approved" | "rejected") {
+    resolveMutation.mutate({
+      approvalId,
+      status,
+      reason:
+        status === "approved" ? "Approved from decision queue." : "Rejected from decision queue.",
+    });
+  }
+
   return (
     <div className="page-stack">
       <Panel eyebrow={copy.overviewEyebrow} title={copy.overviewTitle}>
@@ -87,7 +102,7 @@ export function ApprovalCenterScreen({ copy }: { copy: ApprovalCenterCopy }) {
                 value={search}
               />
               <SegmentedControl
-                aria-label={copy.searchLabel}
+                aria-label={copy.filterLabel}
                 onValueChange={setStatusFilter}
                 options={statusOptions}
                 value={statusFilter}
@@ -141,9 +156,35 @@ export function ApprovalCenterScreen({ copy }: { copy: ApprovalCenterCopy }) {
                   </Stack>
                 </CardBody>
                 <CardFooter>
-                  <ButtonLink href={approval.linkHref} variant="secondary">
-                    {copy.openDetail}
-                  </ButtonLink>
+                  <InlineActions>
+                    {approval.status === "pending" ? (
+                      <>
+                        <Button
+                          disabled={
+                            resolveMutation.isPending &&
+                            resolveMutation.variables?.approvalId === approval.id
+                          }
+                          onClick={() => handleResolve(approval.id, "approved")}
+                          tone="secondary"
+                        >
+                          {copy.approve}
+                        </Button>
+                        <Button
+                          disabled={
+                            resolveMutation.isPending &&
+                            resolveMutation.variables?.approvalId === approval.id
+                          }
+                          onClick={() => handleResolve(approval.id, "rejected")}
+                          tone="destructive"
+                        >
+                          {copy.reject}
+                        </Button>
+                      </>
+                    ) : null}
+                    <ButtonLink href={approval.linkHref} variant="ghost">
+                      {copy.openDetail}
+                    </ButtonLink>
+                  </InlineActions>
                 </CardFooter>
               </Card>
             ))}

@@ -8,6 +8,7 @@ from api.integrations.llm.base import (
     AgentLoopProvider,
     AgentLoopRequest,
     CapabilityFlag,
+    ImplementationStatus,
     LLMProviderUnavailableError,
     ProviderCapabilities,
     ProviderKind,
@@ -23,6 +24,7 @@ class OpenAIAgentsProvider(AgentLoopProvider):
         return ProviderCapabilities(
             provider="openai_agents",
             kind=ProviderKind.AGENT_LOOP,
+            implementation_status=ImplementationStatus.STUB,
             models=[self._model],
             flags=[
                 CapabilityFlag.STREAMING,

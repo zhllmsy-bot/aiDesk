@@ -1,4 +1,4 @@
-import { RunOverviewScreen } from "@/features/runs/components/run-overview-screen";
+import { RunOverviewShell } from "@/features/runs/components/run-overview-shell";
 
 export default async function RunTimelinePage({
   params,
@@ -6,5 +6,5 @@ export default async function RunTimelinePage({
   params: Promise<{ runId: string }>;
 }) {
   const { runId } = await params;
-  return <RunOverviewScreen runId={runId} />;
+  return <RunOverviewShell runId={runId} />;
 }

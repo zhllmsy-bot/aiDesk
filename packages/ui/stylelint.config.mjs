@@ -6,6 +6,7 @@ const strictTokenProperties = [
   "/^font-size/",
   "/^border-radius/",
   "/^box-shadow/",
+  "z-index",
 ];
 
 export default {

@@ -43,6 +43,12 @@ class ProviderKind(StrEnum):
     EXECUTOR_HARNESS = "executor_harness"
 
 
+class ImplementationStatus(StrEnum):
+    STUB = "stub"
+    BETA = "beta"
+    GA = "ga"
+
+
 class CapabilityFlag(StrEnum):
     STREAMING = "streaming"
     TOOL_CALLING = "tool_calling"
@@ -169,6 +175,7 @@ class AgentProfile(LLMContractModel):
 class ProviderCapabilities(LLMContractModel):
     provider: str
     kind: ProviderKind
+    implementation_status: ImplementationStatus
     models: list[str]
     flags: list[CapabilityFlag] = Field(default_factory=list)
     max_input_tokens: int | None = None

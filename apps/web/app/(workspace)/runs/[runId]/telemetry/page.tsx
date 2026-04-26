@@ -1,4 +1,4 @@
-import { RunTelemetryScreen } from "@/features/observability/components/run-telemetry-screen";
+import { RunTelemetryShell } from "@/features/observability/components/run-telemetry-shell";
 
 export default async function RunTelemetryPage({
   params,
@@ -6,5 +6,5 @@ export default async function RunTelemetryPage({
   params: Promise<{ runId: string }>;
 }) {
   const { runId } = await params;
-  return <RunTelemetryScreen runId={runId} />;
+  return <RunTelemetryShell runId={runId} />;
 }

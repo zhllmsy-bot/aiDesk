@@ -1,6 +1,6 @@
 import type { ApprovalDetail, ApprovalSummary } from "@ai-desk/contracts-execution";
 
-const approvals: ApprovalDetail[] = [
+let approvals: ApprovalDetail[] = [
   {
     id: "aprv_patch_guard",
     schemaVersion: "2026-04-19.execution.v1",
@@ -34,13 +34,19 @@ export function resolveApprovalFixture(input: {
   status: "approved" | "rejected" | "expired";
   reason: string;
 }) {
-  const approval = getApprovalFixture(input.approvalId);
-  if (!approval) {
+  const approvalIndex = approvals.findIndex((approval) => approval.id === input.approvalId);
+  if (approvalIndex < 0) {
     return null;
   }
-  return {
-    ...approval,
+  const currentApproval = approvals[approvalIndex];
+  if (!currentApproval) {
+    return null;
+  }
+  const updated = {
+    ...currentApproval,
     status: input.status,
     resolutionNote: input.reason,
   } satisfies ApprovalDetail;
+  approvals = approvals.map((approval, index) => (index === approvalIndex ? updated : approval));
+  return updated;
 }

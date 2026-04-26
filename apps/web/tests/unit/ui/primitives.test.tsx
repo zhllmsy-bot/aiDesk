@@ -18,15 +18,17 @@ import {
   CardBody,
   CardFooter,
   CardHeader,
+  DescriptionItem,
   DescriptionList,
   Input,
-  KeyValue,
+  PageHeader,
   PageLayout,
   SearchInput,
   SegmentedControl,
   Select,
   Sidebar,
   SidebarFooter,
+  SidebarGroup,
   SidebarHeader,
   SidebarItem,
   SidebarNav,
@@ -91,7 +93,7 @@ describe("ui primitives", () => {
             value="all"
           />
           <DescriptionList>
-            <KeyValue label="Requester" value="Admin Operator" />
+            <DescriptionItem label="Requester" value="Admin Operator" />
           </DescriptionList>
           <Breadcrumb>
             <BreadcrumbList>
@@ -107,11 +109,14 @@ describe("ui primitives", () => {
           <Avatar>
             <AvatarFallback>AO</AvatarFallback>
           </Avatar>
+          <PageHeader description="Operator context" title="Decision queue" />
           <PageLayout>
             <Sidebar>
               <SidebarHeader>Sidebar</SidebarHeader>
               <SidebarNav aria-label="Demo">
-                <SidebarItem href="/projects" label="Control" description="Project queue." />
+                <SidebarGroup label="Workspace">
+                  <SidebarItem href="/projects" label="Control" description="Project queue." />
+                </SidebarGroup>
               </SidebarNav>
               <SidebarFooter>Footer</SidebarFooter>
             </Sidebar>
@@ -186,7 +191,7 @@ describe("ui primitives", () => {
     expect(screen.getByText("Ready")).toBeVisible();
     expect(screen.getByText("Pending queue")).toBeVisible();
     expect(screen.getByText("Admin Operator")).toBeVisible();
-    expect(screen.getByText("Workspace")).toBeVisible();
+    expect(screen.getAllByText("Workspace").length).toBeGreaterThan(0);
     expect(screen.getByText("AO")).toBeVisible();
     expect(screen.getByText("Control")).toBeVisible();
     expect(screen.getByText("Cell")).toBeVisible();

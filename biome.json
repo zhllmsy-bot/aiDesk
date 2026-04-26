@@ -11,6 +11,8 @@
       "apps/api/.venv",
       "apps/api/.pytest_cache",
       "apps/api/.ruff_cache",
+      "apps/worker/.venv",
+      "apps/worker/.ruff_cache",
       "apps/web/.next",
       "apps/web/tsconfig.tsbuildinfo",
       "packages/contracts/api/src/generated/schema.ts"

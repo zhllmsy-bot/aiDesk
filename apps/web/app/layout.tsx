@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { NextIntlClientProvider } from "next-intl";
+import { getLocale, getMessages } from "next-intl/server";
 import type { ReactNode } from "react";
 
 import { AppProviders } from "./providers/app-providers";
@@ -10,11 +12,16 @@ export const metadata: Metadata = {
   title: "ai-desk",
 };
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+export default async function RootLayout({ children }: { children: ReactNode }) {
+  const locale = await getLocale();
+  const messages = await getMessages();
+
   return (
-    <html lang="en">
+    <html lang={locale}>
       <body>
-        <AppProviders>{children}</AppProviders>
+        <NextIntlClientProvider locale={locale} messages={messages}>
+          <AppProviders>{children}</AppProviders>
+        </NextIntlClientProvider>
       </body>
     </html>
   );

@@ -8,6 +8,31 @@ function sourceCode(context) {
   return context.sourceCode ?? context.getSourceCode();
 }
 
+function staticClassNameFromAttributes(attributes) {
+  const className = attributes.find(
+    (attribute) =>
+      attribute.type === "JSXAttribute" &&
+      attribute.name.type === "JSXIdentifier" &&
+      attribute.name.name === "className",
+  );
+  if (!className) {
+    return "";
+  }
+  if (className.value?.type === "Literal" && typeof className.value.value === "string") {
+    return className.value.value;
+  }
+  if (className.value?.type === "JSXExpressionContainer") {
+    const expression = className.value.expression;
+    if (expression.type === "Literal" && typeof expression.value === "string") {
+      return expression.value;
+    }
+    if (expression.type === "TemplateLiteral") {
+      return expression.quasis.map((quasi) => quasi.value.raw).join(" ");
+    }
+  }
+  return "";
+}
+
 function featureNameFor(filename) {
   const parts = filename.split("/");
   const index = parts.indexOf("features");
@@ -264,34 +289,10 @@ const aiDeskUiRules = {
       const filename = normalizedFilename(context);
       const shouldEnforce =
         filename.includes("/apps/web/features/review/") ||
-        filename.includes("/apps/web/components/layout/");
+        filename.includes("/apps/web/components/layout/") ||
+        filename.endsWith("/apps/web/features/projects/components/audit-canvas-screen.tsx");
       if (!shouldEnforce) {
         return {};
-      }
-
-      function staticClassName(node) {
-        const className = node.attributes.find(
-          (attribute) =>
-            attribute.type === "JSXAttribute" &&
-            attribute.name.type === "JSXIdentifier" &&
-            attribute.name.name === "className",
-        );
-        if (!className) {
-          return "";
-        }
-        if (className.value?.type === "Literal" && typeof className.value.value === "string") {
-          return className.value.value;
-        }
-        if (className.value?.type === "JSXExpressionContainer") {
-          const expression = className.value.expression;
-          if (expression.type === "Literal" && typeof expression.value === "string") {
-            return expression.value;
-          }
-          if (expression.type === "TemplateLiteral") {
-            return expression.quasis.map((quasi) => quasi.value.raw).join(" ");
-          }
-        }
-        return "";
       }
 
       return {
@@ -302,12 +303,109 @@ const aiDeskUiRules = {
           ) {
             return;
           }
-          const className = staticClassName(node);
+          const className = staticClassNameFromAttributes(node.attributes);
           if (
             /\b[\w-]*card[\w-]*\b/.test(className) ||
             (/\bborder\b/.test(className) && /\bp-\d/.test(className))
           ) {
             context.report({ node, messageId: "rawCard" });
+          }
+        },
+      };
+    },
+  },
+  "require-focus-visible": {
+    meta: {
+      type: "problem",
+      messages: {
+        focusVisible:
+          "Interactive elements outside @ai-desk/ui must include a focus-visible treatment.",
+      },
+    },
+    create(context) {
+      const filename = normalizedFilename(context);
+      if (!filename.includes("/apps/web/")) {
+        return {};
+      }
+
+      return {
+        JSXOpeningElement(node) {
+          if (node.name.type !== "JSXIdentifier") {
+            return;
+          }
+
+          const isAnchor =
+            node.name.name === "a" &&
+            node.attributes.some(
+              (attribute) =>
+                attribute.type === "JSXAttribute" &&
+                attribute.name.type === "JSXIdentifier" &&
+                attribute.name.name === "href",
+            );
+
+          const isInteractiveRole = node.attributes.some(
+            (attribute) =>
+              attribute.type === "JSXAttribute" &&
+              attribute.name.type === "JSXIdentifier" &&
+              attribute.name.name === "role" &&
+              attribute.value?.type === "Literal" &&
+              ["button", "tab"].includes(String(attribute.value.value)),
+          );
+
+          if (!isAnchor && !isInteractiveRole) {
+            return;
+          }
+
+          const className = staticClassNameFromAttributes(node.attributes);
+          if (!/\bfocus-visible:/.test(className)) {
+            context.report({ node, messageId: "focusVisible" });
+          }
+        },
+      };
+    },
+  },
+  "no-raw-segmented-control": {
+    meta: {
+      type: "problem",
+      messages: {
+        rawSegmentedControl:
+          "Use SegmentedControl from @ai-desk/ui instead of hand-rolled button groups.",
+      },
+    },
+    create(context) {
+      const filename = normalizedFilename(context);
+      if (!filename.includes("/apps/web/")) {
+        return {};
+      }
+
+      function isRawInteractive(element) {
+        if (element.type !== "JSXElement" || element.openingElement.name.type !== "JSXIdentifier") {
+          return false;
+        }
+        const name = element.openingElement.name.name;
+        if (name === "button") {
+          return true;
+        }
+        if (name !== "a") {
+          return false;
+        }
+        return element.openingElement.attributes.some(
+          (attribute) =>
+            attribute.type === "JSXAttribute" &&
+            attribute.name.type === "JSXIdentifier" &&
+            attribute.name.name === "role" &&
+            attribute.value?.type === "Literal" &&
+            attribute.value.value === "button",
+        );
+      }
+
+      return {
+        JSXElement(node) {
+          const interactiveChildren = node.children.filter(
+            (child) => child.type === "JSXElement" && isRawInteractive(child),
+          );
+          if (interactiveChildren.length >= 3) {
+            context.report({ node, messageId: "rawSegmentedControl" });
           }
         },
       };
@@ -379,6 +477,8 @@ module.exports = [
       "ai-desk-ui/no-raw-button": "error",
       "ai-desk-ui/no-raw-card": "error",
       "ai-desk-ui/no-raw-input": "error",
+      "ai-desk-ui/no-raw-segmented-control": "error",
+      "ai-desk-ui/require-focus-visible": "error",
     },
   },
 ];

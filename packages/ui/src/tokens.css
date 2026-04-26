@@ -1,1 +1,114 @@
-@import "../styles.css";
+:root {
+  --font-display: "Inter", "IBM Plex Sans", "Segoe UI", sans-serif;
+  --font-body: "Inter", "IBM Plex Sans", "Segoe UI", sans-serif;
+
+  --color-surface: rgb(16 17 15);
+  --color-surface-subtle: rgb(23 24 20);
+  --color-surface-muted: rgb(32 34 28);
+  --color-fg: rgb(244 241 234);
+  --color-fg-muted: rgb(158 154 145);
+  --color-border: color-mix(in srgb, var(--color-fg) 11%, transparent);
+  --color-border-strong: color-mix(in srgb, var(--color-fg) 22%, transparent);
+  --color-accent: rgb(205 158 78);
+  --color-accent-contrast: rgb(28 22 14);
+  --color-accent-subtle: color-mix(in srgb, var(--color-accent) 15%, transparent);
+  --color-destructive: rgb(239 106 91);
+  --color-destructive-subtle: color-mix(in srgb, var(--color-destructive) 16%, transparent);
+  --color-success: rgb(99 195 131);
+  --color-success-subtle: color-mix(in srgb, var(--color-success) 15%, transparent);
+  --color-warning: rgb(205 158 78);
+  --color-warning-subtle: color-mix(in srgb, var(--color-warning) 15%, transparent);
+  --color-info: rgb(122 183 217);
+  --color-info-subtle: color-mix(in srgb, var(--color-info) 15%, transparent);
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-7: 1.75rem;
+  --space-8: 2rem;
+  --space-9: 2.25rem;
+  --space-10: 2.5rem;
+  --space-11: 2.75rem;
+  --space-12: 3rem;
+  --space-13: 3.5rem;
+  --space-14: 4rem;
+  --space-15: 5rem;
+  --space-16: 6rem;
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.5rem;
+  --text-2xl: 2rem;
+  --text-3xl: 3rem;
+
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-full: 999px;
+
+  --shadow-sm: 0 1px 2px color-mix(in srgb, rgb(0 0 0) 18%, transparent);
+  --shadow-md: 0 10px 24px color-mix(in srgb, rgb(0 0 0) 16%, transparent);
+  --shadow-lg: 0 16px 40px color-mix(in srgb, rgb(0 0 0) 24%, transparent);
+
+  --z-dropdown: 40;
+  --z-modal: 50;
+  --z-toast: 60;
+  --z-tooltip: 70;
+
+  --ring: 0 0 0 4px var(--color-accent-subtle);
+  --control-height-sm: 2rem;
+  --control-height-md: 2.5rem;
+  --control-height-lg: 3rem;
+  --layout-auto: auto;
+  --brand-mark-background: linear-gradient(
+      90deg,
+      transparent 46%,
+      color-mix(in srgb, rgb(0 0 0) 26%, transparent) 46% 54%,
+      transparent 54%
+    ),
+    linear-gradient(
+      0deg,
+      transparent 46%,
+      color-mix(in srgb, rgb(0 0 0) 26%, transparent) 46% 54%,
+      transparent 54%
+    ), var(--color-accent);
+  --timeline-dot-shadow: 0 0 0 6px var(--color-accent-subtle);
+
+  --color-ink: var(--color-fg);
+  --color-muted: var(--color-fg-muted);
+  --color-surface-2: var(--color-surface-subtle);
+  --color-surface-3: var(--color-surface-muted);
+  --color-surface-shade: rgb(0 0 0);
+  --color-line: var(--color-border);
+  --color-accent-fg: var(--color-accent-contrast);
+  --color-accent-soft: var(--color-accent-subtle);
+  --color-danger: var(--color-destructive);
+  --color-danger-soft: var(--color-destructive-subtle);
+  --color-warning-soft: var(--color-warning-subtle);
+  --color-success-soft: var(--color-success-subtle);
+  --color-info-soft: var(--color-info-subtle);
+  --color-control: color-mix(in srgb, var(--color-surface-muted) 46%, transparent);
+  --color-control-hover: color-mix(in srgb, var(--color-surface-muted) 70%, transparent);
+  --color-ring: color-mix(in srgb, var(--color-accent) 78%, var(--color-fg));
+  --focus-ring-shadow: var(--ring);
+  --radius-pill: var(--radius-full);
+  --shadow-panel: var(--shadow-lg);
+}
+
+:root[data-theme="dawn"] {
+  --color-surface: rgb(242 239 231);
+  --color-surface-subtle: rgb(232 226 214);
+  --color-surface-muted: rgb(215 206 190);
+  --color-fg: rgb(36 33 27);
+  --color-fg-muted: rgb(111 105 94);
+  --color-border: color-mix(in srgb, var(--color-fg) 14%, transparent);
+  --color-border-strong: color-mix(in srgb, var(--color-fg) 24%, transparent);
+  --color-accent-subtle: color-mix(in srgb, var(--color-accent) 14%, transparent);
+  --color-control: color-mix(in srgb, var(--color-surface-muted) 42%, transparent);
+  --color-control-hover: color-mix(in srgb, var(--color-surface-muted) 70%, transparent);
+}

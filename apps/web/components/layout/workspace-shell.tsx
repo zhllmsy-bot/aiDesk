@@ -13,9 +13,11 @@ import {
   BreadcrumbSeparator,
   Button,
   InlineActions,
+  PageHeader,
   PageLayout,
   Sidebar,
   SidebarFooter,
+  SidebarGroup,
   SidebarHeader,
   SidebarItem,
   SidebarNav,
@@ -150,19 +152,21 @@ export function WorkspaceShell({ children }: { children: React.ReactNode }) {
         </SidebarHeader>
 
         <SidebarNav aria-label="Primary">
-          {workspaceNavItems.map((item) => {
-            const isActive = pathname === item.href || pathname.startsWith(`${item.href}/`);
+          <SidebarGroup label="Workspace">
+            {workspaceNavItems.map((item) => {
+              const isActive = pathname === item.href || pathname.startsWith(`${item.href}/`);
 
-            return (
-              <SidebarItem
-                active={isActive}
-                description={item.description}
-                href={item.href}
-                key={item.key}
-                label={item.label}
-              />
-            );
-          })}
+              return (
+                <SidebarItem
+                  active={isActive}
+                  description={item.description}
+                  href={item.href}
+                  key={item.key}
+                  label={item.label}
+                />
+              );
+            })}
+          </SidebarGroup>
         </SidebarNav>
 
         <SidebarFooter>
@@ -183,8 +187,17 @@ export function WorkspaceShell({ children }: { children: React.ReactNode }) {
 
       <main className="workspace-main">
         <PageLayout width="wide">
-          <header className="workspace-topbar">
-            <div className="workspace-topbar-copy">
+          <PageHeader
+            actions={
+              <InlineActions>
+                <StatusBadge
+                  label={session?.roles[0] ?? "guest"}
+                  tone={session?.is_authenticated ? "info" : "warning"}
+                />
+                <ThemeToggle />
+              </InlineActions>
+            }
+            breadcrumb={
               <Breadcrumb>
                 <BreadcrumbList>
                   <BreadcrumbItem>
@@ -208,18 +221,10 @@ export function WorkspaceShell({ children }: { children: React.ReactNode }) {
                   })}
                 </BreadcrumbList>
               </Breadcrumb>
-              <h2>{workspaceTitle(segments, projectRegistry, titleLabels, segmentLabels)}</h2>
-              <p className="ui-copy">{workspaceSubtitle(segments, subtitleLabels)}</p>
-            </div>
-
-            <InlineActions>
-              <StatusBadge
-                label={session?.roles[0] ?? "guest"}
-                tone={session?.is_authenticated ? "info" : "warning"}
-              />
-              <ThemeToggle />
-            </InlineActions>
-          </header>
+            }
+            description={workspaceSubtitle(segments, subtitleLabels)}
+            title={workspaceTitle(segments, projectRegistry, titleLabels, segmentLabels)}
+          />
 
           {children}
         </PageLayout>

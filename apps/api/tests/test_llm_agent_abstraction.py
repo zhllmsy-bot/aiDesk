@@ -15,8 +15,12 @@ from api.executors.contracts import (
     WorkspaceMode,
 )
 from api.executors.providers.claude_agent import ClaudeAgentExecutorAdapter
-from api.integrations.llm.base import CapabilityFlag
-from api.integrations.llm.factory import create_llm_provider
+from api.integrations.llm.base import (
+    CapabilityFlag,
+    ImplementationStatus,
+    LLMProviderUnavailableError,
+)
+from api.integrations.llm.factory import create_agent_loop_provider, create_llm_provider
 
 
 def _bundle() -> ExecutorInputBundle:
@@ -59,8 +63,18 @@ def test_litellm_factory_exposes_single_llm_boundary() -> None:
     provider = create_llm_provider(Settings(llm_default_model="openai/gpt-5.4"))
 
     assert provider.capabilities.provider == "litellm"
+    assert provider.capabilities.implementation_status == ImplementationStatus.GA
     assert provider.capabilities.models == ["openai/gpt-5.4"]
     assert CapabilityFlag.TOOL_CALLING in provider.capabilities.flags
+
+
+def test_stub_agent_providers_are_rejected_by_factory() -> None:
+    try:
+        create_agent_loop_provider(Settings(llm_agent_provider="claude_agent_sdk"))
+    except LLMProviderUnavailableError as exc:
+        assert "stub" in str(exc)
+    else:
+        raise AssertionError("Stub provider should not be selectable")
 
 
 def test_agent_harness_executor_uses_standard_execution_contract() -> None:

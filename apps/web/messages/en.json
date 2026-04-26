@@ -1,0 +1,75 @@
+{
+  "access": {
+    "eyebrow": "Run Control Access",
+    "title": "Enter the AI run control room",
+    "description": "Sign in to reach project control, runtime monitoring, approval decisions, and evidence trails.",
+    "sessionEyebrow": "Session",
+    "sessionTitle": "Sign in to workspace",
+    "displayName": "Display name",
+    "email": "Email",
+    "role": "Role",
+    "signingIn": "Signing in...",
+    "submit": "Enter workspace"
+  },
+  "review": {
+    "approve": "Approve",
+    "reject": "Reject",
+    "filters": {
+      "all": "All",
+      "approved": "Approved",
+      "expired": "Expired",
+      "pending": "Pending",
+      "rejected": "Rejected"
+    },
+    "filterLabel": "Filter approvals",
+    "searchLabel": "Search approvals",
+    "searchPlaceholder": "Search by title, run, or requester",
+    "overviewEyebrow": "Approval Center",
+    "overviewTitle": "Operator decisions with provenance",
+    "overviewCopy": "Every decision keeps request intent, run correlation, and linked artifacts together so operators can approve scope with runtime context intact.",
+    "pendingLabel": "Pending queue",
+    "pendingDescription": "Requests awaiting an operator decision.",
+    "runsLabel": "Correlated runs",
+    "runsDescription": "Each item links back to run and task context.",
+    "queueEyebrow": "Queue",
+    "queueTitle": "Approvals",
+    "loading": "Loading approval queue...",
+    "empty": "No approvals match the current filters.",
+    "openDetail": "Open detail",
+    "metadata": {
+      "requester": "Requester",
+      "requested": "Requested",
+      "run": "Run",
+      "task": "Task"
+    },
+    "detail": {
+      "reviewEyebrow": "Decision detail",
+      "decisionEyebrow": "Resolution",
+      "decisionTitle": "Approve, reject, or annotate the request",
+      "evidenceEyebrow": "Provenance",
+      "evidenceTitle": "Runtime and artifact links",
+      "backToQueue": "Back to queue",
+      "openRuntime": "Open runtime proof",
+      "openAttempt": "Open attempt ledger",
+      "openArtifact": "Open artifact",
+      "approve": "Approve",
+      "reject": "Reject",
+      "approveSuccess": "Approval recorded and runtime can resume.",
+      "rejectSuccess": "Rejection recorded and runtime remains blocked.",
+      "loading": "Loading approval detail...",
+      "unavailable": "Approval detail is unavailable.",
+      "noteLabel": "Resolution note",
+      "notePlaceholder": "Capture the operator rationale, scope, or follow-up condition.",
+      "resolutionNote": "Resolution note",
+      "resolvedState": "Current state",
+      "metadata": {
+        "requester": "Requester",
+        "requested": "Requested",
+        "project": "Project",
+        "run": "Run",
+        "task": "Task",
+        "attempt": "Attempt"
+      }
+    }
+  }
+}

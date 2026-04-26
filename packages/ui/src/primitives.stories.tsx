@@ -16,15 +16,17 @@ import {
   CardBody,
   CardFooter,
   CardHeader,
+  DescriptionItem,
   DescriptionList,
   Input,
-  KeyValue,
+  PageHeader,
   PageLayout,
   SearchInput,
   SegmentedControl,
   Select,
   Sidebar,
   SidebarFooter,
+  SidebarGroup,
   SidebarHeader,
   SidebarItem,
   SidebarNav,
@@ -36,7 +38,7 @@ import {
   TableHeader,
   TableRow,
   Textarea,
-} from "./index.js";
+} from "./index";
 import {
   Dialog,
   DialogContent,
@@ -61,7 +63,7 @@ import {
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "./primitives.js";
+} from "./primitives";
 
 export default {
   title: "Design System/Primitives",
@@ -102,8 +104,8 @@ export function LightAndDark() {
             value="all"
           />
           <DescriptionList>
-            <KeyValue label="Requester" value="Admin Operator" />
-            <KeyValue label="Run" value="run_20260419_main" />
+            <DescriptionItem label="Requester" value="Admin Operator" />
+            <DescriptionItem label="Run" value="run_20260419_main" />
           </DescriptionList>
           <Breadcrumb>
             <BreadcrumbList>
@@ -119,11 +121,31 @@ export function LightAndDark() {
           <Avatar>
             <AvatarFallback>AO</AvatarFallback>
           </Avatar>
+          <PageHeader
+            breadcrumb={
+              <Breadcrumb>
+                <BreadcrumbList>
+                  <BreadcrumbItem>
+                    <BreadcrumbLink href="#workspace">Workspace</BreadcrumbLink>
+                  </BreadcrumbItem>
+                </BreadcrumbList>
+              </Breadcrumb>
+            }
+            description="Approve, reject, or inspect the decisions that can change an autonomous run."
+            title="Decision queue"
+          />
           <PageLayout>
             <Sidebar>
               <SidebarHeader>Sidebar</SidebarHeader>
               <SidebarNav aria-label="Demo">
-                <SidebarItem active href="#control" label="Control" description="Project queue." />
+                <SidebarGroup label="Workspace">
+                  <SidebarItem
+                    active
+                    href="#control"
+                    label="Control"
+                    description="Project queue."
+                  />
+                </SidebarGroup>
               </SidebarNav>
               <SidebarFooter>Footer</SidebarFooter>
             </Sidebar>

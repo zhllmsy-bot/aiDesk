@@ -24,13 +24,16 @@ const requiredUiPrimitives = [
   "Breadcrumb",
   "Button",
   "Card",
+  "DescriptionItem",
   "DescriptionList",
   "Input",
+  "PageHeader",
   "PageLayout",
   "SearchInput",
   "Select",
   "SegmentedControl",
   "Sidebar",
+  "SidebarGroup",
   "StatCard",
   "Dialog",
   "Sheet",
@@ -102,6 +105,33 @@ function featureNameFor(path) {
   const parts = rel(path).split(sep);
   const index = parts.indexOf("features");
   return index >= 0 ? parts[index + 1] : undefined;
+}
+
+function buildUiManifest(source) {
+  const exportPattern = /^export\s*\{([^}]+)\}\s*from\s*"(.+?)";$/gm;
+  const components = [];
+
+  for (const match of source.matchAll(exportPattern)) {
+    const [, exportList, modulePath] = match;
+    const relativeSource = modulePath.replace(/^\.\//, "src/").replace(/$/, ".tsx");
+
+    for (const entry of exportList.split(",")) {
+      const normalized = entry.trim();
+      if (!normalized || normalized.startsWith("type ")) {
+        continue;
+      }
+      const [name] = normalized.split(/\s+as\s+/);
+      components.push({
+        name: name.trim(),
+        source: relativeSource,
+      });
+    }
+  }
+
+  return {
+    components: components.sort((left, right) => left.name.localeCompare(right.name)),
+    source: "packages/ui/src/index.tsx",
+  };
 }
 
 function checkImportBoundaries(file, source) {
@@ -229,11 +259,22 @@ if (/^\s*\.[_a-zA-Z-][\w-]*\s*[{,]/m.test(webGlobals)) {
 const uiIndexPath = join(root, "packages/ui/src/index.tsx");
 const uiPrimitivesPath = join(root, "packages/ui/src/primitives.tsx");
 const uiStoryPath = join(root, "packages/ui/src/primitives.stories.tsx");
+const uiManifestPath = join(root, "packages/ui/manifest.json");
 const uiIndex = readFileSync(uiIndexPath, "utf8");
 const uiPrimitives = readFileSync(uiPrimitivesPath, "utf8");
 const uiStory = readFileSync(uiStoryPath, "utf8");
-if (!uiIndex.includes("cva(")) {
-  failures.push("packages/ui/src/index.tsx must use cva for primitive variants.");
+if (!existsSync(uiManifestPath)) {
+  failures.push("packages/ui/manifest.json is required; run pnpm ui:manifest.");
+} else {
+  const expectedManifest = `${JSON.stringify(buildUiManifest(uiIndex), null, 2)}\n`;
+  const actualManifest = readFileSync(uiManifestPath, "utf8");
+  if (expectedManifest !== actualManifest) {
+    failures.push("packages/ui/manifest.json is stale; run pnpm ui:manifest.");
+  }
+}
+
+if (!uiIndex.includes('from "./button"') || !uiPrimitives.includes("export const Dialog")) {
+  failures.push("packages/ui must expose split primitive barrels and dedicated Radix wrappers.");
 }
 for (const primitive of requiredUiPrimitives) {
   const primitivePattern = new RegExp(`\\b${primitive}\\b`);

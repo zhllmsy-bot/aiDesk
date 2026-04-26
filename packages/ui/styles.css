@@ -1,83 +1,4 @@
-:root {
-  --font-display: "Inter", "IBM Plex Sans", "Segoe UI", sans-serif;
-  --font-body: "Inter", "IBM Plex Sans", "Segoe UI", sans-serif;
-  --color-ink: rgb(244 241 234);
-  --color-muted: rgb(158 154 145);
-  --color-surface: rgb(16 17 15);
-  --color-surface-2: rgb(23 24 20);
-  --color-surface-3: rgb(32 34 28);
-  --color-surface-shade: rgb(0 0 0);
-  --color-line: color-mix(in srgb, var(--color-ink) 11%, transparent);
-  --color-accent: rgb(205 158 78);
-  --color-accent-fg: rgb(28 22 14);
-  --color-accent-soft: color-mix(in srgb, var(--color-accent) 15%, transparent);
-  --color-danger: rgb(239 106 91);
-  --color-danger-soft: color-mix(in srgb, var(--color-danger) 16%, transparent);
-  --color-warning: rgb(205 158 78);
-  --color-warning-soft: color-mix(in srgb, var(--color-warning) 15%, transparent);
-  --color-success: rgb(99 195 131);
-  --color-success-soft: color-mix(in srgb, var(--color-success) 15%, transparent);
-  --color-info: rgb(122 183 217);
-  --color-info-soft: color-mix(in srgb, var(--color-info) 15%, transparent);
-  --color-control: color-mix(in srgb, var(--color-surface-3) 46%, transparent);
-  --color-control-hover: color-mix(in srgb, var(--color-surface-3) 70%, transparent);
-  --color-ring: color-mix(in srgb, var(--color-accent) 78%, var(--color-ink));
-  --brand-mark-background: linear-gradient(
-      90deg,
-      transparent 46%,
-      color-mix(in srgb, var(--color-surface-shade) 26%, transparent) 46% 54%,
-      transparent 54%
-    ),
-    linear-gradient(
-      0deg,
-      transparent 46%,
-      color-mix(in srgb, var(--color-surface-shade) 26%, transparent) 46% 54%,
-      transparent 54%
-    ), var(--color-accent);
-  --focus-ring-shadow: 0 0 0 4px var(--color-accent-soft);
-  --timeline-dot-shadow: 0 0 0 6px var(--color-accent-soft);
-  --layout-auto: auto;
-  --space-1: 0.25rem;
-  --space-2: 0.5rem;
-  --space-3: 0.75rem;
-  --space-4: 1rem;
-  --space-5: 1.5rem;
-  --space-6: 2rem;
-  --space-7: 3rem;
-  --space-8: 4rem;
-  --radius-sm: 0.375rem;
-  --radius-md: 0.5rem;
-  --radius-lg: 0.5rem;
-  --radius-pill: 999px;
-  --shadow-panel: 0 12px 32px color-mix(in srgb, var(--color-surface-shade) 22%, transparent);
-  --text-xs: 0.75rem;
-  --text-sm: 0.875rem;
-  --text-base: 1rem;
-  --text-lg: 1.125rem;
-  --text-xl: 1.5rem;
-  --text-2xl: 2rem;
-  --text-3xl: 3rem;
-  --control-height-sm: 2rem;
-  --control-height-md: 2.5rem;
-  --control-height-lg: 3rem;
-  --z-dropdown: 40;
-  --z-modal: 50;
-  --z-toast: 60;
-  --z-tooltip: 70;
-}
-
-:root[data-theme="dawn"] {
-  --color-ink: rgb(36 33 27);
-  --color-muted: rgb(111 105 94);
-  --color-surface: rgb(242 239 231);
-  --color-surface-2: rgb(232 226 214);
-  --color-surface-3: rgb(215 206 190);
-  --color-surface-shade: rgb(0 0 0);
-  --color-line: color-mix(in srgb, var(--color-ink) 14%, transparent);
-  --color-accent-soft: color-mix(in srgb, var(--color-accent) 14%, transparent);
-  --color-control: color-mix(in srgb, var(--color-surface-3) 42%, transparent);
-  --color-control-hover: color-mix(in srgb, var(--color-surface-3) 70%, transparent);
-}
+@import "./src/tokens.css";
 
 * {
   box-sizing: border-box;
@@ -334,8 +255,8 @@ img {
 }
 
 .ui-badge-success {
-  background: var(--color-success-soft);
-  color: var(--color-success);
+  background: color-mix(in srgb, var(--color-success) 18%, transparent);
+  color: color-mix(in srgb, var(--color-success) 46%, var(--color-fg));
 }
 
 .ui-badge-warning {
@@ -437,6 +358,18 @@ img {
   display: grid;
   gap: var(--space-2);
   padding: var(--space-4);
+}
+
+.ui-stat-card-header {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.ui-stat-card-trend {
+  color: var(--color-muted);
+  font-size: var(--text-xs);
 }
 
 .ui-stat-card strong {
@@ -565,6 +498,42 @@ img {
   width: min(100%, 92rem);
 }
 
+.ui-page-header,
+.workspace-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-bottom: var(--space-5);
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--color-line);
+}
+
+.ui-page-header-title,
+.workspace-topbar h2 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 2vw, 1.85rem);
+  line-height: 1.15;
+}
+
+.ui-page-header-copy,
+.workspace-topbar-copy {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.ui-page-header-breadcrumb {
+  min-width: 0;
+}
+
+.ui-page-header-actions,
+.workspace-topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
 .ui-sidebar {
   position: sticky;
   top: 0;
@@ -598,6 +567,23 @@ img {
 }
 
 .ui-sidebar-nav {
+  display: grid;
+  gap: var(--space-1);
+}
+
+.ui-sidebar-group {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.ui-sidebar-group-label {
+  color: var(--color-muted);
+  font-size: var(--text-xs);
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.ui-sidebar-group-body {
   display: grid;
   gap: var(--space-1);
 }
@@ -765,6 +751,13 @@ img {
   padding: var(--space-4);
   font-size: var(--text-sm);
   line-height: 1.6;
+}
+
+.ui-code-block:focus-visible,
+.ui-diff-block:focus-visible {
+  border-color: var(--color-ring);
+  box-shadow: var(--focus-ring-shadow);
+  outline: none;
 }
 
 .ui-code-label {
@@ -989,34 +982,6 @@ img {
 .workspace-main {
   min-width: 0;
   padding: var(--space-5);
-}
-
-.workspace-topbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-4);
-  margin-bottom: var(--space-5);
-  padding-bottom: var(--space-4);
-  border-bottom: 1px solid var(--color-line);
-}
-
-.workspace-topbar h2 {
-  margin: 0;
-  font-family: var(--font-display);
-  font-size: clamp(1.25rem, 2vw, 1.85rem);
-  line-height: 1.15;
-}
-
-.workspace-topbar-copy {
-  display: grid;
-  gap: var(--space-2);
-}
-
-.workspace-topbar-actions {
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
 }
 
 .workspace-breadcrumbs {
@@ -1283,7 +1248,7 @@ img {
   bottom: var(--space-5);
   display: grid;
   gap: var(--space-3);
-  z-index: 50;
+  z-index: var(--z-toast);
 }
 
 .toast-card {
@@ -1457,12 +1422,16 @@ img {
 }
 
 .task-todo-item.is-completed {
-  opacity: 0.78;
+  background: color-mix(in srgb, var(--color-success) 10%, transparent);
 }
 
 .task-todo-item strong {
   display: block;
   margin-bottom: var(--space-1);
+}
+
+.task-todo-item.is-completed .ui-copy {
+  color: color-mix(in srgb, var(--color-fg-muted) 52%, var(--color-fg));
 }
 
 .status-strip-grid {

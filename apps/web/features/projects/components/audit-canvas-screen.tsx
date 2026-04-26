@@ -1,7 +1,20 @@
 import { ArrowLeft, ExternalLink } from "lucide-react";
 import Link from "next/link";
 
-import { Button, Panel, StatusBadge } from "@ai-desk/ui";
+import {
+  Button,
+  Card,
+  CardBody,
+  CardFooter,
+  CardHeader,
+  DescriptionItem,
+  DescriptionList,
+  InlineActions,
+  Panel,
+  Stack,
+  StatusBadge,
+  SurfaceNote,
+} from "@ai-desk/ui";
 
 import { getAuditCanvas } from "@/lib/demo-data/audit-data";
 
@@ -31,7 +44,7 @@ export function AuditCanvasScreen({ projectId }: { projectId: string }) {
 
   return (
     <div className="page-stack">
-      <div className="inline-actions">
+      <InlineActions>
         <Link href="/projects">
           <Button tone="secondary">
             <ArrowLeft className="button-icon" aria-hidden="true" />
@@ -44,36 +57,27 @@ export function AuditCanvasScreen({ projectId }: { projectId: string }) {
             <ExternalLink className="button-icon" aria-hidden="true" />
           </Button>
         </Link>
-      </div>
+      </InlineActions>
 
       <Panel
         eyebrow="Project Audit"
         title={`${canvas.projectName} audit canvas`}
         actions={<StatusBadge label={canvas.confidence} tone="info" />}
       >
-        <div className="audit-hero">
+        <Stack gap="4">
           <p className="run-lead">{canvas.thesis}</p>
-          <div className="signal-strip">
-            <div className="signal-cell">
-              <span>Mode</span>
-              <strong>{canvas.auditMode}</strong>
-            </div>
-            <div className="signal-cell">
-              <span>Generated</span>
-              <strong>{formatGeneratedAt(canvas.generatedAt)}</strong>
-            </div>
-            <div className="signal-cell">
-              <span>Run</span>
-              <code>{canvas.runId}</code>
-            </div>
-          </div>
-        </div>
+          <DescriptionList>
+            <DescriptionItem label="Mode" value={canvas.auditMode} />
+            <DescriptionItem label="Generated" value={formatGeneratedAt(canvas.generatedAt)} />
+            <DescriptionItem label="Run" value={<code>{canvas.runId}</code>} />
+          </DescriptionList>
+        </Stack>
       </Panel>
 
       <section className="audit-canvas-grid" aria-label="Three pass audit canvas">
         {canvas.stages.map((stage) => (
-          <article key={stage.key} className="audit-stage-card">
-            <div className="list-card-header">
+          <Card key={stage.key}>
+            <CardHeader>
               <div>
                 <div className="ui-eyebrow">{stage.key.replaceAll("_", " ")}</div>
                 <h3 className="list-card-title">{stage.title}</h3>
@@ -82,36 +86,42 @@ export function AuditCanvasScreen({ projectId }: { projectId: string }) {
                 label={stage.status.replaceAll("_", " ")}
                 tone={stageTone(stage.status)}
               />
-            </div>
-            <p className="ui-copy">{stage.summary}</p>
-            <ul className="audit-stage-list">
-              {stage.findings.map((finding) => (
-                <li key={finding}>{finding}</li>
-              ))}
-            </ul>
-            <div className="inline-actions">
-              {stage.citations.map((citation) => (
-                <Link key={citation.href} href={citation.href}>
-                  <Button tone="secondary">
-                    {citation.label}
-                    <ExternalLink className="button-icon" aria-hidden="true" />
-                  </Button>
-                </Link>
-              ))}
-            </div>
-          </article>
+            </CardHeader>
+            <CardBody>
+              <Stack gap="3">
+                <p className="ui-copy">{stage.summary}</p>
+                <ul className="audit-stage-list">
+                  {stage.findings.map((finding) => (
+                    <li key={finding}>{finding}</li>
+                  ))}
+                </ul>
+              </Stack>
+            </CardBody>
+            <CardFooter>
+              <InlineActions>
+                {stage.citations.map((citation) => (
+                  <Link key={citation.href} href={citation.href}>
+                    <Button tone="secondary">
+                      {citation.label}
+                      <ExternalLink className="button-icon" aria-hidden="true" />
+                    </Button>
+                  </Link>
+                ))}
+              </InlineActions>
+            </CardFooter>
+          </Card>
         ))}
       </section>
 
       <Panel eyebrow="Diff" title="What changed since the prior assessment">
-        <div className="list-grid">
+        <Stack gap="3">
           {canvas.diffSummary.map((item) => (
-            <div key={item} className="run-todo-row">
+            <SurfaceNote key={item} className="run-todo-row">
               <StatusBadge label="delta" tone="neutral" />
               <span>{item}</span>
-            </div>
+            </SurfaceNote>
           ))}
-        </div>
+        </Stack>
       </Panel>
     </div>
   );

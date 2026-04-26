@@ -1,0 +1,193 @@
+{
+  "components": [
+    {
+      "name": "Avatar",
+      "source": "src/avatar.tsx"
+    },
+    {
+      "name": "AvatarFallback",
+      "source": "src/avatar.tsx"
+    },
+    {
+      "name": "Badge",
+      "source": "src/badge.tsx"
+    },
+    {
+      "name": "Breadcrumb",
+      "source": "src/breadcrumb.tsx"
+    },
+    {
+      "name": "BreadcrumbCurrent",
+      "source": "src/breadcrumb.tsx"
+    },
+    {
+      "name": "BreadcrumbItem",
+      "source": "src/breadcrumb.tsx"
+    },
+    {
+      "name": "BreadcrumbLink",
+      "source": "src/breadcrumb.tsx"
+    },
+    {
+      "name": "BreadcrumbList",
+      "source": "src/breadcrumb.tsx"
+    },
+    {
+      "name": "BreadcrumbSeparator",
+      "source": "src/breadcrumb.tsx"
+    },
+    {
+      "name": "Button",
+      "source": "src/button.tsx"
+    },
+    {
+      "name": "ButtonLink",
+      "source": "src/button.tsx"
+    },
+    {
+      "name": "buttonVariants",
+      "source": "src/button.tsx"
+    },
+    {
+      "name": "Card",
+      "source": "src/card.tsx"
+    },
+    {
+      "name": "CardBody",
+      "source": "src/card.tsx"
+    },
+    {
+      "name": "CardFooter",
+      "source": "src/card.tsx"
+    },
+    {
+      "name": "CardHeader",
+      "source": "src/card.tsx"
+    },
+    {
+      "name": "CodeBlock",
+      "source": "src/code-block.tsx"
+    },
+    {
+      "name": "DescriptionItem",
+      "source": "src/description-list.tsx"
+    },
+    {
+      "name": "DescriptionList",
+      "source": "src/description-list.tsx"
+    },
+    {
+      "name": "EmptyState",
+      "source": "src/layout.tsx"
+    },
+    {
+      "name": "InlineActions",
+      "source": "src/layout.tsx"
+    },
+    {
+      "name": "Input",
+      "source": "src/fields.tsx"
+    },
+    {
+      "name": "KeyValue",
+      "source": "src/description-list.tsx"
+    },
+    {
+      "name": "PageHeader",
+      "source": "src/page-layout.tsx"
+    },
+    {
+      "name": "PageLayout",
+      "source": "src/page-layout.tsx"
+    },
+    {
+      "name": "Panel",
+      "source": "src/card.tsx"
+    },
+    {
+      "name": "SearchInput",
+      "source": "src/fields.tsx"
+    },
+    {
+      "name": "SegmentedControl",
+      "source": "src/segmented-control.tsx"
+    },
+    {
+      "name": "Select",
+      "source": "src/fields.tsx"
+    },
+    {
+      "name": "Sidebar",
+      "source": "src/sidebar.tsx"
+    },
+    {
+      "name": "SidebarFooter",
+      "source": "src/sidebar.tsx"
+    },
+    {
+      "name": "SidebarGroup",
+      "source": "src/sidebar.tsx"
+    },
+    {
+      "name": "SidebarHeader",
+      "source": "src/sidebar.tsx"
+    },
+    {
+      "name": "SidebarItem",
+      "source": "src/sidebar.tsx"
+    },
+    {
+      "name": "SidebarNav",
+      "source": "src/sidebar.tsx"
+    },
+    {
+      "name": "Stack",
+      "source": "src/layout.tsx"
+    },
+    {
+      "name": "StatCard",
+      "source": "src/stat-card.tsx"
+    },
+    {
+      "name": "StatusBadge",
+      "source": "src/badge.tsx"
+    },
+    {
+      "name": "SurfaceNote",
+      "source": "src/layout.tsx"
+    },
+    {
+      "name": "Table",
+      "source": "src/table.tsx"
+    },
+    {
+      "name": "TableBody",
+      "source": "src/table.tsx"
+    },
+    {
+      "name": "TableCell",
+      "source": "src/table.tsx"
+    },
+    {
+      "name": "TableHead",
+      "source": "src/table.tsx"
+    },
+    {
+      "name": "TableHeader",
+      "source": "src/table.tsx"
+    },
+    {
+      "name": "TableRow",
+      "source": "src/table.tsx"
+    },
+    {
+      "name": "Textarea",
+      "source": "src/fields.tsx"
+    },
+    {
+      "name": "TextField",
+      "source": "src/fields.tsx"
+    }
+  ],
+  "source": "packages/ui/src/index.tsx"
+}
