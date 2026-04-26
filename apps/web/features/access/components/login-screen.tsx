@@ -25,8 +25,11 @@ export function LoginScreen() {
     <main className="login-shell">
       <section className="login-hero">
         <div className="ui-eyebrow">Run Control Access</div>
-        <h1>进入 AI 运行指挥台</h1>
-        <p className="ui-copy">登录后直接进入项目控制、运行监控、审批决策和证据链视图。</p>
+        <h1>Enter the AI run control room</h1>
+        <p className="ui-copy">
+          Sign in to reach project control, runtime monitoring, approval decisions, and evidence
+          trails.
+        </p>
       </section>
 
       <Panel eyebrow="Session" title="Sign in to workspace">

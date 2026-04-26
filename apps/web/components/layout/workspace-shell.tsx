@@ -29,6 +29,10 @@ function breadcrumbLabel(segment: string, registry: Array<{ id: string; name: st
     return "Runs";
   }
 
+  if (segment === "audit") {
+    return "Audit";
+  }
+
   if (segment === "review") {
     return "Review";
   }
@@ -58,6 +62,9 @@ function workspaceTitle(segments: string[], registry: Array<{ id: string; name: 
   }
 
   if (segments[0] === "projects" && segments.length > 1) {
+    if (segments.includes("audit")) {
+      return "Audit canvas";
+    }
     return breadcrumbLabel(segments[1] ?? "", registry);
   }
 
@@ -79,6 +86,10 @@ function workspaceSubtitle(segments: string[]) {
 
   if (segments[0] === "ops") {
     return "Read executor attempts, retries, memory hits, and verification evidence.";
+  }
+
+  if (segments[0] === "projects" && segments.includes("audit")) {
+    return "Compare survey, counter-argument, roadmap, citations, and deltas for one project audit.";
   }
 
   return "Monitor autonomous projects by current state, latest run, and next operator action.";

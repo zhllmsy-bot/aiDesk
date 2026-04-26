@@ -26,9 +26,14 @@ export function ProjectsCards({ items }: { items: WorkspaceProjectListItem[] }) 
             <span>{item.current_user_role ?? "no role"}</span>
             <span>{item.updated_at}</span>
           </div>
-          <Link href={projectRoutes.detail({ projectId: item.id })}>
-            <Button>Open project</Button>
-          </Link>
+          <div className="inline-actions">
+            <Link href={projectRoutes.audit({ projectId: item.id })}>
+              <Button>Audit canvas</Button>
+            </Link>
+            <Link href={projectRoutes.detail({ projectId: item.id })}>
+              <Button tone="secondary">Open project</Button>
+            </Link>
+          </div>
         </article>
       ))}
     </div>

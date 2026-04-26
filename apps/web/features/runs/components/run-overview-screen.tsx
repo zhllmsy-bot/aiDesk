@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { Suspense } from "react";
 
 import { Button, Panel, StatusBadge } from "@ai-desk/ui";
 
@@ -228,7 +229,9 @@ export function RunOverviewScreen({ runId }: { runId: string }) {
         <RunCommandPanel runId={runId} run={null} projectId={projectId} />
 
         <div className="split-grid">
-          <RunTimelinePanel runId={runId} projectId={projectId} />
+          <Suspense fallback={<div className="surface-note">Loading runtime filters...</div>}>
+            <RunTimelinePanel runId={runId} projectId={projectId} />
+          </Suspense>
           <TaskGraphPanel runId={runId} projectId={projectId} />
         </div>
       </div>
@@ -240,7 +243,9 @@ export function RunOverviewScreen({ runId }: { runId: string }) {
       <RunCommandPanel runId={runId} run={run} projectId={projectId} />
 
       <div className="split-grid">
-        <RunTimelinePanel runId={runId} projectId={projectId} />
+        <Suspense fallback={<div className="surface-note">Loading runtime filters...</div>}>
+          <RunTimelinePanel runId={runId} projectId={projectId} />
+        </Suspense>
         <TaskGraphPanel runId={runId} projectId={projectId} />
       </div>
     </div>

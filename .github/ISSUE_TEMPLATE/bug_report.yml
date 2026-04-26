@@ -1,0 +1,51 @@
+name: Bug report
+description: Report a reproducible AI Desk defect.
+title: "[Bug]: "
+labels: ["bug", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping make AI Desk sturdier. Please include only non-secret logs and configuration.
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - apps/api
+        - apps/web
+        - apps/worker
+        - contracts
+        - integrations
+        - docs
+        - infra
+    validations:
+      required: true
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: What failed, and what did you expect?
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Reproduction
+      description: List exact commands, route, payload, or user flow.
+      placeholder: |
+        1. Run ...
+        2. Open ...
+        3. Observe ...
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence
+      description: Paste redacted logs, screenshots, trace IDs, or contract diffs.
+  - type: input
+    id: version
+    attributes:
+      label: Commit or version
+      placeholder: git rev-parse --short HEAD

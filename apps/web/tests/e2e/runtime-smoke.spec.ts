@@ -42,4 +42,16 @@ test("runtime timeline, task detail, and telemetry deep links work", async ({ pa
   await expect(page).toHaveScreenshot("runtime-telemetry.png", {
     maxDiffPixelRatio: 0.001,
   });
+
+  await page.goto("/projects/proj_meridian/audit");
+  await expect(
+    page.getByRole("heading", { name: "Meridian Control Plane audit canvas" }),
+  ).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Counter Argument" })).toBeVisible();
+
+  await page.goto("/artifacts");
+  await expect(page.getByRole("heading", { name: "Artifact ledger" })).toBeVisible();
+
+  await page.goto("/ops/attempts/att_patch_002");
+  await expect(page.getByRole("heading", { name: "codex-executor" })).toBeVisible();
 });

@@ -20,6 +20,8 @@ jobs:
       - uses: astral-sh/setup-uv@v5
       - run: pnpm install --frozen-lockfile
       - run: uv sync --project apps/api --all-groups
+      - run: pnpm lint:eslint
+      - run: pnpm lint:ui
       - run: pnpm lint
       - run: pnpm typecheck
       - run: pnpm test

@@ -36,9 +36,14 @@ export function ProjectsTable({ items }: { items: WorkspaceProjectListItem[] }) 
               <td>{item.current_user_role ?? "viewer"}</td>
               <td>{item.updated_at}</td>
               <td>
-                <Link href={projectRoutes.detail({ projectId: item.id })}>
-                  <Button tone="secondary">Open</Button>
-                </Link>
+                <div className="inline-actions">
+                  <Link href={projectRoutes.audit({ projectId: item.id })}>
+                    <Button>Audit</Button>
+                  </Link>
+                  <Link href={projectRoutes.detail({ projectId: item.id })}>
+                    <Button tone="secondary">Open</Button>
+                  </Link>
+                </div>
               </td>
             </tr>
           ))}

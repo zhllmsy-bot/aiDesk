@@ -62,6 +62,10 @@ class Settings(BaseSettings):
     aider_model: str = Field(default="openai/gpt-5.4")
     opa_enabled: bool = Field(default=True)
     opa_policy_dir: str = Field(default=str(ROOT_DIR / "infra" / "policies"))
+    otel_enabled: bool = Field(default=False)
+    otel_service_name: str = Field(default="ai-desk-api")
+    otel_exporter_otlp_endpoint: str | None = Field(default=None)
+    logfire_enabled: bool = Field(default=False)
     mem0_api_key: str | None = Field(
         default=None,
         validation_alias=AliasChoices("mem0_api_key", "AI_DESK_MEM0_API_KEY", "MEM0_API_KEY"),

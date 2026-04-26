@@ -7,12 +7,15 @@
   },
   "scripts": {
     "dev": "node ./scripts/dev.mjs",
-    "build": "pnpm --filter @ai-desk/contracts-projects build && pnpm --filter @ai-desk/contracts-runtime build && pnpm --filter @ai-desk/contracts-execution build && pnpm --filter @ai-desk/contracts-llm build && pnpm --filter @ai-desk/contracts-api build && pnpm --filter @ai-desk/web build && pnpm quality:web && pnpm --filter @ai-desk/api build",
-    "lint": "pnpm exec biome check . && pnpm run lint:boundaries && pnpm run lint:ui && pnpm --filter @ai-desk/api lint",
+    "build": "pnpm --filter @ai-desk/contracts-projects build && pnpm --filter @ai-desk/contracts-runtime build && pnpm --filter @ai-desk/contracts-execution build && pnpm --filter @ai-desk/contracts-llm build && pnpm --filter @ai-desk/contracts-api build && pnpm --filter @ai-desk/web build && pnpm quality:web && pnpm --filter @ai-desk/api build && pnpm --filter @ai-desk/worker build",
+    "lint": "pnpm exec biome check . && pnpm run lint:eslint && pnpm run lint:boundaries && pnpm run lint:ui && pnpm run lint:ecosystem && pnpm --filter @ai-desk/api lint && pnpm --filter @ai-desk/worker lint",
+    "lint:eslint": "pnpm exec eslint apps/web packages/ui --max-warnings 0",
     "lint:boundaries": "node ./scripts/check-import-boundaries.mjs",
     "lint:ui": "node ./scripts/check-ui-constraints.mjs",
+    "lint:ecosystem": "node ./scripts/check-ecosystem-readiness.mjs",
     "quality:web": "node ./scripts/check-web-quality-gates.mjs",
-    "typecheck": "pnpm --filter @ai-desk/contracts-projects typecheck && pnpm --filter @ai-desk/contracts-runtime typecheck && pnpm --filter @ai-desk/contracts-execution typecheck && pnpm --filter @ai-desk/contracts-llm typecheck && pnpm --filter @ai-desk/contracts-api typecheck && pnpm --filter @ai-desk/web typecheck && pnpm --filter @ai-desk/api typecheck",
+    "doctor": "node ./scripts/check-local-git-identity.mjs && pnpm -r list --depth -1 && pnpm lint && pnpm typecheck",
+    "typecheck": "pnpm --filter @ai-desk/contracts-projects typecheck && pnpm --filter @ai-desk/contracts-runtime typecheck && pnpm --filter @ai-desk/contracts-execution typecheck && pnpm --filter @ai-desk/contracts-llm typecheck && pnpm --filter @ai-desk/contracts-api typecheck && pnpm --filter @ai-desk/web typecheck && pnpm --filter @ai-desk/api typecheck && pnpm --filter @ai-desk/worker typecheck",
     "test": "pnpm --filter @ai-desk/api test && pnpm --filter @ai-desk/web test",
     "test:temporal": "pnpm --filter @ai-desk/api test:temporal",
     "eval:runtime": "pnpm --filter @ai-desk/api eval:runtime",
@@ -28,8 +31,10 @@
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
     "concurrently": "^9.2.1",
+    "eslint": "^10.2.1",
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.59.0"
   }
 }

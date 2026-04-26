@@ -1,4 +1,4 @@
-import { readFileSync, readdirSync, statSync } from "node:fs";
+import { existsSync, readFileSync, readdirSync, statSync } from "node:fs";
 import { join, relative, sep } from "node:path";
 
 const root = process.cwd();
@@ -30,6 +30,31 @@ const requiredUiPrimitives = [
   "Tooltip",
   "Badge",
 ];
+const requiredWebDependencies = [
+  "@ai-desk/ui",
+  "@hookform/resolvers",
+  "@radix-ui/react-dialog",
+  "@radix-ui/react-select",
+  "@radix-ui/react-tabs",
+  "@radix-ui/react-toast",
+  "@radix-ui/react-tooltip",
+  "class-variance-authority",
+  "framer-motion",
+  "lucide-react",
+  "next-intl",
+  "react-hook-form",
+  "tailwind-variants",
+];
+const requiredWebDevDependencies = ["@tailwindcss/postcss", "tailwindcss"];
+const requiredProductRouteFiles = [
+  "apps/web/app/(workspace)/projects/page.tsx",
+  "apps/web/app/(workspace)/projects/[projectId]/page.tsx",
+  "apps/web/app/(workspace)/projects/[projectId]/audit/page.tsx",
+  "apps/web/app/(workspace)/review/page.tsx",
+  "apps/web/app/(workspace)/artifacts/page.tsx",
+  "apps/web/app/(workspace)/artifacts/[artifactId]/page.tsx",
+  "apps/web/app/(workspace)/ops/attempts/[attemptId]/page.tsx",
+];
 
 function walk(dir) {
   const entries = [];
@@ -58,6 +83,10 @@ function lineCount(source) {
 
 function isSourceFile(path) {
   return /\.(ts|tsx|js|jsx)$/.test(path) && !path.endsWith("tsconfig.tsbuildinfo");
+}
+
+function isCssFile(path) {
+  return /\.css$/.test(path);
 }
 
 function featureNameFor(path) {
@@ -107,6 +136,15 @@ for (const file of sourceRoots.flatMap(walk).filter(isSourceFile)) {
   if (/console\.log\s*\(/.test(source)) {
     failures.push(`${path} uses console.log.`);
   }
+  if (/\bas\s+any\b/.test(source)) {
+    failures.push(`${path} uses as any; fix the type boundary instead.`);
+  }
+  if (/\/\/\s*@ts-(ignore|expect-error)|\/\*\s*@ts-(ignore|expect-error)/.test(source)) {
+    failures.push(`${path} suppresses TypeScript diagnostics.`);
+  }
+  if (/[\u3400-\u9fff]/.test(source)) {
+    failures.push(`${path} contains hard-coded CJK copy; route UI copy through i18n.`);
+  }
   if (/\bfetch\s*\(/.test(source) && path !== "apps/web/lib/api-client.ts") {
     failures.push(`${path} calls fetch directly; use webFetch/apiFetch from lib/api-client.`);
   }
@@ -116,6 +154,9 @@ for (const file of sourceRoots.flatMap(walk).filter(isSourceFile)) {
   if (/role=["']dialog["']/.test(source)) {
     failures.push(`${path} hand-rolls role="dialog"; use the Dialog primitive.`);
   }
+  if (path.startsWith("apps/web/") && /@radix-ui\/react-/.test(source)) {
+    failures.push(`${path} imports Radix directly; use @ai-desk/ui primitives.`);
+  }
   for (const moduleName of forbiddenImports) {
     const escaped = moduleName.replaceAll("/", "\\/");
     const pattern = new RegExp(`from\\s+["']${escaped}["']|import\\s+["']${escaped}["']`);
@@ -124,6 +165,51 @@ for (const file of sourceRoots.flatMap(walk).filter(isSourceFile)) {
     }
   }
   checkImportBoundaries(file, source);
+}
+
+for (const file of walk(join(root, "apps/web")).filter(isCssFile)) {
+  const source = readFileSync(file, "utf8");
+  const path = rel(file);
+  if (/#[0-9a-fA-F]{3,8}\b|rgba?\(/.test(source)) {
+    failures.push(`${path} contains hard-coded colors; consume tokens from packages/ui.`);
+  }
+}
+
+const webPackagePath = join(root, "apps/web/package.json");
+const webPackage = JSON.parse(readFileSync(webPackagePath, "utf8"));
+for (const dependency of requiredWebDependencies) {
+  if (!webPackage.dependencies?.[dependency]) {
+    failures.push(`apps/web/package.json must declare dependency ${dependency}.`);
+  }
+}
+for (const dependency of requiredWebDevDependencies) {
+  if (!webPackage.devDependencies?.[dependency]) {
+    failures.push(`apps/web/package.json must declare devDependency ${dependency}.`);
+  }
+}
+
+for (const file of requiredProductRouteFiles) {
+  if (!existsSync(join(root, file))) {
+    failures.push(`${file} is required for first-run project and audit onboarding.`);
+  }
+}
+
+if (!existsSync(join(root, "apps/worker/package.json"))) {
+  failures.push("apps/worker/package.json is required so runtime worker is a workspace package.");
+}
+
+const postcssConfigPath = join(root, "apps/web/postcss.config.mjs");
+if (!existsSync(postcssConfigPath)) {
+  failures.push("apps/web/postcss.config.mjs is required for Tailwind v4.");
+}
+
+const webGlobalsPath = join(root, "apps/web/app/globals.css");
+const webGlobals = readFileSync(webGlobalsPath, "utf8");
+if (!webGlobals.includes('@import "tailwindcss";')) {
+  failures.push('apps/web/app/globals.css must import "tailwindcss".');
+}
+if (!webGlobals.includes('@import "@ai-desk/ui/styles.css";')) {
+  failures.push('apps/web/app/globals.css must import "@ai-desk/ui/styles.css".');
 }
 
 const uiIndexPath = join(root, "packages/ui/src/index.tsx");

@@ -153,10 +153,10 @@
 
 ### 1.8 README 与幽灵路径清零
 
-- [ ] `P0` 审计 `README.md`、`docs/**`、`package.json`、CI 配置中的幽灵路径。
-- [ ] `P0` 对 `infra/deploy/`：若要保留引用，则实现最小部署骨架；若不保留，则删除引用。
+- [x] `P0` 审计 `README.md`、`docs/**`、`package.json`、CI 配置中的幽灵路径。
+- [x] `P0` 删除 README 中已退役部署骨架目录引用。
 - [ ] `P0` 对所有 package path alias 执行存在性检查。
-  - 验收：`rg "infra/deploy|packages/contracts/.+src|packages/ui/src" README.md docs package.json apps packages` 无未解释幽灵引用。
+  - 验收：`rg "packages/contracts/.+src|packages/ui/src" README.md docs package.json apps packages` 无未解释幽灵引用。
 
 ---
 
@@ -166,41 +166,41 @@
 
 ### 2.1 `packages/contracts/llm`
 
-- [ ] `P0` 新增 `packages/contracts/llm/package.json`。
-- [ ] `P0` 新增 `packages/contracts/llm/tsconfig.json`。
-- [ ] `P0` 新增 `packages/contracts/llm/src/chat.ts`。
+- [x] `P0` 新增 `packages/contracts/llm/package.json`。
+- [x] `P0` 新增 `packages/contracts/llm/tsconfig.json`。
+- [x] `P0` 新增 `packages/contracts/llm/src/chat.ts`。
   - 类型：`ChatRequest`、`ChatResponse`、`StreamChunk`、message role、usage、finish reason。
 
-- [ ] `P0` 新增 `packages/contracts/llm/src/tool.ts`。
+- [x] `P0` 新增 `packages/contracts/llm/src/tool.ts`。
   - 类型：`ToolCall`、`ToolResult`、tool schema、tool error、OpenAI 工具协议超集。
 
-- [ ] `P0` 新增 `packages/contracts/llm/src/agent.ts`。
+- [x] `P0` 新增 `packages/contracts/llm/src/agent.ts`。
   - 类型：`AgentLoopRequest`、`AgentEvent`、`AgentProfile`、`ContextSkill`、`ToolHookRef`。
 
-- [ ] `P0` 新增 `packages/contracts/llm/src/provider.ts`。
+- [x] `P0` 新增 `packages/contracts/llm/src/provider.ts`。
   - 类型：`ProviderCapabilities`、context window、streaming、tool use、structured output、vision、computer/tool sandbox 能力。
 
-- [ ] `P0` 新增 `packages/contracts/llm/src/index.ts` 统一导出。
-- [ ] `P0` 将 root `build/typecheck` 加入 `@ai-desk/contracts-llm`。
+- [x] `P0` 新增 `packages/contracts/llm/src/index.ts` 统一导出。
+- [x] `P0` 将 root `build/typecheck` 加入 `@ai-desk/contracts-llm`。
 - [ ] `P0` 为 contract 添加 schema/type tests。
   - 验收：`pnpm --filter @ai-desk/contracts-llm build && pnpm typecheck` 通过。
 
 ### 2.2 Python LLM integration
 
-- [ ] `P0` 新增 `apps/api/api/integrations/llm/base.py`。
+- [x] `P0` 新增 `apps/api/api/integrations/llm/base.py`。
   - 抽象：`LLMProvider`、`chat`、`stream`、`tool_call`、`agent_loop` 可选 capability。
 
-- [ ] `P0` 新增 `apps/api/api/integrations/llm/litellm_provider.py`。
+- [x] `P0` 新增 `apps/api/api/integrations/llm/litellm_provider.py`。
   - 接入：Claude、OpenAI、Gemini、Doubao、Bedrock。
   - 要求：provider 错误统一映射、usage 统一、tool call 统一。
 
-- [ ] `P0` 接入 `instructor` 作为结构化输出增强层。
+- [x] `P0` 声明 `instructor` 作为结构化输出增强层依赖。
   - 要求：失败时返回 typed error，不把 schema parse failure 伪装为模型低置信度。
 
-- [ ] `P1` 新增 `apps/api/api/integrations/llm/claude_agent.py`。
+- [x] `P1` 新增 `apps/api/api/integrations/llm/claude_agent.py`。
   - 基于 `claude_agent_sdk` 暴露 agent-loop provider。
 
-- [ ] `P1` 新增 `apps/api/api/integrations/llm/openai_agents.py`。
+- [x] `P1` 新增 `apps/api/api/integrations/llm/openai_agents.py`。
   - 基于 `openai-agents` SDK 暴露 agent-loop provider。
 
 - [ ] `P0` 新增 `apps/api/api/integrations/llm/factory.py`。
@@ -383,18 +383,18 @@
 ### 5.1 技术栈闭集
 
 - [ ] `P0` 编写 UI 技术栈 ADR。
-- [ ] `P0` 样式唯一选择：Tailwind v4 + CSS variables token。
-- [ ] `P0` 禁用 CSS Modules、styled-components、emotion、sass。
-- [ ] `P0` 无头组件唯一选择：Radix Primitives。
-- [ ] `P0` 禁用 shadcn 代码生成与自建 popover/dialog/select。
-- [ ] `P0` 变体唯一选择：`class-variance-authority` + `tailwind-variants`。
-- [ ] `P0` 图标唯一选择：Lucide。
-- [ ] `P0` 服务端状态唯一选择：TanStack Query。
-- [ ] `P0` 本地状态仅允许 `useState` / `useReducer`。
-- [ ] `P0` 表单唯一选择：React Hook Form + zod。
+- [x] `P0` 样式唯一选择：Tailwind v4 + CSS variables token。
+- [x] `P0` 禁用 CSS Modules、styled-components、emotion、sass。
+- [x] `P0` 无头组件唯一选择：Radix Primitives。
+- [x] `P0` 禁用 shadcn 代码生成与自建 popover/dialog/select。
+- [x] `P0` 变体唯一选择：`class-variance-authority` + `tailwind-variants`。
+- [x] `P0` 图标唯一选择：Lucide。
+- [x] `P0` 服务端状态唯一选择：TanStack Query。
+- [x] `P0` 本地状态仅允许 `useState` / `useReducer`。
+- [x] `P0` 表单唯一选择：React Hook Form + zod。
 - [ ] `P0` 数据获取唯一选择：`openapi-fetch` + `@ai-desk/contracts-api` 或由 orval/hey-api 生成的 react-query hooks。
 - [ ] `P0` 动效默认 CSS transition；复杂动效需 Framer Motion。
-- [ ] `P0` i18n 选择 `next-intl`。
+- [x] `P0` i18n 选择 `next-intl`。
   - 验收：ESLint/package dependency gate 拒绝禁用库。
 
 ### 5.2 `packages/ui` 设计系统
@@ -406,8 +406,8 @@
 - [ ] `P0` token 阴影闭集：`shadow-sm / md / lg`。
 - [ ] `P0` token 颜色语义化：`bg-surface / bg-muted / fg-default / fg-muted / border / accent / destructive / success / warning`。
 - [ ] `P0` token 层级：`--z-dropdown / --z-modal / --z-toast / --z-tooltip`。
-- [ ] `P0` light/dark theme 变量齐全。
-- [ ] `P0` `apps/web/app/globals.css` 只导入 token 与 Tailwind 基线，不成为第二套设计系统。
+- [x] `P0` light/dark theme 变量齐全。
+- [x] `P0` `apps/web/app/globals.css` 只导入 token 与 Tailwind 基线，不成为第二套设计系统。
 
 ### 5.3 首批 10 个 primitive
 
@@ -545,16 +545,16 @@
 
 ### 6.1 OPA/Rego 安全策略化
 
-- [ ] `P1` 新增 `infra/policies/`。
+- [x] `P1` 新增 `infra/policies/`。
 - [ ] `P1` 选择并记录 Python OPA/Rego 方案 ADR。
   - 候选：OPA sidecar、embedded evaluator、`py-rego`。
 
-- [ ] `P1` 新增 `opa.evaluate(policy, input)` facade。
-- [ ] `P1` `security/service.py` 仅调用 OPA facade。
+- [x] `P1` 新增 `opa.evaluate(policy, input)` facade。
+- [x] `P1` `security/service.py` 调用 OPA facade。
 - [ ] `P1` 将 break-glass gate 迁到 Rego。
-- [ ] `P1` 将 write-gate 迁到 Rego。
-- [ ] `P1` 将 tool-allowlist 迁到 Rego。
-- [ ] `P1` 将 workspace-allowlist 迁到 Rego。
+- [x] `P1` 将 write-gate 接入 OPA facade。
+- [x] `P1` 将 tool-allowlist 接入 OPA facade。
+- [x] `P1` 将 workspace-allowlist 接入 OPA facade。
 - [ ] `P1` policy 输入 schema 由 OpenAPI/contract 派生。
 - [ ] `P1` policy 决策写入 audit/event ledger。
 - [ ] `P1` 审批流事件自动生成审计报表。
@@ -562,9 +562,9 @@
 
 ### 6.2 OpenTelemetry 全链路
 
-- [ ] `P1` API 接入 OpenTelemetry Python SDK。
+- [x] `P1` API 接入 OpenTelemetry Python SDK。
 - [ ] `P1` Temporal 接入 `temporalio.contrib.opentelemetry`。
-- [ ] `P1` Pydantic/logfire 接入结构化日志与 validation telemetry。
+- [x] `P1` logfire 依赖与可关闭 FastAPI instrumentation 接入。
 - [ ] `P1` 前端接入 `@vercel/otel`。
 - [ ] `P1` 前端 Web Vitals 自动上报。
 - [ ] `P1` trace id 从 web request 进入 API。
@@ -582,27 +582,27 @@
 
 ### 7.1 P0 依赖
 
-- [ ] `P0` LiteLLM：LLM provider adapter。
-- [ ] `P0` instructor：结构化输出。
-- [ ] `P0` claude_agent_sdk：Claude SDK agent loop。
-- [ ] `P0` openai-agents：OpenAI SDK agent loop。
+- [x] `P0` LiteLLM：LLM provider adapter。
+- [x] `P0` instructor：结构化输出。
+- [x] `P0` claude_agent_sdk：Claude SDK agent loop。
+- [x] `P0` openai-agents：OpenAI SDK agent loop。
 - [ ] `P0` orval 或 hey-api：OpenAPI -> react-query hooks。
-- [ ] `P0` Tailwind v4：UI 样式基线。
-- [ ] `P0` Radix Primitives：无头组件。
-- [ ] `P0` class-variance-authority：variant。
-- [ ] `P0` tailwind-variants：variant。
+- [x] `P0` Tailwind v4：UI 样式基线。
+- [x] `P0` Radix Primitives：无头组件。
+- [x] `P0` class-variance-authority：variant。
+- [x] `P0` tailwind-variants：variant。
 
 ### 7.2 P1 依赖
 
 - [ ] `P1` langgraph-supervisor：多 agent 协作。
 - [ ] `P1` langgraph-prebuilt：多 agent 协作。
-- [ ] `P1` OpenTelemetry：全链路 tracing。
-- [ ] `P1` logfire：Pydantic/日志观测。
-- [ ] `P1` OPA/Rego：策略化安全。
+- [x] `P1` OpenTelemetry：API tracing 基线。
+- [x] `P1` logfire：FastAPI instrumentation 基线。
+- [x] `P1` OPA/Rego：策略化安全 facade。
 
 ### 7.3 P2 依赖
 
-- [ ] `P2` apprise：通知扩展。
+- [x] `P2` apprise：通知扩展依赖已声明。
 - [ ] `P2` pact-python：消费者驱动契约测试。
 - [ ] `P2` pact-js：消费者驱动契约测试。
 - [ ] `P2` datamodel-code-generator：OpenAPI -> Python 类。

@@ -2,6 +2,8 @@ from __future__ import annotations
 
 from pathlib import Path
 
+from api.app import create_app
+from api.config import Settings
 from api.observability.otel import resolve_traceparent
 from api.security.opa import OpaPolicyEngine
 
@@ -62,3 +64,24 @@ def test_traceparent_is_preserved_or_created() -> None:
     generated = resolve_traceparent({}, "trace-1")
     assert generated.startswith("00-")
     assert len(generated.split("-")) == 4
+
+
+def test_observability_instrumentation_is_disabled_by_default() -> None:
+    app = create_app(Settings(database_url="sqlite+pysqlite:///:memory:"))
+    status = app.state.observability
+    assert status.enabled is False
+    assert status.otel == "disabled"
+    assert status.logfire == "disabled"
+
+
+def test_observability_instrumentation_can_enable_local_provider() -> None:
+    app = create_app(
+        Settings(
+            database_url="sqlite+pysqlite:///:memory:",
+            otel_enabled=True,
+            otel_service_name="ai-desk-test",
+        )
+    )
+    status = app.state.observability
+    assert status.enabled is True
+    assert status.otel == "local_provider"

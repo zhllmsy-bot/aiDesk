@@ -17,25 +17,18 @@
 ### 1.2 启动顺序
 
 ```bash
-# 1. PostgreSQL
-pg_ctl -D /usr/local/var/postgres start
+# 一键本地路径：依次拉起 infra、迁移、API、Web、worker
+pnpm dev
+```
 
-# 2. Temporal Server
-temporal server start-dev
+如果需要手工拆分：
 
-# 3. 数据库迁移
-cd apps/api
-alembic upgrade head
-
-# 4. API Server
-uvicorn api.app:app --host 0.0.0.0 --port 8000
-
-# 5. Temporal Worker（独立终端）
-python -m api.workflows.workers.runtime_worker
-
-# 6. Web Frontend（独立终端）
-cd apps/web
-npm run dev
+```bash
+pnpm infra:up
+pnpm db:migrate
+pnpm --filter @ai-desk/api dev
+pnpm --filter @ai-desk/web dev
+pnpm --filter @ai-desk/worker dev
 ```
 
 ### 1.3 环境变量
@@ -65,6 +58,10 @@ AI_DESK_FEISHU_MCP_BRIDGE_DIR=/Users/admin/Desktop/feishu_mcp
 AI_DESK_FEISHU_MCP_ENV_FILE=/Users/admin/Desktop/feishu_mcp/.env
 AI_DESK_FEISHU_MCP_TIMEOUT_SECONDS=30
 AI_DESK_OPENVIKING_MCP_URL=
+AI_DESK_OTEL_ENABLED=false
+AI_DESK_OTEL_SERVICE_NAME=ai-desk-api
+AI_DESK_OTEL_EXPORTER_OTLP_ENDPOINT=
+AI_DESK_LOGFIRE_ENABLED=false
 ```
 
 说明：`.env.test` 仅用于测试场景（通过测试代码显式注入），不再作为运行时默认环境文件。

@@ -1,0 +1,11 @@
+{
+  "name": "@ai-desk/worker",
+  "private": true,
+  "scripts": {
+    "dev": "pnpm run worker:runtime",
+    "build": "uv run --project ../api python -m compileall ../api/api/workflows/workers",
+    "lint": "uv run --project ../api ruff check ../api/api/workflows/workers",
+    "typecheck": "uv run --project ../api pyright ../api/api/workflows/workers",
+    "worker:runtime": "uv run --project ../api python -m api.workflows.workers.runtime_worker"
+  }
+}

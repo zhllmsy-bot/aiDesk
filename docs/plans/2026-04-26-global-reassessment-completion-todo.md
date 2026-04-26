@@ -81,9 +81,18 @@ Completed in the follow-up execution pass:
 - [x] Add OPA regression tests for tool and write gates.
 - [x] Extend import boundary checks so `domain/**` and `kernel/**` cannot import concrete integrations.
 - [x] Extend import boundary checks so `integrations/**` cannot depend on router modules.
+- [x] Add `apps/worker` as an explicit workspace package and root build/typecheck/lint participant.
+- [x] Add Tailwind v4 wiring in `apps/web` with `@ai-desk/ui` token import.
+- [x] Add project audit canvas, project detail, review, artifact, and ops onboarding routes.
+- [x] Add OTel/logfire instrumentation wiring and dependency declarations.
+- [x] Add `apprise` dependency for notification adapter readiness.
+- [x] Add repository ecosystem readiness docs: contribution guide, security policy, roadmap, and issue templates.
+- [x] Add ecosystem readiness and local git identity checks.
+- [x] Replace placeholder repository git author identity with `zhllmsy-bot <zhllmsy-bot@users.noreply.github.com>`.
+- [x] Run full local validation after the final closure pass: lint, typecheck, tests, build, and web e2e.
 
 External deployment prerequisites, not local repository tasks:
 
 - Production OPA sidecar deployment and policy bundle promotion.
 - External trace backend deployment and dashboard wiring.
-- Full page-by-page UX redesign beyond the first primitive and gate baseline.
+- External community validation such as stars, forks, issues, discussions, and third-party contributors.

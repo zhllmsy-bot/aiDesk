@@ -1,6 +1,18 @@
 # AI Desk
 
-通用项目自治平台的 monorepo（runtime + execution + review + workspace web）。
+企业项目级自治 Backbone：把 Temporal durability、三段式项目评估、审批 ledger、break-glass 与通知 ledger 组合成可自托管的 Agent 编排层。
+
+```mermaid
+flowchart LR
+  U[Operator] --> W[apps/web]
+  W --> A[apps/api control plane]
+  A --> T[Temporal]
+  T --> R[apps/worker runtime worker]
+  R --> E[Executors and agent SDKs]
+  R --> M[Memory adapters]
+  A --> C[packages/contracts]
+  W --> C
+```
 
 当前仓库并行 lane 的 v1 基线：
 
@@ -15,6 +27,7 @@
 apps/
   api/                         FastAPI monolith entry for control plane + runtime + execution
   web/                         Next.js App Router workspace
+  worker/                      Runtime worker process package
 packages/
   contracts/api/               Full FastAPI OpenAPI snapshot + generated TS client/types
   contracts/projects/          BE-1 owner
@@ -23,12 +36,11 @@ packages/
   ui/                          FE-3 owner
 infra/
   dev/                         Postgres + Temporal + worker boot
-  deploy/                      Container deployment skeleton
   observability/               Shared observability placeholder
 docs/specs/                    Shared spec skeletons
 ```
 
-## Quick Start
+## 3 分钟 Quickstart
 
 ```bash
 cp .env.example .env.local
@@ -43,18 +55,34 @@ pnpm dev
 2. 执行 Alembic migration
 3. 启动 `apps/api`
 4. 启动 `apps/web`
-5. 启动 runtime worker
+5. 启动独立 `apps/worker` runtime worker
+
+打开 `http://localhost:3000/projects`，选择 `Meridian Control Plane`，进入 `Audit canvas`。这条 demo path 会展示一次 `project.audit` 三段式结果：survey、counter-argument、roadmap、证据链接与 delta 摘要。
+
+只调试 app、不拉本地 infra 时可用：
+
+```bash
+AI_DESK_SKIP_INFRA=1 pnpm dev
+```
 
 ## Root Commands
 
 - `pnpm dev`
 - `pnpm build`
 - `pnpm lint`
+- `pnpm run doctor`
 - `pnpm typecheck`
 - `pnpm test`
+- `pnpm test:e2e`
 - `pnpm db:migrate`
 - `pnpm openapi:export`
 - `pnpm smoke`
+
+## Community And Roadmap
+
+- Contribution workflow: [`CONTRIBUTING.md`](CONTRIBUTING.md)
+- Security reporting: [`SECURITY.md`](SECURITY.md)
+- Release path: [`docs/roadmap.md`](docs/roadmap.md)
 
 ## API Surface
 

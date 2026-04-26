@@ -1,19 +1,10 @@
+@import "tailwindcss";
 @import "@ai-desk/ui/styles.css";
 
-:root[data-theme="dawn"] {
-  --color-ink: #24211b;
-  --color-muted: #6f695e;
-  --color-surface: #f2efe7;
-  --color-surface-2: #e8e2d6;
-  --color-surface-3: #d7cebe;
-  --color-line: rgba(36, 33, 27, 0.14);
-  --color-accent-soft: rgba(139, 94, 38, 0.14);
-  background: #f2efe7;
-}
-
-body[data-theme="dawn"] {
-  background: #f2efe7;
-}
+@source "../app";
+@source "../components";
+@source "../features";
+@source "../../../packages/ui/src";
 
 .workspace-shell {
   min-height: 100vh;
@@ -29,7 +20,7 @@ body[data-theme="dawn"] {
   align-content: start;
   padding: var(--space-5) var(--space-4);
   border-right: 1px solid var(--color-line);
-  background: color-mix(in srgb, var(--color-surface) 94%, #000 6%);
+  background: color-mix(in srgb, var(--color-surface) 94%, var(--color-surface-shade) 6%);
 }
 
 .workspace-brand {
@@ -43,9 +34,18 @@ body[data-theme="dawn"] {
   aspect-ratio: 1;
   border-radius: var(--radius-sm);
   border: 1px solid color-mix(in srgb, var(--color-accent) 55%, transparent);
-  background: linear-gradient(90deg, transparent 46%, rgba(0, 0, 0, 0.26) 46% 54%, transparent 54%),
-    linear-gradient(0deg, transparent 46%, rgba(0, 0, 0, 0.26) 46% 54%, transparent 54%),
-    var(--color-accent);
+  background: linear-gradient(
+      90deg,
+      transparent 46%,
+      color-mix(in srgb, var(--color-surface-shade) 26%, transparent) 46% 54%,
+      transparent 54%
+    ),
+    linear-gradient(
+      0deg,
+      transparent 46%,
+      color-mix(in srgb, var(--color-surface-shade) 26%, transparent) 46% 54%,
+      transparent 54%
+    ), var(--color-accent);
   box-shadow: none;
 }
 
@@ -145,7 +145,7 @@ body[data-theme="dawn"] {
 }
 
 .workspace-breadcrumb-separator {
-  color: rgba(255, 255, 255, 0.28);
+  color: color-mix(in srgb, var(--color-ink) 28%, transparent);
 }
 
 .page-stack {
@@ -320,7 +320,7 @@ body[data-theme="dawn"] {
 }
 
 .field-error {
-  color: #ffbfb4;
+  color: var(--color-danger);
   font-size: var(--text-sm);
 }
 
@@ -335,7 +335,7 @@ body[data-theme="dawn"] {
   align-items: center;
   padding: 0.35rem 0.7rem;
   border-radius: 999px;
-  background: rgba(255, 177, 77, 0.16);
+  background: var(--color-accent-soft);
   color: var(--color-warning);
   font-size: var(--text-xs);
 }
@@ -357,7 +357,7 @@ body[data-theme="dawn"] {
   height: 0.9rem;
   border-radius: 999px;
   background: var(--color-accent);
-  box-shadow: 0 0 0 6px rgba(241, 184, 82, 0.15);
+  box-shadow: 0 0 0 6px color-mix(in srgb, var(--color-accent) 15%, transparent);
   margin-top: 0.35rem;
 }
 
@@ -373,7 +373,7 @@ body[data-theme="dawn"] {
   overflow: hidden;
   border-radius: var(--radius-md);
   border: 1px solid var(--color-line);
-  background: rgba(255, 255, 255, 0.04);
+  background: color-mix(in srgb, var(--color-surface-3) 30%, transparent);
 }
 
 .artifact-preview img {
@@ -402,7 +402,7 @@ body[data-theme="dawn"] {
   padding: 1rem 1.1rem;
   border-radius: var(--radius-md);
   border: 1px solid var(--color-line);
-  background: rgba(10, 12, 16, 0.92);
+  background: color-mix(in srgb, var(--color-surface) 92%, transparent);
   box-shadow: var(--shadow-panel);
 }
 
@@ -530,7 +530,7 @@ body[data-theme="dawn"] {
   padding: var(--space-3);
   border: 1px solid var(--color-line);
   border-radius: var(--radius-sm);
-  background: rgba(255, 255, 255, 0.035);
+  background: color-mix(in srgb, var(--color-surface-3) 24%, transparent);
 }
 
 .task-todo-header {
@@ -563,7 +563,7 @@ body[data-theme="dawn"] {
 }
 
 .task-todo-item.is-running {
-  background: rgba(119, 198, 255, 0.08);
+  background: color-mix(in srgb, var(--color-info) 8%, transparent);
 }
 
 .task-todo-item.is-completed {
@@ -669,6 +669,42 @@ body[data-theme="dawn"] {
   font-size: var(--text-sm);
 }
 
+.button-icon {
+  width: 1rem;
+  height: 1rem;
+  flex: 0 0 auto;
+}
+
+.audit-hero {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.audit-canvas-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-4);
+}
+
+.audit-stage-card {
+  display: grid;
+  align-content: start;
+  gap: var(--space-3);
+  min-width: 0;
+  padding: var(--space-4);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-sm);
+  background: color-mix(in srgb, var(--color-surface-2) 54%, transparent);
+}
+
+.audit-stage-list {
+  display: grid;
+  gap: var(--space-2);
+  margin: 0;
+  padding-left: var(--space-4);
+  color: var(--color-muted);
+}
+
 .graph-task-id {
   color: var(--color-muted);
   font-size: var(--text-xs);
@@ -701,6 +737,7 @@ body[data-theme="dawn"] {
   .runtime-filter-bar,
   .runtime-mini-links,
   .run-command-grid,
+  .audit-canvas-grid,
   .signal-strip,
   .run-lookup-form {
     grid-template-columns: 1fr;

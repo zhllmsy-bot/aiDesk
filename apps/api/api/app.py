@@ -19,6 +19,7 @@ from api.models import register_models
 from api.notifications.router import router as notifications_router
 from api.observability.logging import configure_root_logging
 from api.observability.middleware import CorrelationMiddleware
+from api.observability.otel import configure_observability
 from api.observability.router import router as observability_router
 from api.review.router import router as review_router
 from api.workflows.dependencies import configure_runtime_container
@@ -75,6 +76,7 @@ def create_app(
     if execution_container is not None:
         app.state.execution_container = execution_container
 
+    app.state.observability = configure_observability(app, resolved_settings)
     app.add_middleware(CorrelationMiddleware)
 
     app.add_middleware(
