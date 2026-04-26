@@ -8,6 +8,8 @@
     "lint": "pnpm exec biome check .",
     "typecheck": "tsc --project tsconfig.json --noEmit",
     "test": "vitest run",
+    "test:a11y": "playwright test --config playwright.config.ts --grep @a11y",
+    "test:visual": "playwright test --config playwright.config.ts --grep @visual",
     "test:e2e": "playwright test --config playwright.config.ts"
   },
   "dependencies": {

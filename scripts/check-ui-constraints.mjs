@@ -19,16 +19,25 @@ const forbiddenImports = [
   "animejs",
 ];
 const requiredUiPrimitives = [
+  "Avatar",
+  "Badge",
+  "Breadcrumb",
   "Button",
+  "Card",
+  "DescriptionList",
   "Input",
+  "PageLayout",
+  "SearchInput",
   "Select",
+  "SegmentedControl",
+  "Sidebar",
+  "StatCard",
   "Dialog",
   "Sheet",
   "Toast",
   "Table",
   "Tabs",
   "Tooltip",
-  "Badge",
 ];
 const requiredWebDependencies = [
   "@ai-desk/ui",
@@ -210,6 +219,11 @@ if (!webGlobals.includes('@import "tailwindcss";')) {
 }
 if (!webGlobals.includes('@import "@ai-desk/ui/styles.css";')) {
   failures.push('apps/web/app/globals.css must import "@ai-desk/ui/styles.css".');
+}
+if (/^\s*\.[_a-zA-Z-][\w-]*\s*[{,]/m.test(webGlobals)) {
+  failures.push(
+    "apps/web/app/globals.css must not define business classes; move them to @ai-desk/ui or feature CSS.",
+  );
 }
 
 const uiIndexPath = join(root, "packages/ui/src/index.tsx");

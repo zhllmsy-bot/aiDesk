@@ -1,10 +1,34 @@
 import * as React from "react";
 
 import {
+  Avatar,
+  AvatarFallback,
   Badge,
+  Breadcrumb,
+  BreadcrumbCurrent,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbSeparator,
   Button,
+  ButtonLink,
+  Card,
+  CardBody,
+  CardFooter,
+  CardHeader,
+  DescriptionList,
   Input,
+  KeyValue,
+  PageLayout,
+  SearchInput,
+  SegmentedControl,
   Select,
+  Sidebar,
+  SidebarFooter,
+  SidebarHeader,
+  SidebarItem,
+  SidebarNav,
+  StatCard,
   Table,
   TableBody,
   TableCell,
@@ -49,13 +73,61 @@ export function LightAndDark() {
       <ToastProvider>
         <div className="ui-stack ui-stack-gap-4">
           <Button>Button</Button>
+          <ButtonLink href="#button-link" variant="secondary">
+            Button link
+          </ButtonLink>
           <Input aria-label="Input" placeholder="Input" />
+          <SearchInput aria-label="Search" placeholder="Search" />
           <Textarea aria-label="Textarea" placeholder="Textarea" />
           <Select aria-label="Select" defaultValue="one">
             <option value="one">One</option>
             <option value="two">Two</option>
           </Select>
           <Badge tone="success">Badge</Badge>
+          <Card>
+            <CardHeader>
+              <strong>Card header</strong>
+            </CardHeader>
+            <CardBody>Card body</CardBody>
+            <CardFooter>Card footer</CardFooter>
+          </Card>
+          <StatCard label="Pending queue" value="3" description="Requests awaiting review." />
+          <SegmentedControl
+            aria-label="Status"
+            onValueChange={() => undefined}
+            options={[
+              { label: "All", value: "all" },
+              { label: "Pending", value: "pending" },
+            ]}
+            value="all"
+          />
+          <DescriptionList>
+            <KeyValue label="Requester" value="Admin Operator" />
+            <KeyValue label="Run" value="run_20260419_main" />
+          </DescriptionList>
+          <Breadcrumb>
+            <BreadcrumbList>
+              <BreadcrumbItem>
+                <BreadcrumbLink href="#workspace">Workspace</BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbItem>
+                <BreadcrumbSeparator />
+                <BreadcrumbCurrent>Review</BreadcrumbCurrent>
+              </BreadcrumbItem>
+            </BreadcrumbList>
+          </Breadcrumb>
+          <Avatar>
+            <AvatarFallback>AO</AvatarFallback>
+          </Avatar>
+          <PageLayout>
+            <Sidebar>
+              <SidebarHeader>Sidebar</SidebarHeader>
+              <SidebarNav aria-label="Demo">
+                <SidebarItem active href="#control" label="Control" description="Project queue." />
+              </SidebarNav>
+              <SidebarFooter>Footer</SidebarFooter>
+            </Sidebar>
+          </PageLayout>
           <Dialog>
             <DialogTrigger asChild>
               <Button tone="secondary">Dialog</Button>

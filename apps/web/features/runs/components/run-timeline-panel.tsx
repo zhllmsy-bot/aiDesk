@@ -110,10 +110,11 @@ export function RunTimelinePanel({
               <ul className="timeline-scroll" aria-label="Run timeline events">
                 {items.map((event) => (
                   <li key={event.eventId}>
-                    <button
+                    <Button
                       className={`timeline-entry-button${selected?.eventId === event.eventId ? " timeline-entry-active" : ""}`}
                       onClick={() => setSelectedEventId(event.eventId)}
                       type="button"
+                      variant="ghost"
                     >
                       <div className="timeline-entry-meta">
                         <StatusBadge label={event.label} tone={event.statusTone} />
@@ -129,7 +130,7 @@ export function RunTimelinePanel({
                           <span>attempt: {event.correlation.attemptId}</span>
                         ) : null}
                       </div>
-                    </button>
+                    </Button>
                   </li>
                 ))}
               </ul>

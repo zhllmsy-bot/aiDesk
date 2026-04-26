@@ -1,15 +1,54 @@
 "use client";
 
-import Link from "next/link";
-import type { ChangeEvent } from "react";
 import { useDeferredValue, useState } from "react";
 
-import { Button, Input, Panel, Stack, StatusBadge } from "@ai-desk/ui";
+import {
+  ButtonLink,
+  Card,
+  CardBody,
+  CardFooter,
+  CardHeader,
+  DescriptionList,
+  EmptyState,
+  InlineActions,
+  KeyValue,
+  Panel,
+  SearchInput,
+  SegmentedControl,
+  Stack,
+  StatCard,
+  StatusBadge,
+  SurfaceNote,
+} from "@ai-desk/ui";
 
 import { useApprovalsList } from "../hooks/use-approvals-list";
 import { approvalListItemViewModel, approvalStatusLabel } from "../view-models";
 
-export function ApprovalCenterScreen() {
+export type ApprovalCenterCopy = {
+  empty: string;
+  filters: Record<"all" | "approved" | "expired" | "pending" | "rejected", string>;
+  loading: string;
+  metadata: {
+    requester: string;
+    requested: string;
+    run: string;
+    task: string;
+  };
+  openDetail: string;
+  overviewCopy: string;
+  overviewEyebrow: string;
+  overviewTitle: string;
+  pendingDescription: string;
+  pendingLabel: string;
+  queueEyebrow: string;
+  queueTitle: string;
+  runsDescription: string;
+  runsLabel: string;
+  searchLabel: string;
+  searchPlaceholder: string;
+};
+
+export function ApprovalCenterScreen({ copy }: { copy: ApprovalCenterCopy }) {
   const { data, isLoading } = useApprovalsList();
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
@@ -28,88 +67,89 @@ export function ApprovalCenterScreen() {
   });
 
   const pendingCount = (data ?? []).filter((approval) => approval.status === "pending").length;
+  const statusOptions = ["all", "pending", "approved", "rejected", "expired"].map((value) => ({
+    label: copy.filters[value as keyof ApprovalCenterCopy["filters"]],
+    value,
+  }));
 
   return (
     <div className="page-stack">
-      <Panel eyebrow="Approval Center" title="Operator decisions with provenance">
+      <Panel eyebrow={copy.overviewEyebrow} title={copy.overviewTitle}>
         <div className="hero-grid">
           <div className="hero-copy">
-            <p className="ui-copy">
-              Every decision keeps the request intent, run correlation, and linked artifacts in the
-              same place so the operator can approve scope without losing runtime context.
-            </p>
-            <div className="inline-actions">
-              <Input
-                aria-label="Search approvals"
+            <p className="ui-copy">{copy.overviewCopy}</p>
+            <InlineActions>
+              <SearchInput
+                aria-label={copy.searchLabel}
+                onChange={(event) => setSearch(event.target.value)}
+                onClear={() => setSearch("")}
+                placeholder={copy.searchPlaceholder}
                 value={search}
-                onChange={(event: ChangeEvent<HTMLInputElement>) => setSearch(event.target.value)}
-                placeholder="Search by title, run, or requester"
               />
-              <div className="inline-actions">
-                {["all", "pending", "approved", "rejected", "expired"].map((value) => (
-                  <Button
-                    key={value}
-                    tone={statusFilter === value ? "primary" : "secondary"}
-                    onClick={() => setStatusFilter(value)}
-                  >
-                    {value}
-                  </Button>
-                ))}
-              </div>
-            </div>
+              <SegmentedControl
+                aria-label={copy.searchLabel}
+                onValueChange={setStatusFilter}
+                options={statusOptions}
+                value={statusFilter}
+              />
+            </InlineActions>
           </div>
           <div className="hero-metrics">
-            <div className="metric-card">
-              <span className="ui-eyebrow">Pending queue</span>
-              <strong>{pendingCount}</strong>
-              <p className="ui-copy">Requests that still need an operator decision.</p>
-            </div>
-            <div className="metric-card">
-              <span className="ui-eyebrow">Correlated runs</span>
-              <strong>{new Set((data ?? []).map((item) => item.correlation.runId)).size}</strong>
-              <p className="ui-copy">Every item links back to run and task context.</p>
-            </div>
+            <StatCard
+              description={copy.pendingDescription}
+              label={copy.pendingLabel}
+              value={pendingCount}
+            />
+            <StatCard
+              description={copy.runsDescription}
+              label={copy.runsLabel}
+              value={new Set((data ?? []).map((item) => item.correlation.runId)).size}
+            />
           </div>
         </div>
       </Panel>
 
-      <Panel eyebrow="Queue" title="Approvals">
+      <Panel eyebrow={copy.queueEyebrow} title={copy.queueTitle}>
         {isLoading ? (
-          <div className="surface-note">Loading approval queue...</div>
+          <SurfaceNote>{copy.loading}</SurfaceNote>
         ) : items.length ? (
-          <div className="list-grid">
+          <Stack gap="4">
             {items.map((approval) => (
-              <article key={approval.id} className="list-card">
-                <div className="list-card-header">
+              <Card key={approval.id}>
+                <CardHeader>
                   <div>
                     <div className="ui-eyebrow">{approval.type}</div>
                     <h3 className="list-card-title">{approval.title}</h3>
                   </div>
-                  <div className="inline-actions">
+                  <InlineActions>
                     <StatusBadge
                       label={approvalStatusLabel(approval.status)}
                       tone={approval.statusTone}
                     />
                     <StatusBadge label={approval.riskLevel} tone={approval.riskTone} />
-                  </div>
-                </div>
-                <p className="ui-copy">{approval.reason}</p>
-                <div className="meta-row">
-                  <span>Requester: {approval.requestedBy.name}</span>
-                  <span>Requested: {approval.requestedAtLabel}</span>
-                  <span>Run: {approval.correlation.runId}</span>
-                  <span>Task: {approval.correlation.taskId}</span>
-                </div>
-                <Stack gap="3">
-                  <Link href={approval.linkHref}>
-                    <Button>Open detail</Button>
-                  </Link>
-                </Stack>
-              </article>
+                  </InlineActions>
+                </CardHeader>
+                <CardBody>
+                  <Stack gap="3">
+                    <p className="ui-copy">{approval.reason}</p>
+                    <DescriptionList>
+                      <KeyValue label={copy.metadata.requester} value={approval.requestedBy.name} />
+                      <KeyValue label={copy.metadata.requested} value={approval.requestedAtLabel} />
+                      <KeyValue label={copy.metadata.run} value={approval.correlation.runId} />
+                      <KeyValue label={copy.metadata.task} value={approval.correlation.taskId} />
+                    </DescriptionList>
+                  </Stack>
+                </CardBody>
+                <CardFooter>
+                  <ButtonLink href={approval.linkHref} variant="secondary">
+                    {copy.openDetail}
+                  </ButtonLink>
+                </CardFooter>
+              </Card>
             ))}
-          </div>
+          </Stack>
         ) : (
-          <div className="empty-state">No approvals match the current filters.</div>
+          <EmptyState>{copy.empty}</EmptyState>
         )}
       </Panel>
     </div>

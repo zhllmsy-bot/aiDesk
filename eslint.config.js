@@ -20,31 +20,69 @@ const aiDeskUiRules = {
       type: "problem",
       messages: {
         arbitraryTailwind: "Tailwind arbitrary values require a token or ADR-backed class.",
-        cjk: "Hard-coded CJK UI copy is not allowed; route copy through i18n.",
+        rawI18nString:
+          "Hard-coded CJK, smart punctuation, or emoji UI copy is not allowed; route copy through i18n.",
         tsAny: "Do not use `as any`; fix the type boundary instead.",
         tsSuppress: "Do not suppress TypeScript diagnostics.",
       },
     },
     create(context) {
+      function checkClassName(node, value) {
+        if (typeof value === "string" && /\b[a-z][a-z0-9-]*-\[[^\]]+\]/.test(value)) {
+          context.report({ node, messageId: "arbitraryTailwind" });
+        }
+      }
+
+      function checkRawUiString(node, value) {
+        if (typeof value !== "string") {
+          return;
+        }
+        if (/[\u3400-\u9fff，。；！？“”‘’—–]|\p{Extended_Pictographic}/u.test(value)) {
+          context.report({ node, messageId: "rawI18nString" });
+        }
+      }
+
       return {
         Program(node) {
-          const text = sourceCode(context).getText();
-          const checks = [
-            {
-              messageId: "arbitraryTailwind",
-              pattern: /\b[a-z][a-z0-9-]*-\[[^\]]+\]/,
-            },
-            { messageId: "cjk", pattern: /[\u3400-\u9fff]/ },
-            { messageId: "tsAny", pattern: /\bas\s+any\b/ },
-            {
-              messageId: "tsSuppress",
-              pattern: /\/\/\s*@ts-(ignore|expect-error)|\/\*\s*@ts-(ignore|expect-error)/,
-            },
-          ];
-          for (const check of checks) {
-            if (check.pattern.test(text)) {
-              context.report({ node, messageId: check.messageId });
+          for (const comment of sourceCode(context).getAllComments()) {
+            if (/@ts-(ignore|expect-error)/.test(comment.value)) {
+              context.report({ node: comment, messageId: "tsSuppress" });
             }
+          }
+        },
+        JSXAttribute(node) {
+          if (node.name.type !== "JSXIdentifier" || node.name.name !== "className") {
+            return;
+          }
+
+          if (node.value?.type === "Literal") {
+            checkClassName(node.value, node.value.value);
+          }
+
+          if (node.value?.type === "JSXExpressionContainer") {
+            const expression = node.value.expression;
+            if (expression.type === "Literal") {
+              checkClassName(expression, expression.value);
+            }
+            if (expression.type === "TemplateLiteral") {
+              for (const quasi of expression.quasis) {
+                checkClassName(quasi, quasi.value.raw);
+              }
+            }
+          }
+        },
+        JSXText(node) {
+          checkRawUiString(node, node.value);
+        },
+        Literal(node) {
+          checkRawUiString(node, node.value);
+        },
+        TSAnyKeyword(node) {
+          context.report({ node, messageId: "tsAny" });
+        },
+        TSAsExpression(node) {
+          if (node.typeAnnotation.type === "TSAnyKeyword") {
+            context.report({ node, messageId: "tsAny" });
           }
         },
       };
@@ -149,6 +187,156 @@ const aiDeskUiRules = {
       };
     },
   },
+  "no-raw-button": {
+    meta: {
+      type: "problem",
+      messages: {
+        rawButton:
+          "Use Button or ButtonLink from @ai-desk/ui instead of a raw interactive element.",
+      },
+    },
+    create(context) {
+      const filename = normalizedFilename(context);
+      if (!filename.includes("/apps/web/")) {
+        return {};
+      }
+
+      return {
+        JSXOpeningElement(node) {
+          if (node.name.type === "JSXIdentifier" && node.name.name === "button") {
+            context.report({ node, messageId: "rawButton" });
+            return;
+          }
+
+          if (node.name.type !== "JSXIdentifier" || node.name.name !== "a") {
+            return;
+          }
+
+          const role = node.attributes.find(
+            (attribute) =>
+              attribute.type === "JSXAttribute" &&
+              attribute.name.type === "JSXIdentifier" &&
+              attribute.name.name === "role" &&
+              attribute.value?.type === "Literal" &&
+              attribute.value.value === "button",
+          );
+          if (role) {
+            context.report({ node, messageId: "rawButton" });
+          }
+        },
+      };
+    },
+  },
+  "no-raw-input": {
+    meta: {
+      type: "problem",
+      messages: {
+        rawInput: "Use Input, TextField, SearchInput, Textarea, or Select from @ai-desk/ui.",
+      },
+    },
+    create(context) {
+      const filename = normalizedFilename(context);
+      if (!filename.includes("/apps/web/")) {
+        return {};
+      }
+
+      return {
+        JSXOpeningElement(node) {
+          if (
+            node.name.type === "JSXIdentifier" &&
+            ["input", "select", "textarea"].includes(node.name.name)
+          ) {
+            context.report({ node, messageId: "rawInput" });
+          }
+        },
+      };
+    },
+  },
+  "no-raw-card": {
+    meta: {
+      type: "problem",
+      messages: {
+        rawCard:
+          "Use Card, StatCard, SurfaceNote, or EmptyState from @ai-desk/ui for framed surfaces.",
+      },
+    },
+    create(context) {
+      const filename = normalizedFilename(context);
+      const shouldEnforce =
+        filename.includes("/apps/web/features/review/") ||
+        filename.includes("/apps/web/components/layout/");
+      if (!shouldEnforce) {
+        return {};
+      }
+
+      function staticClassName(node) {
+        const className = node.attributes.find(
+          (attribute) =>
+            attribute.type === "JSXAttribute" &&
+            attribute.name.type === "JSXIdentifier" &&
+            attribute.name.name === "className",
+        );
+        if (!className) {
+          return "";
+        }
+        if (className.value?.type === "Literal" && typeof className.value.value === "string") {
+          return className.value.value;
+        }
+        if (className.value?.type === "JSXExpressionContainer") {
+          const expression = className.value.expression;
+          if (expression.type === "Literal" && typeof expression.value === "string") {
+            return expression.value;
+          }
+          if (expression.type === "TemplateLiteral") {
+            return expression.quasis.map((quasi) => quasi.value.raw).join(" ");
+          }
+        }
+        return "";
+      }
+
+      return {
+        JSXOpeningElement(node) {
+          if (
+            node.name.type !== "JSXIdentifier" ||
+            !["article", "div", "section"].includes(node.name.name)
+          ) {
+            return;
+          }
+          const className = staticClassName(node);
+          if (
+            /\b[\w-]*card[\w-]*\b/.test(className) ||
+            (/\bborder\b/.test(className) && /\bp-\d/.test(className))
+          ) {
+            context.report({ node, messageId: "rawCard" });
+          }
+        },
+      };
+    },
+  },
+  "no-non-lucide-icons": {
+    meta: {
+      type: "problem",
+      messages: {
+        iconImport: "Use lucide-react as the single icon source for UI icons.",
+      },
+    },
+    create(context) {
+      return {
+        ImportDeclaration(node) {
+          if (typeof node.source.value !== "string") {
+            return;
+          }
+          if (
+            /(^|\/)(react-icons|heroicons|phosphor-react|@mui\/icons-material|@tabler\/icons)/.test(
+              node.source.value,
+            )
+          ) {
+            context.report({ node, messageId: "iconImport" });
+          }
+        },
+      };
+    },
+  },
 };
 
 module.exports = [
@@ -187,6 +375,10 @@ module.exports = [
       "ai-desk-ui/no-direct-fetch-outside-client": "error",
       "ai-desk-ui/no-direct-radix-in-web": "error",
       "ai-desk-ui/no-handrolled-ui-primitives": "error",
+      "ai-desk-ui/no-non-lucide-icons": "error",
+      "ai-desk-ui/no-raw-button": "error",
+      "ai-desk-ui/no-raw-card": "error",
+      "ai-desk-ui/no-raw-input": "error",
     },
   },
 ];
